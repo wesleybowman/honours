@@ -35,9 +35,12 @@ b=np.arange(0,m)
 
 first=time.time()
 
+total=n*m
+
 for (i,j),k in np.ndenumerate(K):
 
-    print(i,j)
+    perc=i*j
+    print(perc/total)
     r=(i*distX,j*distY,z)
 
     for (x,y),value in np.ndenumerate(img):
