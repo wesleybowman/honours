@@ -41,15 +41,17 @@ def main():
     for i in xrange(K.shape[0]):
         for j in xrange(K.shape[1]):
 
+            #perc=i*j
+            #print(perc/total)
             print(i,j)
             r=(i*distX,j*distY,z)
 
             for x in xrange(img.shape[0]):
                 for y in xrange(img.shape[1]):
-                    print(x,y)
                     ksi=(x*distX,y*distY,z)
                     ksiNorm=np.linalg.norm(ksi)
-                    ksiDotR=np.dot(ksi,r)
+                    ksiDotR=float(np.dot(ksi,r))
+                    #ksiDotR=np.dot(ksi,r)
 
                     temp[x,y]=img[x,y]*np.exp(1j*k*ksiDotR/ksiNorm)
 
@@ -61,8 +63,16 @@ def main():
             temp2=rbs(a,b,temp.real)
             K[i,j]=temp2.integral(0,n,0,m)
 
-    timeTook=time.time()-first
+            timeTook=time.time()-first
 
-    print(timeTook)
+            print(timeTook)
+
+
+    K.dump('K.dat')
+
+    kInt=K.real*K.real+K.imag*K.imag
+
+    plt.imshow(kInt,cmap=plt.cm.Greys_r)
+
 
 main()
