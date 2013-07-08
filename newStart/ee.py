@@ -2,14 +2,12 @@ from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-#from scipy.interpolate import LinearNDInterpolator as interpol
 from scipy.interpolate import RectBivariateSpline as rbs
-from scipy.integrate import dblquad
-from numba import double,complex128 #,autojit
-from numba.decorators import jit, autojit
+from numba import autojit
 
 @autojit
 def main():
+    '''Using numba to try and make this as fast as possible, still very slow. '''
 
     obj=plt.imread('jerichoObject.bmp')
     ref=plt.imread('jerichoRef.bmp')
@@ -22,7 +20,6 @@ def main():
     wavelength=405e-9
     k=2*np.pi/(wavelength)
     z=250e-6
-    #z=13e-3
     #z=13e-3-250e-6
 
     distX=6e-6
@@ -34,32 +31,27 @@ def main():
     a = np.arange(0,n)
     b = np.arange(0,m)
 
-#    pts=np.array((a.ravel(),b.ravel())).T
-
     first=time.time()
 
     for i in xrange(K.shape[0]):
         for j in xrange(K.shape[1]):
 
-            #perc=i*j
-            #print(perc/total)
             print(i,j)
+            '''create an r vector '''
             r=(i*distX,j*distY,z)
 
             for x in xrange(img.shape[0]):
                 for y in xrange(img.shape[1]):
+                    '''create an ksi vector, then calculate
+                       it's norm, and the dot product of r and ksi'''
                     ksi=(x*distX,y*distY,z)
                     ksiNorm=np.linalg.norm(ksi)
                     ksiDotR=float(np.dot(ksi,r))
-                    #ksiDotR=np.dot(ksi,r)
 
+                    '''calculate the integrand'''
                     temp[x,y]=img[x,y]*np.exp(1j*k*ksiDotR/ksiNorm)
 
-            #tempRavel=temp.ravel()
-            #surf=interpol(pts,tempRavel)
-            #func=lambda y,x: surf([[x,y]])
-
-            #K[i,j]=dblquad(func,0.0,m,lambda x:0.0, lambda x:n)[0]
+            '''interpolate so that we can do the integral and take the integral'''
             temp2=rbs(a,b,temp.real)
             K[i,j]=temp2.integral(0,n,0,m)
 
@@ -73,6 +65,5 @@ def main():
     kInt=K.real*K.real+K.imag*K.imag
 
     plt.imshow(kInt,cmap=plt.cm.Greys_r)
-
 
 main()

@@ -11,6 +11,8 @@ def X(Xprime,Yprime,Rprime,L):
 def Y(Xprime,Yprime,Rprime,L):
     return (Yprime*L)/Rprime
 
+def I(Xprime,Yprime):
+
 @autojit
 def main():
 
@@ -46,7 +48,7 @@ def main():
             xx=X(Xprime,Yprime,Rprime,L)
             yy=Y(Xprime,Yprime,Rprime,L)
 
-            I=img[xx,yy]
+            return img[xx,yy]
 
 
 main()
