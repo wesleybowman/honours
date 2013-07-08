@@ -11,8 +11,6 @@ def X(Xprime,Yprime,Rprime,L):
 def Y(Xprime,Yprime,Rprime,L):
     return (Yprime*L)/Rprime
 
-def I(Xprime,Yprime):
-
 @autojit
 def main():
 
