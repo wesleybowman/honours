@@ -3,8 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from numba import autojit
-from math import sqrt
-
 
 @autojit
 def main():
@@ -14,19 +12,16 @@ def main():
 
     img=obj-ref
 
-    K=np.empty(img.shape)+0j
     temp=np.empty(img.shape)+0j
-    #tempDot=np.empty(img.shape)+0j
-    #tempNorm=np.empty(img.shape)+0j
 
     wavelength=405e-9
     k=2*np.pi/(wavelength)
-    #L=250e-6
-    L=13e-3
-    #z=13e-3-250e-6
 
-    distX=6e-6
-    distY=6e-6
+    ''' L is the distance from the source to the screen '''
+    L=13e-3
+
+    #distX=6e-6
+    #distY=6e-6
 
     n=float(img.shape[0])
     m=float(img.shape[1])
@@ -45,27 +40,29 @@ def main():
     xx=xx.astype(int)
     yy=yy.astype(int)
 
-    print(img[xx,yy])
+    ''' z is the slice we want to look at '''
+    z=250e-6
+    #z=13e-3-250e-6
+    #z=13e-3
+
+    print(z)
 
     temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
+
     print('temp')
-    print(temp)
+
+    K=np.fft.fft2(temp)
+
+    print('fft')
 
     print(time.time()-first)
 
-#    for x in xrange(img.shape[0]):
-#        for y in xrange(img.shape[1]):
-#            print(x,y)
-#            r=sqrt(L*L+x*x+y*y)
-#            Xprime=(x*L)/r
-#            Yprime=(y*L)/r
-#            Rprime=(L*L)/r
-#            xx=(Xprime*L)/Rprime
-#            yy=(Yprime*L)/Rprime
-#
-#            print(img[xx,yy])
-#
-#    print(time.time()-first)
+    Kint=K.real*K.real+K.imag+K.imag
+    print('Kint')
+
+    #plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
+    plt.imshow(Kint,cmap=plt.cm.Greys_r)
+    plt.show()
 
 main()
 
