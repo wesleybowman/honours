@@ -20,7 +20,7 @@ def func_star(a_b):
     """Convert `f([1,2])` to `f(1,2)` call."""
     return func(*a_b)
 
-global temp#,temp2,temp3,xx,yy,Xprime,Yprime,k
+#global temp,temp2,temp3,xx,yy,Xprime,Yprime,k
 #@autojit
 #def main():
 
@@ -90,6 +90,7 @@ pool.map(func_star,itertools.product(i,j))
 #            K[smallX,smallY]=temp3.integral(0,kx,0,ky)
 
 print(K)
+K.dump('K.dat')
 #K=np.fft.fft2(temp)
 
 #print('fft')
