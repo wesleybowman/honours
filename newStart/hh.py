@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from numba import autojit
+from scipy.interpolate import RectBivariateSpline as rbs
 
 @autojit
 def main():
@@ -13,6 +14,7 @@ def main():
     img=obj-ref
 
     temp=np.empty(img.shape)+0j
+    K=np.empty(img.shape)+0j
 
     wavelength=405e-9
     k=2*np.pi/(wavelength)
@@ -51,18 +53,37 @@ def main():
 
     print('temp')
 
-    K=np.fft.fft2(temp)
+    kx=K.shape[0]
+    ky=K.shape[1]
+    i=np.arange(0,kx)
+    j=np.arange(0,ky)
 
-    print('fft')
+    #smallX=np.mgrid[0:K.shape[0],0:K.shape[1]][0]
+    #smallY=np.mgrid[0:K.shape[0],0:K.shape[1]][1]
+
+    for smallX in xrange(kx):
+        for smallY in xrange(ky):
+
+            print(smallX,smallY)
+
+            temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
+            temp3=rbs(i,j,temp2.real)
+            K[smallX,smallY]=temp3.integral(0,kx,0,ky)
+
+    print(K)
+    #K=np.fft.fft2(temp)
+
+    #print('fft')
 
     print(time.time()-first)
 
-    Kint=K.real*K.real+K.imag+K.imag
-    print('Kint')
+    #Kint=K.real*K.real+K.imag+K.imag
+    #print('Kint')
 
     #plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
-    plt.imshow(Kint,cmap=plt.cm.Greys_r)
-    plt.show()
+    #plt.imshow(Kint,cmap=plt.cm.Greys_r)
+    #plt.show()
+
 
 main()
 
