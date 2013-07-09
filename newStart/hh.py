@@ -7,14 +7,15 @@ from multiprocessing import Pool
 import itertools
 
 def func(smallX,smallY):
-
+    ''' Function used to calculate the integral '''
     print(smallX,smallY)
     temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
     temp3=rbs(i,j,temp2.real)
     K[smallX,smallY]=temp3.integral(0,kx,0,ky)
 
 def func_star(a_b):
-    """Convert `f([1,2])` to `f(1,2)` call."""
+    ''' Convert `f([1,2])` to `f(1,2)` call, so that pool can do multiple
+        arguments. '''
     return func(*a_b)
 
 obj=plt.imread('jerichoObject.bmp')
@@ -34,15 +35,12 @@ L=13e-3
 #distX=6e-6
 #distY=6e-6
 
-n=float(img.shape[0])
-m=float(img.shape[1])
-total=n*m
-count=0
+n=img.shape[0]
+m=img.shape[1]
 
 first=time.time()
 
-a=np.mgrid[0:n,0:m][0]
-b=np.mgrid[0:n,0:m][1]
+a,b=np.mgrid[0:n,0:m]
 
 r=np.sqrt(L*L+a*a+b*b)
 Xprime=(a*L)/r
@@ -81,7 +79,3 @@ print(time.time()-first)
 #plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
 #plt.imshow(Kint,cmap=plt.cm.Greys_r)
 #plt.show()
-
-
-
-
