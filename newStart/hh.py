@@ -2,16 +2,13 @@ from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-from numba import autojit
 from scipy.interpolate import RectBivariateSpline as rbs
 from multiprocessing import Pool
 import itertools
 
-
 def func(smallX,smallY):
 
     print(smallX,smallY)
-
     temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
     temp3=rbs(i,j,temp2.real)
     K[smallX,smallY]=temp3.integral(0,kx,0,ky)
@@ -19,10 +16,6 @@ def func(smallX,smallY):
 def func_star(a_b):
     """Convert `f([1,2])` to `f(1,2)` call."""
     return func(*a_b)
-
-#global temp,temp2,temp3,xx,yy,Xprime,Yprime,k
-#@autojit
-#def main():
 
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
@@ -43,6 +36,8 @@ L=13e-3
 
 n=float(img.shape[0])
 m=float(img.shape[1])
+total=n*m
+count=0
 
 first=time.time()
 
@@ -63,11 +58,9 @@ z=250e-6
 #z=13e-3-250e-6
 #z=13e-3
 
-print(z)
+print('Distance: {0}'.format(z))
 
 temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
-
-print('temp')
 
 kx=K.shape[0]
 ky=K.shape[1]
@@ -77,23 +70,8 @@ j=np.arange(0,ky)
 pool=Pool()
 pool.map(func_star,itertools.product(i,j))
 
-#smallX=np.mgrid[0:K.shape[0],0:K.shape[1]][0]
-#smallY=np.mgrid[0:K.shape[0],0:K.shape[1]][1]
-
-#    for smallX in xrange(kx):
-#        for smallY in xrange(ky):
-#
-#            print(smallX,smallY)
-#
-#            temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
-#            temp3=rbs(i,j,temp2.real)
-#            K[smallX,smallY]=temp3.integral(0,kx,0,ky)
-
 print(K)
 K.dump('K.dat')
-#K=np.fft.fft2(temp)
-
-#print('fft')
 
 print(time.time()-first)
 
