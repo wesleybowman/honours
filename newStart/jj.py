@@ -6,6 +6,8 @@ from mpi4py import MPI
 import time
 
 comm=MPI.COMM_WORLD
+size = comm.Get_size()
+rank = comm.Get_rank()
 
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
