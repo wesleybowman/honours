@@ -1,10 +1,10 @@
 from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
-import time
 from scipy.interpolate import RectBivariateSpline as rbs
 from multiprocessing import Pool
 import itertools
+import time
 
 def func(smallX,smallY):
     ''' Function used to calculate the integral '''
@@ -35,8 +35,7 @@ L=13e-3
 #distX=6e-6
 #distY=6e-6
 
-n=img.shape[0]
-m=img.shape[1]
+n,m=img.shape
 
 first=time.time()
 
@@ -60,11 +59,11 @@ print('Distance: {0}'.format(z))
 
 temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
 
-kx=K.shape[0]
-ky=K.shape[1]
+kx,ky=K.shape
 i=np.arange(0,kx)
 j=np.arange(0,ky)
 
+''' Using multiprocessing.Pool to make this parallel. '''
 pool=Pool()
 pool.map(func_star,itertools.product(i,j))
 
