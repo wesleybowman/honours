@@ -1,4 +1,3 @@
-''' Trying to vectorize code to make it faster '''
 from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,6 +5,20 @@ from scipy.interpolate import RectBivariateSpline as rbs
 from multiprocessing import Pool
 import itertools
 import time
+
+def func(smallX,smallY):
+    ''' Function used to calculate the integral '''
+    print(smallX,smallY)
+    temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
+    temp3=rbs(i,j,temp2.real)
+    Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
+    temp4=rbs(i,j,temp2.imag)
+    Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
+
+def func_star(a_b):
+    ''' Convert `f([1,2])` to `f(1,2)` call, so that pool can do multiple
+        arguments. '''
+    return func(*a_b)
 
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
@@ -22,9 +35,6 @@ k=2*np.pi/(wavelength)
 
 ''' L is the distance from the source to the screen '''
 L=13e-3
-
-#distX=6e-6
-#distY=6e-6
 
 n,m=img.shape
 
@@ -54,26 +64,18 @@ kx,ky=K.shape
 i=np.arange(0,kx)
 j=np.arange(0,ky)
 
-smallX,smallY=np.mgrid[0:kx,0:ky]
+''' Using multiprocessing.Pool to make this parallel. '''
+pool=Pool()
+pool.map(func_star,itertools.product(i,j))
 
-temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
-temp3=rbs(i,j,temp2.real)
-Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
-
-temp4=rbs(i,j,temp2.imag)
-Kimag[smallX,smallY]+=temp4.integral(0,kx,0,ky)
-
-Kreal=Kreal.real
-Kimag=Kimag.real*1j
-K=Kreal+Kimag
-Kint=K.real*K.real+K.imag*K.imag
-
-print(K)
-print(Kint)
-K.dump('K.dat')
+Kreal.dump('Kreal.dat')
+Kimag.dump('Kimag.dat')
 
 print(time.time()-first)
 
-plt.imshow(Kint,cmap=plt.cm.Greys_r)
-plt.show()
+#Kint=K.real*K.real+K.imag+K.imag
+#print('Kint')
 
+#plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
+#plt.imshow(Kint,cmap=plt.cm.Greys_r)
+#plt.show()
