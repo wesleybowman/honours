@@ -2,23 +2,10 @@ from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import RectBivariateSpline as rbs
-from multiprocessing import Pool
-import itertools
+from mpi4py import MPI
 import time
 
-def func(smallX,smallY):
-    ''' Function used to calculate the integral '''
-    print(smallX,smallY)
-    temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
-    temp3=rbs(i,j,temp2.real)
-    Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
-    temp4=rbs(i,j,temp2.imag)
-    Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
-
-def func_star(a_b):
-    ''' Convert `f([1,2])` to `f(1,2)` call, so that pool can do multiple
-        arguments. '''
-    return func(*a_b)
+comm=MPI.COMM_WORLD
 
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
@@ -61,21 +48,18 @@ print('Distance: {0}'.format(z))
 temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
 
 kx,ky=K.shape
-i=np.arange(0,kx)
-j=np.arange(0,ky)
 
-''' Using multiprocessing.Pool to make this parallel. '''
-pool=Pool()
-pool.map(func_star,itertools.product(i,j))
+for smallX in xrange(kx):
+    for smallY in xrange(ky):
+        print(smallX,smallY)
+        temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
+        temp3=rbs(smallX,smallY,temp2.real)
+        Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
+        temp4=rbs(smallX,smallY,temp2.imag)
+        Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
+
 
 Kreal.dump('Kreal.dat')
 Kimag.dump('Kimag.dat')
 
 print(time.time()-first)
-
-#Kint=K.real*K.real+K.imag+K.imag
-#print('Kint')
-
-#plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
-#plt.imshow(Kint,cmap=plt.cm.Greys_r)
-#plt.show()
