@@ -11,7 +11,9 @@ def func(smallX,smallY):
     print(smallX,smallY)
     temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
     temp3=rbs(i,j,temp2.real)
-    K[smallX,smallY]=temp3.integral(0,kx,0,ky)
+    Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
+    temp4=rbs(i,j,temp2.imag)
+    Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
 
 def func_star(a_b):
     ''' Convert `f([1,2])` to `f(1,2)` call, so that pool can do multiple
@@ -25,6 +27,8 @@ img=obj-ref
 
 temp=np.empty(img.shape)+0j
 K=np.empty(img.shape)+0j
+Kreal=np.empty(img.shape)+0j
+Kimag=np.empty(img.shape)+0j
 
 wavelength=405e-9
 k=2*np.pi/(wavelength)
@@ -67,8 +71,8 @@ j=np.arange(0,ky)
 pool=Pool()
 pool.map(func_star,itertools.product(i,j))
 
-print(K)
-K.dump('K.dat')
+Kreal.dump('Kreal.dat')
+Kimag.dump('Kimag.dat')
 
 print(time.time()-first)
 

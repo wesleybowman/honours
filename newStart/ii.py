@@ -54,7 +54,7 @@ kx,ky=K.shape
 i=np.arange(0,kx)
 j=np.arange(0,ky)
 
-smallX,smallY=a,b
+smallX,smallY=np.mgrid[0:kx,0:ky]
 
 temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
 temp3=rbs(i,j,temp2.real)
@@ -67,22 +67,20 @@ Kimag[smallX,smallY]+=temp4.integral(0,kx,0,ky)
 #pool=Pool()
 #pool.map(func_star,itertools.product(i,j))
 
-print(Kreal.dtype)
-print(Kimag.dtype)
+#Kreal=Kreal.astype(np.float64,copy=False)
+#Kimag=Kimag.astype(np.float64,copy=False)
 
-Kreal=Kreal.astype(np.float64,copy=False)
-Kimag=Kimag.astype(np.float64,copy=False)
-
-print(Kreal.dtype)
-print(Kimag.dtype)
-
-K=Kreal*Kreal+Kimag*Kimag
+Kreal=Kreal.real
+Kimag=Kimag.real*1j
+K=Kreal+Kimag
+Kint=K.real*K.real+K.imag*K.imag
 
 print(K)
+print(Kint)
 K.dump('K.dat')
 
 print(time.time()-first)
 
-plt.imshow(K,cmap=plt.cm.Greys_r)
+plt.imshow(Kint,cmap=plt.cm.Greys_r)
 plt.show()
 
