@@ -29,7 +29,6 @@ def main(slice,comm,rank,size):
         L=13e-3
 
         n,m=img.shape
-        total=n*m
 
         a,b=np.mgrid[0:n,0:m]
 
