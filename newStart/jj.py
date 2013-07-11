@@ -71,10 +71,9 @@ else:
     jj=None
     k=None
 
-print(L)
 comm.Barrier()
 
-print('{0} {1} \n'.format(comm.rank,comm.size))
+print('rank:{0} size:{1} \n'.format(comm.rank,comm.size))
 comm.Barrier()
 
 print('broadcasting')
