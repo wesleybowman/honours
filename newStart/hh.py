@@ -5,11 +5,16 @@ from scipy.interpolate import RectBivariateSpline as rbs
 from multiprocessing import Pool
 import itertools
 import time
+import numexpr as ne
+#from numba import autojit
+
+'''Autojit has an error of cannot allocate memory for func and func_star
+    I think it also takes longer to run'''
 
 def func(smallX,smallY):
     ''' Function used to calculate the integral '''
     print(smallX,smallY)
-    temp2=temp[xx,yy]*np.exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)
+    temp2=ne.evaluate('temp*exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)')
     temp3=rbs(i,j,temp2.real)
     Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
     temp4=rbs(i,j,temp2.imag)
@@ -20,65 +25,64 @@ def func_star(a_b):
         arguments. '''
     return func(*a_b)
 
-obj=plt.imread('jerichoObject.bmp')
-ref=plt.imread('jerichoRef.bmp')
+#@autojit
+def main():
+    ''' Using multiprocessing.Pool to make this parallel. '''
+    pool=Pool()
+    pool.map(func_star,itertools.product(i,j))
 
-img=obj-ref
+    Kreal.dump('Kreal.dat')
+    Kimag.dump('Kimag.dat')
 
-temp=np.empty(img.shape)+0j
-K=np.empty(img.shape)+0j
-Kreal=np.empty(img.shape)+0j
-Kimag=np.empty(img.shape)+0j
+    print(time.time()-first)
 
-wavelength=405e-9
-k=2*np.pi/(wavelength)
+if __name__=='__main__':
 
-''' L is the distance from the source to the screen '''
-L=13e-3
+    obj=plt.imread('jerichoObject.bmp')
+    ref=plt.imread('jerichoRef.bmp')
 
-#distX=6e-6
-#distY=6e-6
+    img=obj-ref
 
-n,m=img.shape
+    temp=np.empty(img.shape)+0j
+    K=np.empty(img.shape)+0j
+    Kreal=np.empty(img.shape)+0j
+    Kimag=np.empty(img.shape)+0j
 
-first=time.time()
+    wavelength=405e-9
+    k=2*np.pi/(wavelength)
 
-a,b=np.mgrid[0:n,0:m]
+    ''' L is the distance from the source to the screen '''
+    L=13e-3
 
-r=np.sqrt(L*L+a*a+b*b)
-Xprime=(a*L)/r
-Yprime=(b*L)/r
-Rprime=(L*L)/r
-xx=(Xprime*L)/Rprime
-yy=(Yprime*L)/Rprime
-xx=xx.astype(int)
-yy=yy.astype(int)
+    #distX=6e-6
+    #distY=6e-6
 
-''' z is the slice we want to look at '''
-z=250e-6
-#z=13e-3-250e-6
-#z=13e-3
+    n,m=img.shape
 
-print('Distance: {0}'.format(z))
+    first=time.time()
 
-temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
+    a,b=np.mgrid[0:n,0:m]
 
-kx,ky=K.shape
-i=np.arange(0,kx)
-j=np.arange(0,ky)
+    r=ne.evaluate('sqrt(L*L+a*a+b*b)')
+    Xprime=ne.evaluate('(a*L)/r')
+    Yprime=ne.evaluate('(b*L)/r')
+    Rprime=ne.evaluate('(L*L)/r')
+    xx=ne.evaluate('(Xprime*L)/Rprime')
+    yy=ne.evaluate('(Yprime*L)/Rprime')
+    xx=xx.astype(int)
+    yy=yy.astype(int)
 
-''' Using multiprocessing.Pool to make this parallel. '''
-pool=Pool()
-pool.map(func_star,itertools.product(i,j))
+    ''' z is the slice we want to look at '''
+    z=250e-6
+    #z=13e-3-250e-6
+    #z=13e-3
 
-Kreal.dump('Kreal.dat')
-Kimag.dump('Kimag.dat')
+    print('Distance: {0}'.format(z))
 
-print(time.time()-first)
+    temp[xx,yy]=ne.evaluate('img*(L/Rprime)**4*exp((1j*k*z*Rprime)/L)')
 
-#Kint=K.real*K.real+K.imag+K.imag
-#print('Kint')
+    kx,ky=K.shape
+    i=np.arange(0,kx)
+    j=np.arange(0,ky)
 
-#plt.imshow(np.log(Kint+1),cmap=plt.cm.Greys_r)
-#plt.imshow(Kint,cmap=plt.cm.Greys_r)
-#plt.show()
+    main()
