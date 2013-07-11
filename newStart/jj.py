@@ -9,6 +9,9 @@ import numexpr as ne
 def main(slice,comm,rank,size):
 
     if rank==0:
+
+        first=time.time()
+
         obj=plt.imread('jerichoObject.bmp')
         ref=plt.imread('jerichoRef.bmp')
 
@@ -27,7 +30,6 @@ def main(slice,comm,rank,size):
 
         n,m=img.shape
 
-        first=time.time()
 
         a,b=np.mgrid[0:n,0:m]
 
@@ -41,7 +43,7 @@ def main(slice,comm,rank,size):
         yy=yy.astype(int)
 
         ''' z is the slice we want to look at '''
-        z=250e-6
+        #z=250e-6
         #z=13e-3-250e-6
         #z=13e-3
         z=slice
@@ -73,9 +75,11 @@ def main(slice,comm,rank,size):
     comm.Barrier()
 
     print('rank:{0} size:{1} \n'.format(comm.rank,comm.size))
+
     comm.Barrier()
 
     print('broadcasting')
+
     kx=comm.bcast(kx,root=0)
     ky=comm.bcast(ky,root=0)
     L=comm.bcast(L,root=0)
@@ -89,6 +93,7 @@ def main(slice,comm,rank,size):
     k=comm.bcast(k,root=0)
 
     print('done broadcasting')
+
     comm.Barrier()
 
     rows = [comm.rank + comm.size * aa for aa in range(int(kx/comm.size)+1) if comm.rank + comm.size*aa < kx]
