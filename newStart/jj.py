@@ -78,7 +78,7 @@ def main(slice,comm,rank,size):
 
     comm.Barrier()
 
-    print('broadcasting')
+    if rank==0: print('broadcasting')
 
     kx=comm.bcast(kx,root=0)
     ky=comm.bcast(ky,root=0)
@@ -92,7 +92,7 @@ def main(slice,comm,rank,size):
     jj=comm.bcast(jj,root=0)
     k=comm.bcast(k,root=0)
 
-    print('done broadcasting')
+    if rank==0: print('done broadcasting')
 
     comm.Barrier()
 
@@ -102,7 +102,7 @@ def main(slice,comm,rank,size):
 
     comm.Barrier()
 
-    print('loops now')
+    if rank==0: print('loops now')
 
     for smallX in rows:
         for smallY in rows2:
@@ -130,5 +130,5 @@ if __name__=='__main__':
     slices=[250e-6,13e-3-250e-6,13e-3]
 
     for slice in slices:
-        print('on slice:{0}'.format(slice))
+        if rank==0: print('on slice:{0}'.format(slice))
         main(slice,comm,rank,size)
