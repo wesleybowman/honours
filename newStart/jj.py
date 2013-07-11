@@ -29,7 +29,7 @@ def main(slice,comm,rank,size):
         L=13e-3
 
         n,m=img.shape
-
+        total=n*m
 
         a,b=np.mgrid[0:n,0:m]
 
@@ -57,7 +57,7 @@ def main(slice,comm,rank,size):
         ii=np.arange(kx)
         jj=np.arange(ky)
 
-        print(comm.rank,comm.size)
+        print('Total number of Processors in use: {0}'.format(comm.size))
 
     else:
         kx=None
@@ -74,11 +74,11 @@ def main(slice,comm,rank,size):
 
     comm.Barrier()
 
-    print('rank:{0} size:{1} \n'.format(comm.rank,comm.size))
+    #print('rank:{0} size:{1} \n'.format(comm.rank,comm.size))
 
     comm.Barrier()
 
-    if rank==0: print('broadcasting')
+    if rank==0: print('Broadcasting')
 
     kx=comm.bcast(kx,root=0)
     ky=comm.bcast(ky,root=0)
@@ -92,7 +92,7 @@ def main(slice,comm,rank,size):
     jj=comm.bcast(jj,root=0)
     k=comm.bcast(k,root=0)
 
-    if rank==0: print('done broadcasting')
+    if rank==0: print('Done broadcasting')
 
     comm.Barrier()
 
@@ -102,16 +102,25 @@ def main(slice,comm,rank,size):
 
     comm.Barrier()
 
-    if rank==0: print('loops now')
+    count=0
+    countTot=[]
 
     for smallX in rows:
         for smallY in rows2:
-            print(smallX,smallY)
+            #print(smallX,smallY)
             temp2=ne.evaluate('temp*exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)')
             temp3=rbs(ii,jj,temp2.real)
             Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
             temp4=rbs(ii,jj,temp2.imag)
             Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
+
+            count+=1
+            countTot=comm.gather(count)
+
+            try:
+                print('Done with: {0} elements'.format(sum(countTot)))
+            except:
+                pass
 
     comm.Barrier()
 
@@ -130,5 +139,5 @@ if __name__=='__main__':
     slices=[250e-6,13e-3-250e-6,13e-3]
 
     for slice in slices:
-        if rank==0: print('on slice:{0}'.format(slice))
+        if rank==0: print('On slice:{0}'.format(slice))
         main(slice,comm,rank,size)
