@@ -6,23 +6,11 @@ from mpi4py import MPI
 import time
 import numexpr as ne
 
-def compute(kx,ky,start=0,step=1):
-    for smallX in xrange(start,kx,step):
-        for smallY in xrange(start,ky,step):
-            print(smallX,smallY)
-            temp2=ne.evaluate('temp*exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)')
-            temp3=rbs(i,j,temp2.real)
-            Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
-            temp4=rbs(i,j,temp2.imag)
-            Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
-    return Kreal,Kimag
-
 comm=MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
-root=0
 
-if rank==root:
+if rank==0:
     obj=plt.imread('jerichoObject.bmp')
     ref=plt.imread('jerichoRef.bmp')
 
@@ -54,15 +42,6 @@ if rank==root:
     xx=xx.astype(int)
     yy=yy.astype(int)
 
-#    r=np.sqrt(L*L+a*a+b*b)
-#    Xprime=(a*L)/r
-#    Yprime=(b*L)/r
-#    Rprime=(L*L)/r
-#    xx=(Xprime*L)/Rprime
-#    yy=(Yprime*L)/Rprime
-#    xx=xx.astype(int)
-#    yy=yy.astype(int)
-
     ''' z is the slice we want to look at '''
     z=250e-6
     #z=13e-3-250e-6
@@ -70,16 +49,16 @@ if rank==root:
 
     print('Distance: {0}'.format(z))
 
-    #temp[xx,yy]=img[xx,yy]*(L/Rprime)**4*np.exp((1j*k*z*Rprime)/L)
     temp[xx,yy]=ne.evaluate('img*(L/Rprime)**4*exp((1j*k*z*Rprime)/L)')
 
     kx,ky=K.shape
 
-    i=np.arange(kx)
-    j=np.arange(ky)
+    ii=np.arange(kx)
+    jj=np.arange(ky)
+
+    print(comm.rank,comm.size)
 
 else:
-    pass
     kx=None
     ky=None
     L=None
@@ -88,9 +67,17 @@ else:
     temp=None
     Kreal=None
     Kimag=None
+    ii=None
+    jj=None
+    k=None
 
+print(L)
 comm.Barrier()
 
+print('{0} {1} \n'.format(comm.rank,comm.size))
+comm.Barrier()
+
+print('broadcasting')
 kx=comm.bcast(kx,root=0)
 ky=comm.bcast(ky,root=0)
 L=comm.bcast(L,root=0)
@@ -99,11 +86,33 @@ Yprime=comm.bcast(Yprime,root=0)
 temp=comm.bcast(temp,root=0)
 Kreal=comm.bcast(Kreal,root=0)
 Kimag=comm.bcast(Kimag,root=0)
+ii=comm.bcast(ii,root=0)
+jj=comm.bcast(jj,root=0)
+k=comm.bcast(k,root=0)
+
+print('done broadcasting')
+comm.Barrier()
+
+rows = [comm.rank + comm.size * aa for aa in range(int(kx/comm.size)+1) if comm.rank + comm.size*aa < kx]
+
+rows2 = [comm.rank + comm.size * bb for bb in range(int(ky/comm.size)+1) if comm.rank + comm.size*bb < ky]
 
 comm.Barrier()
-Kreal,Kimag=compute(kx,ky,rank,size)
 
-if rank==root:
+print('loops now')
+
+for smallX in rows:
+    for smallY in rows2:
+        print(smallX,smallY)
+        temp2=ne.evaluate('temp*exp((1j*k*(smallX*Xprime+smallY*Yprime))/L)')
+        temp3=rbs(ii,jj,temp2.real)
+        Kreal[smallX,smallY]=temp3.integral(0,kx,0,ky)
+        temp4=rbs(ii,jj,temp2.imag)
+        Kimag[smallX,smallY]=temp4.integral(0,kx,0,ky)
+
+comm.Barrier()
+
+if rank==0:
     Kreal.dump('Kreal.dat')
     Kimag.dump('Kimag.dat')
 
