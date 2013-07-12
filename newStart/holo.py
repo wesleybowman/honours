@@ -6,11 +6,14 @@ import matplotlib.pyplot as plt
 optics = hp.core.Optics(wavelen=.405, index=1.33,
                         polarization=[1.0, 0.0])
 
-holo = hp.core.load('jerichoObject.bmp',spacing=6,optics=optics)
+''' loading the images '''
+obj = hp.core.load('jerichoObject.bmp',spacing=6,optics=optics)
+ref = hp.core.load('jerichoRef.bmp',spacing=6,optics=optics)
 
-'''reconstruction? '''
-''' For now doing individual slices. One of these 3 should work. Is this in
-    meters? '''
+''' contrast image '''
+holo=obj-ref
+
+'''reconstruction '''
 #rec = hp.propagate(holo, 13e-3)
 #rec = hp.propagate(holo, 13e-3-250e-6)
 rec = hp.propagate(holo, 250e-6)
@@ -20,8 +23,8 @@ recInt=rec.real*rec.real+rec.imag*rec.imag
 
 ''' hp.show doesn't show me anything,unless plt.show() is also present '''
 #hp.show(holo)
-hp.show(recInt)
+#hp.show(recInt)
 
 ''' how I have to view it '''
-#plt.imshow(recInt)
+plt.imshow(recInt)
 plt.show()
