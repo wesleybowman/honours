@@ -1,5 +1,6 @@
 from __future__ import division,print_function
 import holopy as hp
+import numpy as np
 import matplotlib.pyplot as plt
 
 ''' setting up optics '''
@@ -13,18 +14,16 @@ ref = hp.core.load('jerichoRef.bmp',spacing=6,optics=optics)
 ''' contrast image '''
 holo=obj-ref
 
-'''reconstruction '''
+'''reconstruction, same image for all slices though '''
 #rec = hp.propagate(holo, 13e-3)
 #rec = hp.propagate(holo, 13e-3-250e-6)
-rec = hp.propagate(holo, 250e-6)
+rec = hp.propagate(holo, np.linspace(245e-6,13e-3,20))
 
 ''' intensity so pyplot can plot it '''
 recInt=rec.real*rec.real+rec.imag*rec.imag
 
 ''' hp.show doesn't show me anything,unless plt.show() is also present '''
-#hp.show(holo)
-#hp.show(recInt)
+hp.show(recInt)
 
 ''' how I have to view it '''
-plt.imshow(recInt)
 plt.show()
