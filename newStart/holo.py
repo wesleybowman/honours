@@ -17,7 +17,7 @@ holo=obj-ref
 # reconstruction, same image for all slices though
 #rec = hp.propagate(holo, 13e-3)
 #rec = hp.propagate(holo, 13e-3-250e-6)
-rec = hp.propagate(holo, np.linspace(200,300,10))
+rec = hp.propagate(holo, np.linspace(200e-6,300e-6,10))
 
 # intensity so pyplot can plot it
 recInt=abs(rec)*abs(rec)
