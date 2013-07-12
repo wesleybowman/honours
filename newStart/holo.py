@@ -18,7 +18,7 @@ rec = hp.propagate(holo, 250e-6)
 ''' intensity so pyplot can plot it '''
 recInt=rec.real*rec.real+rec.imag*rec.imag
 
-''' hp.show doesn't show me anything '''
+''' hp.show doesn't show me anything,unless plt.show() is also present '''
 #hp.show(holo)
 hp.show(recInt)
 
