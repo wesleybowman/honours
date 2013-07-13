@@ -10,12 +10,12 @@ import numexpr as ne
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
 
-img=obj-ref
+holo=obj-ref
 
-temp=np.empty(img.shape)+0j
-K=np.empty(img.shape)+0j
-Kreal=np.empty(img.shape)+0j
-Kimag=np.empty(img.shape)+0j
+temp=np.empty(holo.shape)+0j
+K=np.empty(holo.shape)+0j
+Kreal=np.empty(holo.shape)+0j
+Kimag=np.empty(holo.shape)+0j
 
 wavelength=405e-9
 k=2*np.pi/(wavelength)
@@ -23,13 +23,13 @@ k=2*np.pi/(wavelength)
 ''' L is the distance from the source to the screen '''
 L=13e-3
 z=250e-6
-z=13e-3
+#z=13e-3
 #z=13e-3-250e-6
 
 dx=6e-6
 dy=6e-6
 
-n,m=img.shape
+n,m=holo.shape
 
 first=time.time()
 
@@ -38,8 +38,9 @@ k2=k*k
 l2=l*l
 dx2=dx*dx
 dy2=dy*dy
+pi=np.pi #here for numexpr to evaluate
 
-img=ref*obj*np.exp((-1j*np.pi)/(wavelength*z)*(k2*dx2+l2*dy2))
+img=ne.evaluate('ref*holo*exp((-1j*pi)/(wavelength*z)*(k2*dx2+l2*dy2))')
 
 rec=np.fft.ifft2(img)
 recInt=abs(rec)*abs(rec)
