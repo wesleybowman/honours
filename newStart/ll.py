@@ -63,7 +63,7 @@ for x in rowsX:
         temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
 
         #Sum up temp, and multiply by the length and width to get the volume.
-        reconstruction[x,y]=ne.evaluate('sum(temp)*(distX*n)*(distY*m)')
+        reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
 
 reconstruction.dump('reconstruction.dat')
 
