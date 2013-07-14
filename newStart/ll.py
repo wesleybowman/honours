@@ -14,8 +14,6 @@ ref=plt.imread('jerichoRef.bmp')
 
 holo=obj-ref
 
-#Kreal=np.empty(holo.shape)+0j
-#Kimag=np.empty(holo.shape)+0j
 temp=np.empty(holo.shape)+0j
 reconstruction=np.empty(holo.shape)+0j
 
@@ -64,7 +62,8 @@ for x in rowsX:
         KSIdotR = np.dot(KSI[x,y], R[x,y])
         temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
 
-        reconstruction[x,y]=ne.evaluate('sum(temp)')
+        #Sum up temp, and multiply by the length and width to get the volume.
+        reconstruction[x,y]=ne.evaluate('sum(temp)*(distX*n)*(distY*m)')
 
 reconstruction.dump('reconstruction.dat')
 
