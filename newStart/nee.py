@@ -2,11 +2,10 @@ from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import RectBivariateSpline as rbs
-from numba import autojit
+#from numba import autojit
 
 #@autojit
 def main():
-    '''Using numba to try and make this as fast as possible, still very slow. '''
 
     obj=plt.imread('jerichoObject.bmp')
     ref=plt.imread('jerichoRef.bmp')
