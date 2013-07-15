@@ -2,6 +2,7 @@ from __future__ import division,print_function
 import holopy as hp
 import numpy as np
 import matplotlib.pyplot as plt
+from mayavi import mlab
 
 # setting up optics
 #optics = hp.core.Optics(wavelen=.405, index=1.33, polarization=[1.0, 0.0])
@@ -27,3 +28,10 @@ recInt=abs(rec)*abs(rec)
 
 hp.show(recInt)
 plt.show()
+
+''' 3D plotting - useful? '''
+#mlab.contour3d(recInt)
+##    mlab.pipeline.volume(mlab.pipeline.scalar_field(newImg))
+#mlab.axes(x_axis_visibility=True,y_axis_visibility=True,z_axis_visibility=True)
+#mlab.outline()
+#mlab.show()
