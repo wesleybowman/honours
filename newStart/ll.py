@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 from mpi4py import MPI
 import numexpr as ne
 
-
 comm=MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
@@ -27,11 +26,6 @@ distY=6e-6
 
 n=float(holo.shape[0])
 m=float(holo.shape[1])
-
-dA=(1/n)*(1/m)
-
-a = np.arange(0,n)
-b = np.arange(0,m)
 
 #create all r vectors
 R = np.empty((holo.shape[0], holo.shape[1], 3))
@@ -66,6 +60,3 @@ for x in rowsX:
         reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
 
 reconstruction.dump('reconstruction.dat')
-
-
-
