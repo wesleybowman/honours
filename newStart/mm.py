@@ -53,7 +53,7 @@ KSIdotR=inner1d(KSI,R)
 rowsX = [comm.rank + comm.size * aa for aa in range(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
 rowsY = [comm.rank + comm.size * bb for bb in range(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
 
-''' could also use itertools here '''
+# using itertools since it looks nicer.
 for x,y in itertools.product(rowsX,rowsY):
 
     print(x, y)
@@ -66,10 +66,8 @@ for x,y in itertools.product(rowsX,rowsY):
     temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
 
     #Sum up temp, and multiply by the length and width to get the volume.
-    reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
+    reconstruction[x,y]=temp.sum()*distX*n*distY
 
-
-#
 #for x in rowsX:
 #    for y in rowsY:
 #

@@ -48,9 +48,9 @@ KSInorm = np.sum(np.abs(KSI)**2,axis=-1)**(1./2)
 KSIdotR=inner1d(KSI,R)
 
 KSIdotR=KSIdotR.ravel()
-s=pd.Series(KSIdotR)
 x,_=np.ogrid[0:n,0:m]
 
+s=pd.Series(KSIdotR)
 KSIdotR=KSIdotR[x][0] #playing around with this
 print(KSIdotR.shape)
 
@@ -83,26 +83,6 @@ rowsY = [comm.rank + comm.size * bb for bb in range(int(m/comm.size)+1) if comm.
 
 KSIdotR=inner1d(KSI,R)
 reconstruction=np.empty(holo.shape)+0j
-
-#''' could also use itertools here '''
-#KSIdotR=inner1d(KSI,R)
-#
-#for x,y in itertools.product(rowsX,rowsY):
-#
-#    print(x, y)
-#
-#    #KSIdotR = np.dot(KSI[x,y], R[x,y])
-#    #temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
-#
-#    #set a tempKSI so numexpr can work
-#    tempKSI=KSIdotR[x,y]
-#    temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
-#
-#    #Sum up temp, and multiply by the length and width to get the volume.
-#    reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
-#    print(reconstruction)
-
-
 
 for x in rowsX:
     for y in rowsY:

@@ -3,7 +3,10 @@ import numpy as np
 import numexpr as ne
 
 a=np.ones((10,10))*10
+b=np.arange(1,9).reshape(3,3)
+
 temp=np.empty(a.shape)
+
 
 n,m=a.shape
 
