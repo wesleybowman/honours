@@ -66,7 +66,7 @@ for x,y in itertools.product(rowsX,rowsY):
     temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
 
     #Sum up temp, and multiply by the length and width to get the volume.
-    reconstruction[x,y]=temp.sum()*distX*n*distY
+    reconstruction[x,y]=temp.sum()*distX*distY
 
 #for x in rowsX:
 #    for y in rowsY:
