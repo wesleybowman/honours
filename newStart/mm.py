@@ -68,18 +68,4 @@ for x,y in itertools.product(rowsX,rowsY):
     #Sum up temp, and multiply by the length and width to get the volume.
     reconstruction[x,y]=temp.sum()*distX*distY
 
-#for x in rowsX:
-#    for y in rowsY:
-#
-#        print(x, y)
-#
-#        #KSIdotR = np.dot(KSI[x,y], R[x,y])
-#        #temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
-#
-#        tempKSI=KSIdotR[x,y]
-#        temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
-#
-#        #Sum up temp, and multiply by the length and width to get the volume.
-#        reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
-
 reconstruction.dump('reconstruction.dat')
