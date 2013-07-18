@@ -10,7 +10,8 @@ comm=MPI.COMM_WORLD
 size = comm.Get_size()
 rank = comm.Get_rank()
 
-print(size)
+if rank==0:
+    print('Processors used: {}'.format(size))
 
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
