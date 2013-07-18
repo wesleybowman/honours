@@ -5,7 +5,7 @@ from mpi4py import MPI
 import numexpr as ne
 from numpy.core.umath_tests import inner1d
 import itertools
-import pandas as pd
+#import pandas as pd
 
 comm=MPI.COMM_WORLD
 size = comm.Get_size()
@@ -46,11 +46,15 @@ KSI[:,:,2] = z
 KSInorm = np.sum(np.abs(KSI)**2,axis=-1)**(1./2)
 
 KSIdotR=inner1d(KSI,R)
+print(KSIdotR)
+nKSIdotR=np.einsum('ijk,ijk->ij',KSI,R)
+print(nKSIdotR)
+print(nKSIdotR==KSIdotR)
 
 KSIdotR=KSIdotR.ravel()
 x,_=np.ogrid[0:n,0:m]
 
-s=pd.Series(KSIdotR)
+#s=pd.Series(KSIdotR)
 KSIdotR=KSIdotR[x][0] #playing around with this
 print(KSIdotR.shape)
 
@@ -61,14 +65,12 @@ temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
 #reconstruction=temp.sum()*(distX*n)*(distY*m)
 
 
-print(s)
-t=pd.DataFrame(temp)
-print(t.values)
+#print(s)
+#t=pd.DataFrame(temp)
+#print(t.values)
 
-asdf=pd.Panel(np.empty((n,m,n)))
-print(asdf)
-
-
+#asdf=pd.Panel(np.empty((n,m,n)))
+#print(asdf)
 
 print(temp.shape)
 print(temp[0,0])
@@ -84,21 +86,20 @@ rowsY = [comm.rank + comm.size * bb for bb in range(int(m/comm.size)+1) if comm.
 KSIdotR=inner1d(KSI,R)
 reconstruction=np.empty(holo.shape)+0j
 
-for x in rowsX:
-    for y in rowsY:
+for x,y in itertools.product(rowsX,rowsY):
 
-        print(x, y)
+    print(x, y)
 
-        #KSIdotR = np.dot(KSI[x,y], R[x,y])
-        #temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
+    #KSIdotR = np.dot(KSI[x,y], R[x,y])
+    #temp = ne.evaluate('holo * exp(1j * k * KSIdotR / KSInorm)')
 
-        tempKSI=KSIdotR[x,y]
-        print(tempKSI)
-        temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
+    tempKSI=KSIdotR[x,y]
+    print(tempKSI)
+    temp = ne.evaluate('holo * exp(1j * k * tempKSI / KSInorm)')
 
-        #Sum up temp, and multiply by the length and width to get the volume.
-        print(temp.sum())
-        reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
-        print(reconstruction[x,y])
+    #Sum up temp, and multiply by the length and width to get the volume.
+    print(temp.sum())
+    reconstruction[x,y]=temp.sum()*(distX*n)*(distY*m)
+    print(reconstruction[x,y])
 
 reconstruction.dump('reconstruction.dat')
