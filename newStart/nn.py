@@ -49,7 +49,7 @@ KSIdotR=inner1d(KSI,R)
 print(KSIdotR)
 nKSIdotR=np.einsum('ijk,ijk->ij',KSI,R)
 print(nKSIdotR)
-print(nKSIdotR==KSIdotR)
+print((nKSIdotR==KSIdotR).all())
 
 KSIdotR=KSIdotR.ravel()
 x,_=np.ogrid[0:n,0:m]
