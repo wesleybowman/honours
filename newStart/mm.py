@@ -56,7 +56,8 @@ KSIdotR=inner1d(KSI,R)
 rowsX = [comm.rank + comm.size * aa for aa in range(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
 rowsY = [comm.rank + comm.size * bb for bb in range(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
 
-# using itertools since it looks nicer.
+comm.Barrier()
+
 for x,y in itertools.product(rowsX,rowsY):
 
     print(x, y)
@@ -70,5 +71,7 @@ for x,y in itertools.product(rowsX,rowsY):
 
     #Sum up temp, and multiply by the length and width to get the volume.
     reconstruction[x,y]=temp.sum()*distX*distY
+
+comm.Barrier()
 
 reconstruction.dump('reconstruction.dat')
