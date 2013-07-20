@@ -6,6 +6,7 @@ import numexpr as ne
 from numpy.core.umath_tests import inner1d
 import itertools
 #import pandas as pd
+import tables as tb
 
 comm=MPI.COMM_WORLD
 size = comm.Get_size()
