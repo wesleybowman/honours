@@ -9,6 +9,10 @@ def plot(img):
     plt.imshow(img,cmap=plt.cm.Greys_r)
     plt.show()
 
+def logPlot(img):
+    plt.imshow(np.log(img+1),cmap=plt.cm.Greys_r)
+    plt.show()
+
 obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
 
@@ -55,16 +59,16 @@ yy=yy.astype(int)
 
 ''' z is the slice we want to look at '''
 z=250e-6
-#z=13e-3-250e-6
+z=13e-3-250e-6
 #z=13e-3
 
 print('Distance: {0}'.format(z))
 
-imgPrime[xx,yy]=ne.evaluate('img*(L/Rprime)**4*exp((1j*k*z*Rprime)/L)')
+imgPrime=ne.evaluate('img*(L/Rprime)**4*exp((1j*k*z*Rprime)/L)')
 
 K=np.fft.ifft2(imgPrime)
 
 Kint=abs(K)*abs(K)
 
 plot(Kint)
-
+logPlot(Kint)
