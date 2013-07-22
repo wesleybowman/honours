@@ -29,7 +29,7 @@ recInt=abs(rec)*abs(rec)
 hp.show(recInt)
 plt.show()
 
-''' 3D plotting - useful? '''
+''' 3D plotting - useful '''
 #mlab.contour3d(recInt)
 ##    mlab.pipeline.volume(mlab.pipeline.scalar_field(newImg))
 #mlab.axes(x_axis_visibility=True,y_axis_visibility=True,z_axis_visibility=True)

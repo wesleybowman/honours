@@ -1,4 +1,4 @@
-nner_loops = 251
+inner_loops = 251
 hl = int(m/inner_loops)
 print "starting loops"
 for x in xrange(n):
