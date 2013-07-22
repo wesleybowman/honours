@@ -2,9 +2,10 @@ from __future__ import division,print_function
 import holopy as hp
 import numpy as np
 import matplotlib.pyplot as plt
-from mayavi import mlab
 
 def jericho():
+    ''' using Dr. Jericho's setup and images, currently doesn't work.
+        I think this is because Jericho using a spherical wave. '''
 
     optics = hp.core.Optics(wavelen=.405, index=1.33, polarization=[1.0, 0.0])
 
@@ -18,6 +19,7 @@ def jericho():
     return rec
 
 def myHolo():
+    ''' my holographic setup, which I think works since we use plane waves '''
 
     optics = hp.core.Optics(wavelen=.635, index=1.33, polarization=[1.0, 0.0])
 
@@ -38,7 +40,8 @@ recInt=abs(rec)*abs(rec)
 hp.show(recInt)
 plt.show()
 
-''' 3D plotting - useful '''
+''' 3D plotting - useful? '''
+#from mayavi import mlab
 #mlab.contour3d(recInt)
 ##    mlab.pipeline.volume(mlab.pipeline.scalar_field(newImg))
 #mlab.axes(x_axis_visibility=True,y_axis_visibility=True,z_axis_visibility=True)
