@@ -1,7 +1,6 @@
 from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
-import time
 import numexpr as ne
 
 def plot(img):
@@ -16,6 +15,7 @@ obj=plt.imread('jerichoObject.bmp')
 ref=plt.imread('jerichoRef.bmp')
 
 img=obj-ref
+img=obj
 
 temp=np.empty(img.shape)+0j
 imgPrime=np.empty(img.shape)+0j
@@ -29,12 +29,10 @@ k=2*np.pi/(wavelength)
 ''' L is the distance from the source to the screen '''
 L=13e-3
 
-#distX=6e-6
-#distY=6e-6
+distX=6e-6
+distY=6e-6
 
 n,m=img.shape
-
-first=time.time()
 
 a,b=np.mgrid[0:n,0:m]
 
@@ -58,12 +56,15 @@ yy=yy.astype(int)
 
 ''' z is the slice we want to look at '''
 z=250e-6
-#z=13e-3-250e-6
+z=13e-3-250e-6
 #z=13e-3
 
 print('Distance: {0}'.format(z))
 
 imgPrime=ne.evaluate('img * (L / Rprime)**4 * exp((1j * k * z * Rprime) / L)')
+
+#pi=np.pi
+#imgPrime=ne.evaluate('imgPrime*exp(-1j*pi*(xx*xx*distX*distX+yy*yy*distY*distY)/(wavelength*z))')
 
 K=np.fft.ifft2(imgPrime)
 
