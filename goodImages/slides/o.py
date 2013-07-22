@@ -1,11 +1,7 @@
-'''
-This was written to create the hologram with CGH and then reconstruct it.
-'''
+from __future__ import division,print_function
 import numpy as np
 import matplotlib.pyplot as plt
-from mayavi import mlab
 import numexpr as ne
-import time
 
 def normalizeImage(img):
     '''This is to make sure every input image is seen as the same by the
@@ -81,8 +77,9 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
 
     n,m=holoInt.shape
 
-    dx=(px/n)*np.ones(n) #(px/n)*np.ones(n)
-    dy=(py/m)*np.ones(m) #(py/m)*np.ones(m)
+    dx=(px)*np.ones(m) #(px/n)*np.ones(n)
+    dy=(py)*np.ones(n) #(py/m)*np.ones(m)
+
     dx,dy=np.meshgrid(dx,dy)
 
     x,y=np.mgrid[0:n,0:m]
@@ -95,18 +92,19 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
     x2=x2
     y2=y2
 
-    dx2=dx2.T
-    dy2=dy2.T
+    dx2=dx2
+    dy2=dy2
 
     pi=np.pi
 
     xy=ne.evaluate('x2*dx2+y2*dy2')
-    #ev=ne.evaluate('-1j*pi/(wavelength*z)*(xy)')
-    #g=ne.evaluate('exp(ev)')
+    ev=ne.evaluate('-2j*pi*(xy)/(wavelength*z)')
+    g=ne.evaluate('exp(ev)')
 
-    g=ne.evaluate('exp(-1j * pi * (xy) / (wavelength * z))')
-
-
+#    k=2*pi/wavelength
+#    ksi=np.sqrt(x2+y2+z*z)
+#    newref=ne.evaluate('1/(ksi)*exp(-1j*k*ksi)')
+#    g=ne.evaluate('g*newref')
 
     rec=ne.evaluate('holoInt*g')
     recShift=np.fft.ifftshift(rec)
@@ -115,84 +113,54 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
     recInt=rec.real*rec.real+rec.imag*rec.imag
 
     if show:
+        plt.imshow(recInt,cmap=plt.cm.Greys_r)
+        plt.show()
         plt.imshow(np.log(recInt+1),cmap=plt.cm.Greys_r)
         plt.show()
 
     return recInt,rec
 
 if __name__=='__main__':
-#    img=plt.imread('smallA.png')
-    #img=plt.imread('onePixels.png')
-    #img=plt.imread('dot.png')
-    img=plt.imread('bar.png')
-#    img=plt.imread('dot2.png')
-#    img=plt.imread('offCenterDot.png')
-#    img=plt.imread('farther2.png')
-#    img=plt.imread('screwfar1.png')
-#    img=plt.imread('thickerSinglePixel.png')
-#    img=plt.imread('object.png')
 
-    img=plt.imread('whitebar.png')
-    img=np.mean(img,2)
+    obj=plt.imread('fibre1.png')
+    ref=plt.imread('refFibre1.png')
 
-    zstep=100
-    start=0.7
-    end=2
-    distance,step=np.linspace(start,end,zstep,retstep=True)
+    obj=plt.imread('jerichoObject.bmp')
+    ref=plt.imread('jerichoRef.bmp')
+    img=obj-ref
 
-    diff=diffraction(img)
-    prop=propagation(diff)
-    holo,holoInt=hologram(prop)
+    #img=np.mean(img,2)
 
-    count=0
-    for i in distance:
-        recInt,rec=reconstruction(holoInt,z=i,show=0)
+    start=200e-6
+    stop=13e-3
+    stepSize=1e-6
+    distance=np.arange(start,stop,stepSize)
 
-        if count==0:
-            temp=recInt
-            count+=1
+#    diff=diffraction(img)
+#    prop=propagation(diff)
+#    holo,holoInt=hologram(prop)
 
-        if count==1:
+    holoInt=img
+    distX=6e-6
+    distY=6e-6
+    distance=13e-3
+    distance=13e-3-250e-6
+    #distance=250e-6
 
-            newImg=np.dstack((temp,recInt))
-            count+=1
+    recInt,rec=reconstruction(holoInt,wavelength=405e-9,z=distance,px=distX,py=distY,show=1)
 
-        else:
-
-            newImg=np.dstack((newImg,recInt))
-
-    n,m,o=newImg.shape
-    x,y=np.mgrid[0:n,0:m]
-    print step
-
-    yes=1
-
-    if yes==1:
-    #    mlab.options.backend = 'envisage'
-        mlab.contour3d(newImg)
-    #    mlab.pipeline.volume(mlab.pipeline.scalar_field(newImg))
-        mlab.axes(x_axis_visibility=True,y_axis_visibility=True,z_axis_visibility=True)
-        mlab.outline()
-        mlab.show()
-
-    elif yes==2:
-        plt.ion()
-        fig=plt.figure()
-        ax=fig.gca()
-        for i in xrange(zstep):
-            print i
-            plt.clf()
-            plt.imshow(newImg[...,i])
-            fig.canvas.draw()
-            time.sleep(1e-3)
-
-    else:
-        fig=plt.figure()
-        ax=fig.gca()
-        for i in xrange(zstep):
-            print i
-            plt.clf()
-            plt.imshow(newImg[...,i])
-            plt.show()
-            time.sleep(1e-3)
-
+#    plt.ion()
+#    fig=plt.figure()
+#    ax=fig.gca()
+#    for i,value in enumerate(distance):
+#        print i, value
+##        name='figure%d.png'%(i,)
+##        plt.savefig(name,bbox_inches=0)
+#        plt.clf()
+#
+#        recInt,rec=reconstruction(holoInt,wavelength=405e-9,z=value,px=distX,py=distY,show=0)
+#
+#        plt.imshow(recInt,cmap=plt.cm.Greys_r)
+#        fig.canvas.draw()
+#        time.sleep(1e-3)
+#

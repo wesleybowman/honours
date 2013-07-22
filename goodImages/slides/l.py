@@ -1,6 +1,3 @@
-'''
-This was written to create the hologram with CGH and then reconstruct it.
-'''
 import numpy as np
 import matplotlib.pyplot as plt
 from mayavi import mlab
@@ -101,12 +98,8 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
     pi=np.pi
 
     xy=ne.evaluate('x2*dx2+y2*dy2')
-    #ev=ne.evaluate('-1j*pi/(wavelength*z)*(xy)')
-    #g=ne.evaluate('exp(ev)')
-
-    g=ne.evaluate('exp(-1j * pi * (xy) / (wavelength * z))')
-
-
+    ev=ne.evaluate('-1j*pi/(wavelength*z)*(xy)')
+    g=ne.evaluate('exp(ev)')
 
     rec=ne.evaluate('holoInt*g')
     recShift=np.fft.ifftshift(rec)
@@ -115,7 +108,7 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
     recInt=rec.real*rec.real+rec.imag*rec.imag
 
     if show:
-        plt.imshow(np.log(recInt+1),cmap=plt.cm.Greys_r)
+        plt.imshow((recInt),cmap=plt.cm.Greys_r)
         plt.show()
 
     return recInt,rec
@@ -124,7 +117,7 @@ if __name__=='__main__':
 #    img=plt.imread('smallA.png')
     #img=plt.imread('onePixels.png')
     #img=plt.imread('dot.png')
-    img=plt.imread('bar.png')
+#    img=plt.imread('bar.png')
 #    img=plt.imread('dot2.png')
 #    img=plt.imread('offCenterDot.png')
 #    img=plt.imread('farther2.png')
@@ -132,67 +125,43 @@ if __name__=='__main__':
 #    img=plt.imread('thickerSinglePixel.png')
 #    img=plt.imread('object.png')
 
-    img=plt.imread('whitebar.png')
+    '''2.5 to 3.5 cm away from camera '''
+    obj=plt.imread('fibre1.png')
+    ref=plt.imread('refFibre1.png')
+    img=obj-ref
+
     img=np.mean(img,2)
 
-    zstep=100
-    start=0.7
-    end=2
+    zstep=1000
+    start=3.5e-2
+    end=4.0e-2
     distance,step=np.linspace(start,end,zstep,retstep=True)
+    stepSize=1e-6
+    distance=np.arange(start,stop,stepSize)
 
-    diff=diffraction(img)
-    prop=propagation(diff)
-    holo,holoInt=hologram(prop)
 
-    count=0
-    for i in distance:
-        recInt,rec=reconstruction(holoInt,z=i,show=0)
+#    diff=diffraction(img)
+#    prop=propagation(diff)
+#    holo,holoInt=hologram(prop)
 
-        if count==0:
-            temp=recInt
-            count+=1
+    holoInt=img
+    distX=4.8e-3
+    distY=3.6e-3
 
-        if count==1:
+    print stepSize
 
-            newImg=np.dstack((temp,recInt))
-            count+=1
+    plt.ion()
+    fig=plt.figure()
+    ax=fig.gca()
+    for i,value in enumerate(distance):
+        print i
+#        name='figure%d.png'%(i,)
+#        plt.savefig(name,bbox_inches=0)
+        plt.clf()
 
-        else:
+        recInt,rec=reconstruction(holoInt,z=value,px=distX,py=distY,show=0)
 
-            newImg=np.dstack((newImg,recInt))
-
-    n,m,o=newImg.shape
-    x,y=np.mgrid[0:n,0:m]
-    print step
-
-    yes=1
-
-    if yes==1:
-    #    mlab.options.backend = 'envisage'
-        mlab.contour3d(newImg)
-    #    mlab.pipeline.volume(mlab.pipeline.scalar_field(newImg))
-        mlab.axes(x_axis_visibility=True,y_axis_visibility=True,z_axis_visibility=True)
-        mlab.outline()
-        mlab.show()
-
-    elif yes==2:
-        plt.ion()
-        fig=plt.figure()
-        ax=fig.gca()
-        for i in xrange(zstep):
-            print i
-            plt.clf()
-            plt.imshow(newImg[...,i])
-            fig.canvas.draw()
-            time.sleep(1e-3)
-
-    else:
-        fig=plt.figure()
-        ax=fig.gca()
-        for i in xrange(zstep):
-            print i
-            plt.clf()
-            plt.imshow(newImg[...,i])
-            plt.show()
-            time.sleep(1e-3)
+        plt.imshow(recInt)
+        fig.canvas.draw()
+        time.sleep(1e-3)
 
