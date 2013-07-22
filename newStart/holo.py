@@ -4,26 +4,35 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mayavi import mlab
 
-# setting up optics
-#optics = hp.core.Optics(wavelen=.405, index=1.33, polarization=[1.0, 0.0])
+def jericho():
 
-optics = hp.core.Optics(wavelen=.635, index=1.33, polarization=[1.0, 0.0])
+    optics = hp.core.Optics(wavelen=.405, index=1.33, polarization=[1.0, 0.0])
 
-# loading the images
-#obj = hp.load('jerichoObject.bmp',spacing=6,optics=optics)
-#ref = hp.load('jerichoRef.bmp',spacing=6,optics=optics)
+    obj = hp.load('jerichoObject.bmp',spacing=6,optics=optics)
+    ref = hp.load('jerichoRef.bmp',spacing=6,optics=optics)
 
-obj = hp.load('fibre1.png',spacing=7.6,optics=optics)
-ref = hp.load('refFibre1.png',spacing=7.6,optics=optics)
+    holo=obj-ref
 
-# contrast image
-holo=obj-ref
+    rec = hp.propagate(holo, np.linspace(200,13e7,10))
 
-# reconstruction, same image for all slices though
-#rec = hp.propagate(holo, np.linspace(200,13e7,10))
-rec = hp.propagate(holo, np.linspace(3.5e4,5.5e4,100))
+    return rec
 
-# intensity so pyplot can plot it
+def myHolo():
+
+    optics = hp.core.Optics(wavelen=.635, index=1.33, polarization=[1.0, 0.0])
+
+    obj = hp.load('fibre1.png',spacing=7.6,optics=optics)
+    ref = hp.load('refFibre1.png',spacing=7.6,optics=optics)
+
+    holo=obj-ref
+
+    rec = hp.propagate(holo, np.linspace(3.5e4,5.5e4,100))
+
+    return rec
+
+rec=jericho()
+rec=myHolo()
+
 recInt=abs(rec)*abs(rec)
 
 hp.show(recInt)
