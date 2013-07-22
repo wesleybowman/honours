@@ -29,7 +29,7 @@ def myHolo():
 
     holo = obj - ref
 
-    rec = hp.propagate(holo, np.linspace(2.5e-2, 7.5e-2, 200))
+    rec = hp.propagate(holo, np.linspace(2.5e-2, 7.5e-2, 20))
 
     return rec
 
@@ -38,7 +38,19 @@ rec = myHolo()
 
 recInt = abs(rec) * abs(rec)
 
+print('Amplitude')
 hp.show(recInt)
+plt.show()
+
+print('Imaginary')
+hp.show(rec.imag)
+plt.show()
+
+print('Phase')
+phase=np.arctan(rec.imag/rec.real)
+#phase=np.unwrap(phase)
+hp.show(phase)
+#hp.show(np.angle(rec))
 plt.show()
 
 ''' 3D plotting - useful? '''
