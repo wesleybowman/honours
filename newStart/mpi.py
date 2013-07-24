@@ -16,23 +16,27 @@ m=10
 tempX=np.zeros((n,m))
 buf=np.zeros((n,m))
 
-#rowsX = [comm.rank + comm.size * aa for aa in xrange(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
-#rowsY = [comm.rank + comm.size * bb for bb in xrange(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
+rowsX = [comm.rank + comm.size * aa for aa in xrange(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
+rowsY = [comm.rank + comm.size * bb for bb in xrange(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
 
 comm.Barrier()
 
 print(tempX)
 
-comm.Scatter( [tempX, MPI.DOUBLE], [buf, MPI.DOUBLE])
 
-for x in xrange(n):
+for x in rowsX:
     for y in xrange(m):
 
+        #buf[x,y]=x+y
         buf[x,y]=x+1
 
-#buf += 1
 
-comm.Allgather([buf, MPI.DOUBLE], [tempX, MPI.DOUBLE])
+comm.Barrier()
+
+tempX=comm.reduce(buf, op= MPI.SUM, root=0)
+
+#comm.Allgather([buf, MPI.DOUBLE], [tempX, MPI.DOUBLE])
+#comm.gather([buf, MPI.DOUBLE], [tempX, MPI.DOUBLE], root = 0)
 
 print(tempX)
 

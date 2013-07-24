@@ -6,10 +6,6 @@ from multiprocessing import Pool
 import itertools
 import time
 import numexpr as ne
-#from numba import autojit
-
-'''Autojit has an error of cannot allocate memory for func and func_star
-    I think it also takes longer to run'''
 
 def func(smallX,smallY):
     ''' Function used to calculate the integral '''
