@@ -46,17 +46,17 @@ hl = int(m/inner_loops)
 print("starting loops")
 
 for x in xrange(n):
-        for i in xrange(inner_loops):
-                print (x,i)
+    for i in xrange(inner_loops):
+        print (x,i)
 
-                ksiTemp = KSIdotR[x,hl*i:hl*(i+1)]
-                neTemp = ksiTemp[:,None,None]
+        ksiTemp = KSIdotR[x,hl*i:hl*(i+1)]
+        neTemp = ksiTemp[:,None,None]
 
-                arg = ne.evaluate("neTemp/KSInorm")
-                temp = ne.evaluate("holo * exp(1j * k * arg)")
-                temp2 = ne.evaluate("sum(temp, axis=2)")
+        arg = ne.evaluate("neTemp/KSInorm")
+        temp = ne.evaluate("holo * exp(1j * k * arg)")
+        temp2 = ne.evaluate("sum(temp, axis=2)")
 
-                reconstruction[x,hl*i:hl*(i+1)]=temp2.sum(axis=1)
+        reconstruction[x,hl*i:hl*(i+1)]=temp2.sum(axis=1)
 
 reconstruction = ne.evaluate("reconstruction *distX * distY")
 
