@@ -25,7 +25,12 @@ print(tempX)
 
 comm.Scatter( [tempX, MPI.DOUBLE], [buf, MPI.DOUBLE])
 
-buf += 1
+for x in xrange(n):
+    for y in xrange(m):
+
+        buf[x,y]=x+1
+
+#buf += 1
 
 comm.Allgather([buf, MPI.DOUBLE], [tempX, MPI.DOUBLE])
 
