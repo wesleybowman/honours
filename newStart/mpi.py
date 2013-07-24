@@ -12,24 +12,15 @@ comm.Barrier()
 
 n=28
 m=10
-size=n*m
-
-my_size = size // comm.size # Every process computes a vector of lenth *my_size*
-size = comm.size*my_size # Make sure size is a integer multiple of comm.size
-my_offset = comm.rank*my_size
 
 tempX=np.zeros((n,m))
 buf=np.zeros((n,m))
-
-xx=[]
-yy=[]
 
 rowsX = [comm.rank + comm.size * aa for aa in xrange(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
 rowsY = [comm.rank + comm.size * bb for bb in xrange(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
 
 comm.Barrier()
 
-#for x,y in itertools.product(rowsX,rowsY):
 for x in rowsX:
     for y in xrange(m):
 
@@ -37,7 +28,6 @@ for x in rowsX:
         tempX[x,y]=x+1
 
 comm.Barrier()
-
 
 #print(tempX)
 comm.allgather(buf,tempX)
