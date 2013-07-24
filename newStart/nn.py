@@ -14,8 +14,10 @@ reconstruction=np.empty(holo.shape)+0j
 
 wavelength=405e-9
 k=2*np.pi/(wavelength)
-z=250e-6
-#z=13e-3-250e-6
+zz='250e-6'
+#z='13e-3-250e-6'
+
+z=float(zz)
 
 distX=6e-6
 distY=6e-6
@@ -60,4 +62,5 @@ for x in xrange(n):
 
 reconstruction = ne.evaluate("reconstruction *distX * distY")
 
-reconstruction.dump('reconstruction.dat')
+saveName='{}reconstruction'.format(zz)
+np.save(saveName,reconstruction)
