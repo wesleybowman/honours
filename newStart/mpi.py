@@ -16,25 +16,36 @@ m=10
 tempX=np.zeros((n,m))
 buf=np.zeros((n,m))
 
-rowsX = [comm.rank + comm.size * aa for aa in xrange(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
-rowsY = [comm.rank + comm.size * bb for bb in xrange(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
+#rowsX = [comm.rank + comm.size * aa for aa in xrange(int(n/comm.size)+1) if comm.rank + comm.size*aa < n]
+#rowsY = [comm.rank + comm.size * bb for bb in xrange(int(m/comm.size)+1) if comm.rank + comm.size*bb < m]
 
 comm.Barrier()
 
-for x in rowsX:
-    for y in xrange(m):
-
-        print(x, y)
-        tempX[x,y]=x+1
-
-comm.Barrier()
-
-#print(tempX)
-comm.allgather(buf,tempX)
 print(tempX)
-comm.Barrier()
-print('buf')
-print(buf)
-bad=np.where(tempX!=0)
-print(bad[0].shape)
 
+comm.Scatter( [tempX, MPI.DOUBLE], [buf, MPI.DOUBLE])
+
+buf += 1
+
+comm.Allgather([buf, MPI.DOUBLE], [tempX, MPI.DOUBLE])
+
+print(tempX)
+
+
+#for x in rowsX:
+#    for y in xrange(m):
+#
+#        print(x, y)
+#        tempX[x,y]=x+1
+#
+#comm.Barrier()
+#
+##print(tempX)
+#comm.allgather(buf,tempX)
+#print(tempX)
+#comm.Barrier()
+#print('buf')
+#print(buf)
+#bad=np.where(tempX!=0)
+#print(bad[0].shape)
+#

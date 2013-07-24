@@ -22,8 +22,11 @@ else:
 
 my_A = np.empty(my_N, dtype=np.float64)
 
+print A,my_A
+
 # Scatter data into my_A arrays
 comm.Scatter( [A, MPI.DOUBLE], [my_A, MPI.DOUBLE] )
+comm.Barrier()
 
 print("After Scatter:")
 for r in xrange(comm.size):
