@@ -7,29 +7,29 @@ from mpi4py import MPI
 
 comm=MPI.COMM_WORLD
 
-if comm.rank==0:
-    print(comm.size)
+if comm.rank == 0:
+    print('Processors used: {}'.format(comm.size))
 
-obj=plt.imread('jerichoObject.bmp')
-ref=plt.imread('jerichoRef.bmp')
+obj = plt.imread('jerichoObject.bmp')
+ref = plt.imread('jerichoRef.bmp')
 
-holo=obj-ref
+holo = obj-ref
 
-temp=np.empty(holo.shape)+0j
-reconstruction=np.empty(holo.shape)+0j
+temp = np.empty(holo.shape)+0j
+reconstruction = np.empty(holo.shape)+0j
 
-wavelength=405e-9
-k=2*np.pi/(wavelength)
+wavelength = 405e-9
+k = 2 * np.pi / (wavelength)
 #zz='250e-6'
-zz='13e-3-250e-6'
+zz = '13e-3-250e-6'
 
-z=eval(zz)
+z = eval(zz)
 
-distX=6e-6
-distY=6e-6
+distX = 6e-6
+distY = 6e-6
 
-n=holo.shape[0]
-m=holo.shape[1]
+n = holo.shape[0]
+m = holo.shape[1]
 
 #create all r vectors
 R = np.empty((n, m, 3))
@@ -46,12 +46,12 @@ KSI[:,:,2] = z
 # vectorized 2-norm; see http://stackoverflow.com/a/7741976/4323
 KSInorm = np.sum(np.abs(KSI)**2,axis=-1)**(1./2)
 
-KSIdotR=inner1d(KSI,R)
+KSIdotR = inner1d(KSI,R)
 
 inner_loops = 251
 hl = int(m/inner_loops)
 
-if comm.rank==0:
+if comm.rank == 0:
     print("starting loops")
 
 comm.Barrier()
@@ -71,13 +71,13 @@ for x in rowsX:
         temp = ne.evaluate("holo * exp(1j * k * arg)")
         temp2 = ne.evaluate("sum(temp, axis=2)")
 
-        reconstruction[x,hl*i:hl*(i+1)]=temp2.sum(axis=1)
+        reconstruction[x, hl*i:hl*(i+1)] = temp2.sum(axis=1)
 
 comm.Barrier()
 
-rec=comm.reduce(reconstruction, op=MPI.SUM, root=0)
+rec = comm.reduce(reconstruction, op=MPI.SUM, root=0)
 
 reconstruction = ne.evaluate("rec * distX * distY")
 
-saveName='{}reconstruction'.format(zz)
-np.save(saveName,reconstruction)
+saveName = '{}reconstruction'.format(zz)
+np.save(saveName, reconstruction)
