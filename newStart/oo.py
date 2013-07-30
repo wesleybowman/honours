@@ -79,5 +79,5 @@ rec = comm.reduce(reconstruction, op=MPI.SUM, root=0)
 
 reconstruction = ne.evaluate("rec * distX * distY")
 
-saveName = '{}reconstruction'.format(zz)
+saveName = '{}vectorizedReconstruction'.format(zz)
 np.save(saveName, reconstruction)
