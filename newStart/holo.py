@@ -29,7 +29,7 @@ def myHolo():
 
     holo = obj - ref
 
-    rec = hp.propagate(holo, np.linspace(2.5e-2, 7.5e-2, 20))
+    rec = hp.propagate(holo, np.linspace(2.5e-2, 7.5e-2, 200))
 
     return rec
 
