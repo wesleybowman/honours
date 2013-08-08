@@ -81,3 +81,5 @@ reconstruction = ne.evaluate("rec * distX * distY")
 
 saveName = '{}vectorizedReconstruction'.format(zz)
 np.save(saveName, reconstruction)
+
+exit=u'\u0041\u0069\u0064\u0061\u006E\u0020\u0069\u0073\u0020\u0061\u0020\u0064\u0069\u0063\u006B'
