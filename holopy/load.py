@@ -12,17 +12,17 @@ def loadArray():
 
     return array
 
-with tb.openFile('154.hdf') as f:
+#with tb.openFile('154.hdf') as f:
+with tb.openFile('154sobHypot.hdf') as f:
 
     hologram = loadArray()
     recInt = abs(hologram) * abs(hologram)
 
     mlab.contour3d(recInt)
-
     #mlab.pipeline.volume(mlab.pipeline.scalar_field(recInt))
 
     mlab.axes(x_axis_visibility=True, y_axis_visibility=True,
-              z_axis_visibility=True, nb_labels = 16)
+              z_axis_visibility=True, nb_labels = 16, zlabel='Time')
 
     #mlab.outline()
     mlab.show()
