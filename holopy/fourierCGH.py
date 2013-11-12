@@ -30,12 +30,11 @@ def diffraction(img,show=None):
 
 def propagation(diff,wavelength=632e-9,z=1,px=0.01,py=0.01,show=None):
 
-
     '''Not sure which k to use '''
     k=2*np.pi/wavelength
     k=1/wavelength
 
-    a,b=diff.shape
+    a, b = diff.shape
 
     k2=k*k
     kx=np.fft.fftfreq(a,px/a)
@@ -63,9 +62,20 @@ def propagation(diff,wavelength=632e-9,z=1,px=0.01,py=0.01,show=None):
 def hologram(prop,show=None):
     holo=np.fft.ifft2(prop)
     holoInt=holo.real*holo.real+holo.imag*holo.imag
+    holoInt = abs(holo)
+
     if show:
-        plt.imshow((holoInt),cmap=plt.cm.Greys_r)
-        plt.show()
+        fig = plt.figure(frameon=False)
+        ax = plt.Axes(fig, [0., 0., 1., 1.])
+        ax.set_axis_off()
+        fig.add_axes(ax)
+
+        ax.imshow(holoInt, aspect='auto',cmap=plt.cm.Greys_r)
+        fig.savefig('cgh.png')
+
+        #plt.imshow((holoInt),cmap=plt.cm.Greys_r)
+        #plt.savefig('cgh.png', bbox_inches='tight')
+        #plt.show()
 
     return holo,holoInt
 
@@ -97,16 +107,8 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
     return recInt
 
 if __name__=='__main__':
-    img=plt.imread('smallA.png')
-    #img=plt.imread('onePixels.png')
-    #img=plt.imread('dot.png')
     img=plt.imread('bar.png')
-#    img=plt.imread('dot2.png')
-#    img=plt.imread('offCenterDot.png')
-#    img=plt.imread('farther2.png')
-#    img=plt.imread('screwfar1.png')
-#    img=plt.imread('thickerSinglePixel.png')
-#    img=plt.imread('object.png')
+    img=plt.imread('whitebar.png')
 
 
     try:
@@ -114,11 +116,11 @@ if __name__=='__main__':
     except ValueError:
         pass
 
-    img=normalizeImage(img)
+    #img=normalizeImage(img)
 
-    diff=diffraction(img)
-    prop=propagation(diff)
-    holo,holoInt=hologram(prop)
+    diff = diffraction(img)
+    prop = propagation(diff)
+    holo, holoInt = hologram(prop,show=1)
 
     #recInt=reconstruction(holoInt)
 

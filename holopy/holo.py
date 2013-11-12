@@ -4,22 +4,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def myHolo():
-    ''' my holographic setup, which I think works since we use plane waves '''
 
-    optics = hp.core.Optics(wavelen=.66, index=1.33, polarization=[1.0, 0.0])
+    optics = hp.core.Optics(wavelen=.632, index=1.33, polarization=[1.0, 0.0])
 
-    magnification = 40
-    Spacing = 6.8 / magnification
+    #magnification = 40
+    #Spacing = 6.8 / magnification
+    Spacing = 0.1
 
-    obj = hp.load('image0139.tif', spacing=Spacing, optics=optics)
-    ref = hp.load('image0146.tif', spacing=Spacing, optics=optics)
+    obj = hp.load('cgh.png', spacing=Spacing, optics=optics)
+    #ref = hp.load('image0146.tif', spacing=Spacing, optics=optics)
 
-    holo = obj - ref
+    #holo = obj - ref
+    holo = obj
 
     hp.show(holo)
     plt.show()
 
-    rec = hp.propagate(holo, np.linspace(1, 500, 50))
+    rec = hp.propagate(holo, np.linspace(100, 150, 50))
 
     return rec
 
