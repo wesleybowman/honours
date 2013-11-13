@@ -51,9 +51,11 @@ def propagation(diff,wavelength=632e-9,z=1,px=0.01,py=0.01,show=None):
 
     if show:
         propShift=np.fft.fftshift(prop)
-        propInt=propShift.real*propShift.real+propShift.imag*propShift.imag
+        #propInt=propShift.real*propShift.real+propShift.imag*propShift.imag
+        propInt = abs(propShift)
 
-        plt.imshow(np.log(propInt.real+1e-3),cmap=plt.cm.Greys_r)
+        #plt.imshow(np.log(propInt.real+1e-3),cmap=plt.cm.Greys_r)
+        plt.imshow((propInt),cmap=plt.cm.Greys_r)
         plt.show()
 
     return prop
@@ -61,7 +63,7 @@ def propagation(diff,wavelength=632e-9,z=1,px=0.01,py=0.01,show=None):
 
 def hologram(prop,show=None):
     holo=np.fft.ifft2(prop)
-    holoInt=holo.real*holo.real+holo.imag*holo.imag
+    #holoInt=holo.real*holo.real+holo.imag*holo.imag
     holoInt = abs(holo)
 
     if show:
@@ -109,6 +111,7 @@ def reconstruction(holoInt,wavelength=632e-9,z=1,px=0.01,py=0.01,show=1):
 if __name__=='__main__':
     img=plt.imread('bar.png')
     img=plt.imread('whitebar.png')
+    #img=plt.imread('whitecircle.png')
 
 
     try:
@@ -119,7 +122,7 @@ if __name__=='__main__':
     #img=normalizeImage(img)
 
     diff = diffraction(img)
-    prop = propagation(diff)
+    prop = propagation(diff, z=2, show=1)
     holo, holoInt = hologram(prop,show=1)
 
     #recInt=reconstruction(holoInt)
