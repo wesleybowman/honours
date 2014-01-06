@@ -1,0 +1,81 @@
+\documentclass[12pt]{report}
+
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{acadia-hon-thesis}
+
+\usepackage{siunitx}
+
+
+%URL stuff
+\usepackage{url}
+\urlstyle{same}
+
+%Code stuff
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true
+  tabsize=3
+}
+
+%FlowChart Stuff
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{decision} = [diamond, draw, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, text width=5em, text centered, rounded corners, minimum height=4em]
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{result}[theorem]{Result}
+\newtheorem{definition}[theorem]{Definition}
+%%theorems and stuff
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+%%definitions
+
+\newcommand{\tab}{\hspace*{2em}}
+%tab command
+
+\begin{document}
+\title{Honours}
+\date{End of Term}
+\author{Wesley Bowman}
+\maketitle
+\pagebreak
+
+\tableofcontents
+
+\pagebreak
+%
+%
+
+
+
+\end{document}

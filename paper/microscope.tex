@@ -1,0 +1,110 @@
+\include{header}
+\begin{document}
+
+\chapter{Holographic Microscope} \label{chap:Micro}
+
+One of the main goals of this research was to construct a microscope that was
+able to create holograms that could be reconstructed numerically. To achieve
+this, two different techniques were tried. All parts used where placed on a
+optical rail that was horizontal.
+
+\section{Pinhole Holograms}
+This was the first microscope that was tried in the lab. This microscope
+consisted of a laser, a pinhole, the object to be reconstructed, and a charged
+coupled device, or a CCD.
+
+A 632 nm laser was mostly used, but a 450 nm laser was tested at one point as
+well to see if it helped the resolution and intensity. The pinhole needed to be
+small, so a \SI{10}{\micro\meter}, \SI{5}{\micro\meter}, \SI{1}{\micro\meter} pinhole was used. The smaller the
+aperture, the higher the resolution could be. The samples were nothing in
+particular for this stage, as it was a testing stage to see if reconstructions
+could be done with the setup, therefore hairs or fibre optic cables were used
+for the sample. The CCD used was a webcam, since it was an effective CCD for
+the price, and since this was still in the testing process it didn't feel
+necessary to go overboard with an expensive CCD.
+
+The problem with this setup was that it lead to a point source illumination
+which lead to spherical propagation of light after the aperture. This created
+a problem in the reconstruction, since the reconstruction methods that were
+being used were for plane-wave holography. Another problem was that to do
+pinhole holography, you have to be very precise with the laser hitting the
+pinhole, and then very precise with the rest of the equipment placing after the
+pinhole as well. The camera needs to get very close to the object, and the
+object needs to be close to the pinhole. The amount of precision needed was
+just not possible with the equipment that we had available.
+
+
+\section{Plane-Wave Holograms}
+After a trip to the Manoharan Lab at Harvard University, it was realized that
+pinhole holography was not the way to go for a lab just starting up. This is
+why the next microscope built was a plane-wave holography microscope. This
+setup entailed of a laser, two objectives, the sample, and a CCD\@. There was
+also the optional part of a neutral density filter (ND filter), which allowed for the
+intensity of light to be adjusted so as not to saturate the CCD\@. A diagram of
+the setup and the actual setup used are shown in Figure~\ref{fig:inlineSetup}
+and in Figures~\ref{fig:OurMicroscopeSide}-\ref{fig:OurMicroscopeUp} respectively.
+
+\begin{figure}[htbp!]
+\begin{center}
+    \includegraphics[scale=0.5]{inlineSetup}
+\end{center}
+\caption{A diagram of the Plane-Wave Holography Microscope.}
+\label{fig:inlineSetup}
+\end{figure}
+
+%\begin{figure}
+%\begin{center}
+%    \includegraphics[scale=0.10]{OurMicroscope}
+%\end{center}
+%\caption{Our actual setup. Need a new updated and better picture of this.}
+%\label{fig:OurMicroscope}
+%\end{figure}
+
+\begin{figure}[htbp!]
+\begin{center}
+    \includegraphics[scale=0.05]{pictures/microscopeside.jpg}
+\end{center}
+\caption{Our actual setup as seen from the side view.}
+\label{fig:OurMicroscopeSide}
+\end{figure}
+
+\begin{figure}[htbp!]
+\begin{center}
+    \includegraphics[scale=0.05]{pictures/microscopesideup.jpg}
+\end{center}
+\caption{A different angle of our setup that allows for a view of the most of
+    the optical parts, including the CCD.}
+\label{fig:OurMicroscopeSideUp}
+\end{figure}
+
+\begin{figure}[htbp!]
+\begin{center}
+    \includegraphics[scale=0.05]{pictures/microscopeup.jpg}
+\end{center}
+\caption{A top-down view of the setup that shows both optical rails.}
+\label{fig:OurMicroscopeUp}
+\end{figure}
+
+The same
+lasers used in the pinhole setup were used here. The CCD was upgraded to an interchangeable
+lens camera. Interchangeable lens cameras have no mirrors or prisms in front of
+their CCD\@. This allowed us to buy the camera body only, and the CCD is directly
+exposed to the incoming light, which allowed for minimal aberrations. This new
+camera was a big step in resolution for our images. The two objectives were used
+before and after the sample in the setup. The first objective is there for
+the culmination of the light from the laser. This is not needed if your laser
+has a culminated beam on its own. The second objective is there to
+magnify the resulting diffraction or interference patterns that are created
+when the light passes through the sample. This allowed for the holograms to be
+better recorded on the CCD, as it allowed the CCD to be fully used. This can be
+done since every part of the hologram holds all the information needed to
+reconstructed the object. Both objectives and the object were placed on
+three-axis mounts so that they could be adjusted and lined up properly.
+The neutral
+density filter was used depending on the sample that was being viewed, and if the CCD was being
+saturated. Saturating the CCD does not allow for a good hologram reconstruction
+since some of the information is missing. The ND filter went after the laser
+and before the first objective. It was placed here for ease of use and access.
+
+
+\end{document} 

@@ -1,0 +1,148 @@
+
+%---------------------------------------------------------
+% Header: This file includes all the packages and custom definitions
+% we have used in this example thesis.
+%----------------------------------------------------------
+
+\documentclass[12pt,twoside,openright]{report}
+
+%---------------------
+% START: Packages
+%---------------------
+\usepackage{textcomp}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{soul}
+\usepackage{listings}
+%\usepackage{subfig}
+\usepackage{verbatim}
+\usepackage{alltt}
+\usepackage{siunitx}
+\usepackage{color}
+
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{lmodern}
+
+% There are used in the graphics chapter.
+% You can delete the following two lines if you use no tikz/pgf graphics
+% in your thesis.
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+% Load the natbib citation package: set the citations to be numerical
+% with square brackets separated by commas.
+\usepackage[numbers,square,comma]{natbib}
+
+% Now include the Acadia thesis style
+\usepackage{acadia-hon-thesis}
+
+% Load the hyperref package.
+% The options tell it to (a) use hyper-links to pages with Roman
+% numerals that are different than pages with Arabic numbers, and
+% (b) tell Adobe reader to show a page number matching the thesis page
+% number (rather than sequentially numbering the PDF pages from 1).
+\usepackage[plainpages=false,pdfpagelabels]{hyperref}
+
+% The information in the first three lines here goes into the PDF
+% document properties.
+% The rest of the lines define options related to hyper-links.
+% colorlinks: typeset links in the given colours
+%	      (otherwise an ugly box is drawn around the links, although
+%	       it is only seen on the screen, not in printed copies)
+% A newer option (since May 2011) would be to just use the hidelinks option.
+% Note: pdfprintscaling=None should discourage Adobe reader from wanting to
+% scale your pages to fit printable area when you print from Adobe reader.
+\hypersetup{%
+    pdftitle={PUT YOUR THESIS TITLE HERE},
+    pdfauthor={Wesley A. Bowman},
+    pdfkeywords={PUT ANY KEYWORDS HERE},
+    colorlinks = true,
+    linkcolor = black,
+    anchorcolor = black,
+    citecolor = black,
+    filecolor = black,
+    urlcolor = black,
+    pdfprintscaling=None
+}
+
+
+% Load the algorithm/mic packages and use chapter-wise numbering
+\usepackage[chapter]{algorithm}
+\usepackage{algorithmic}
+
+
+
+%---------------------
+% END: Packages
+%---------------------
+\bibliographystyle{plainnat}
+
+% The depth of the table of contents: change the MAXIMUM depth of
+% citations in your table of contents.
+\setcounter{tocdepth}{6}
+
+%
+% Some definitions of commands used in this thesis
+%
+
+% For instance, if you have an acronym you like to use, then define a
+% command, it's faster and if the acronym changes you only have to
+% change it in one place.
+\def\sysacro{SPECIALACRONYM}
+
+% Allow us to change the margins easily and at will
+\newenvironment{changemargin}[2]{%
+  \begin{list}{}{%
+    \setlength{\topsep}{0pt}%
+    \setlength{\leftmargin}{#1}%
+    \setlength{\rightmargin}{#2}%
+    \setlength{\listparindent}{\parindent}%
+    \setlength{\itemindent}{\parindent}%
+    \setlength{\parsep}{\parskip}%
+  }%
+  \item[]}{\end{list}}
+
+%setup the default format of listings
+\lstset{%
+    basicstyle=\footnotesize,
+    numbers=left,
+    xleftmargin=5mm,
+    linewidth=\textwidth,
+    breaklines,
+    frame=tb,
+    frameround=fttt
+}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+% A new definition style
+\newtheoremstyle{defstyle}	% name
+    {3pt}			% Space above
+    {3pt}			% Space below
+    {}				% Body font
+    {}				% Indent amount
+    {\itshape}			% Theorem head font
+    {:}				% Punctuation after theorem head
+    {.5em}			% Space after theorem head
+    {}		% Theorem head spec (can be left empty,meaning 'normal’)
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+
+
+% Change comment style for algorithms
+\renewcommand{\algorithmiccomment}[1]{/*#1*/}
+% Change Require: to Input: for algorithms
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+% Change Ensure: to Output: for algorithms
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+\newcommand{\BigO}[1]{\ensuremath{\operatorname{O}\bigl(#1\bigr)}}
+
+\newfloat{Code}{H}{myc}
