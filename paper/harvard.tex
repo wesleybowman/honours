@@ -1,18 +1,19 @@
 %\include{header}
 %\begin{document}
-%
-%\chapter{Results} \label{chap:Results}
 
 \chapter{Results} \label{chap:Results}
 \section{Harvard University}
 
 HoloPy was the open-source Python module used for all of the reconstructions
-done. When this module was found, the opportunity was presented to travel to
+done, and was developed by the Manoharan Lab, who is a world leader in optical
+holography \cite{Manoharan}. When this module was found, the opportunity was presented to travel to
 Harvard University and meet with the developer to get some incite on how to
-build an efficient microscope and to learn how to properly use HoloPy. While at
+build an efficient microscope as well as to learn how to properly use HoloPy. While at
 Harvard University, the Manoharan Lab graciously allowed for holograms to be
 taken using their setup so that there could be a comparison to the microscope
-that was to be built.
+that was to be built. The Manoharan Lab optical holography setup is shown in
+Figure~\ref{fig:harvardSetup}. This was a highly advanced setup, allowing for
+fine adjustments to be made easily to the any part of the setup.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -48,27 +49,26 @@ that was to be built.
 
     \end{center}
     \caption{%
-        The Harvard University equipment setup.
+        The Harvard University optical holography setup.
     }%
     \label{fig:harvardSetup}
 \end{figure}
 
 A lot of the images taken at Harvard University have objects in them which were
-unknown, since the sample was used was water from the Charles River. Not
+unknown, since the sample was used was water from the Charles River in Boston,
+Massachusetts. Not
 having known what the objects were did not cause an issue though, since
-reconstruction was the only purpose of looking at the objects.
+a demonstration of holographic principles was the only purpose of looking at the objects.
 
 
 \begin{figure}
     \begin{center}
         \includegraphics[width=\textwidth]{pictures/128focus.png}
-        \caption{The in-focus image for Figures~\ref{fig:129}-\ref{fig:131}. }
+        \caption{The in-focus image for Figures~\ref{fig:129}-\ref{fig:131}.
+    Objects $i.$\ - $iii.$\ are the objects being reconstructed. }
         \label{fig:128focus}
     \end{center}
 \end{figure}
-
-
-
 
 
 \begin{figure}[ht!]
@@ -80,13 +80,13 @@ reconstruction was the only purpose of looking at the objects.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:129holo}
             \includegraphics[width=\textwidth]{pictures/129holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:129rec1}
             \includegraphics[width=\textwidth]{pictures/129rec1.png}
-            \caption{Reconstruction at one $z$ value.}
+            \caption{Reconstruction at a $z$ value of \SI{14.898}{\micro\meter}.}
         \end{subfigure}
             %
                 \hspace*{\fill}
@@ -95,14 +95,15 @@ reconstruction was the only purpose of looking at the objects.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:129rec2}
             \includegraphics[width=\textwidth]{pictures/129rec2.png}
-            \caption{Reconstruction at a different $z$ value.}
+            \caption{Reconstruction at a $z$ value of \SI{22.245}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        This hologram has the least amount of fridges in these series of
-        holograms.
+        This hologram has the least amount of fringes in these series of
+        holograms at approximately 3 fringes located around object $i.$ tightly
+        bound to the object.
     }%
     \label{fig:129}
 \end{figure}
@@ -114,13 +115,13 @@ reconstruction was the only purpose of looking at the objects.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:130holo}
             \includegraphics[width=\textwidth]{pictures/130holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:130rec1}
             \includegraphics[width=\textwidth]{pictures/130rec1.png}
-            \caption{Reconstruction at one value of $z$.}
+            \caption{Reconstruction at a $z$ value of \SI{32.245}{\micro\meter}.}
         \end{subfigure}
             %
                 \hspace*{\fill}
@@ -129,13 +130,15 @@ reconstruction was the only purpose of looking at the objects.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:130rec2}
             \includegraphics[width=\textwidth]{pictures/130rec2.png}
-            \caption{Reconstruction at a different value of $z$.}
+            \caption{Reconstruction at a $z$ value of \SI{39.592}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        This hologram is an in-between hologram in terms of the fridges.
+        This hologram is an in-between hologram in terms of the amount of
+        fringes with there being approximately 7 tightly bound fringes around
+        object $i.$
     }%
     \label{fig:130}
 \end{figure}
@@ -147,33 +150,48 @@ reconstruction was the only purpose of looking at the objects.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:131holo}
             \includegraphics[width=\textwidth]{pictures/131holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
-        \begin{subfigure}[t]{\textwidth}
+        \begin{subfigure}[t]{0.9\textwidth}
             \label{fig:131rec}
             \includegraphics[width=\textwidth]{pictures/131rec.png}
-            \caption{Reconstruction}
+            \caption{Reconstruction at a $z$ value of \SI{168.367}{\micro\meter}.}
         \end{subfigure}
-
 
     \end{center}
     \caption{%
-        This hologram has the most fridges and seems to comtain the least
-        amount of detail, but when reconstructed, it is seen that more detail
-        than the previous reconstructions can be obtained, while also losing
-        different details.
+        This hologram has the most fringes with approximately 7 fringes not
+        tightly grouped around object $i.$, and seemed to contain the least
+        amount of detail, but when reconstructed, it was seen that more detail
+        is shown in object $i.$ and $ii.$, while the details of the objects at $iii.$
+        were lost.
     }%
     \label{fig:131}
 \end{figure}
 
 The images shown below show a few different
 techniques of holography that is advantageous compared to bright field optics.
-For Figures~\ref{fig:128focus}-\ref{fig:131}, the difference between the amount of fridges in the hologram
-are shown, along with reconstructions at different $z$ values. The advantages
-in holography are that the images do not need to be in-focus to be viewed with
-good resolution. This advantage leads to the other advantage that objects do
-not have to lie in the same plane to be viewed.
+For Figures~\ref{fig:128focus}-\ref{fig:131}, the difference between the number of fringes in the hologram
+are shown, along with reconstructions at different $z$ values. In these images,
+objects $i.$ and $ii.$ were in the same focal plane, while objects at $iii.$
+were in
+a different focal plane. This is why multiple values of $z$ were used in
+reconstruction. In Figure~\ref{fig:129} (a), there were approximately 3 fringes
+located closely around object $i.$, which were tightly grouped. In
+Figure~\ref{fig:130} (a), there were approximately 7 fringes
+located closely around object $i.$, which were also tightly grouped. In
+Figure~\ref{fig:131} (a), there were approximately 7 fringes around object
+$i.$, but the fringes were not closely bound to object $i.$ like in
+Figures~\ref{fig:129} and \ref{fig:130}. This led to there being only one
+reconstruction that needed to be done, since the objects at position $iii.$
+could no longer be resolved.
+
+
+%The advantages
+%in holography are that the images do not need to be in-focus to be viewed with
+%good resolution. This advantage leads to the other advantage that objects do
+%not have to lie in the same plane to be viewed.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -181,35 +199,41 @@ not have to lie in the same plane to be viewed.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:132focus}
             \includegraphics[width=\textwidth]{pictures/132focus.png}
-            \caption{In-focus image}
+            \caption{The in-focus image, where the objects are hard to
+            identify.}
+            %because of the low contrast to the background.}
         \end{subfigure}
             %
-                %\hspace*{\fill}
+                \hspace*{\fill}
     %
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:133holo}
             \includegraphics[width=\textwidth]{pictures/133holo.png}
-            \caption{Hologram of the in-focus image.}
+            \caption{A hologram of the in-focus image.}% which already gives more
+            %contrast to the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:133rec}
             \includegraphics[width=\textwidth]{pictures/133rec.png}
-            \caption{Reconstruction of the hologram.}
+            \caption{Reconstruction of the hologram at a $z$ value of \SI{72.245}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-       It can be seen that the reconstruction is highly detailed compared to
-       the low level of detail in the hologram.
+       The reconstruction allowed for the objects $i.$ and $ii.$ to be easily
+       identified because of the higher contrast. The edges of the objects now
+       stand out, even with the interference from the small particles around
+       the objects.
     }%
     \label{fig:133}
 \end{figure}
 
 A typical reconstruction is shown in Figure~\ref{fig:133}. Even with some
-interference from objects, the reconstruction for the rectangular object is
-still fairly detailed and distinguished.
+interference from objects, object $i.$ was still resolved into a clear
+rectangular object whose borders are clearly visable, along with object
+$ii.$, both of which were hard to distinguish in the in-focus image.
 
 
 \begin{figure}
@@ -227,19 +251,21 @@ still fairly detailed and distinguished.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:139holo}
             \includegraphics[width=\textwidth]{pictures/139holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:139rec}
             \includegraphics[width=\textwidth]{pictures/139rec.png}
-            \caption{Reconstruction}
+            \caption{Reconstruction at a $z$ value of
+                \SI{56.327}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        Hologram that has a fair level of detail, and then reconstructed.
+        The hologram has some of the details seen in the object in the in-focus
+        image, and has approximately 8 fringes around the object.
     }%
     \label{fig:139}
 \end{figure}
@@ -251,27 +277,35 @@ still fairly detailed and distinguished.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:140holo}
             \includegraphics[width=\textwidth]{pictures/140holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:140rec}
             \includegraphics[width=\textwidth]{pictures/140rec.png}
-            \caption{Reconstruction}
+            \caption{Reconstruction at a $z$ value of
+                \SI{215.306}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        The same object with more fridges and less detail that provides a
-        better detail reconstruction than Figure~\ref{fig:139}
+        This hologram had no details seen in the in-focus image, and had
+        approximately 12 fringes in a wide radius around the object. The
+        reconstruction showed details from the in-focus image.
     }%
     \label{fig:140}
 \end{figure}
 
 Once again, in Figures~\ref{fig:136focus}-\ref{fig:140}, the difference in the
-amount of fridges is shown. In this case, the more fridges led to a higher
-resolution inside the object.
+amount of fringes is shown. In this case, the more fringes led to a higher
+resolution inside the object. In Figure~\ref{fig:139}, there were approximately
+8 fringes around the object, and in the hologram, the object still has some
+details about the object in it. In Figure~\ref{fig:140}, there is approximately
+12-14 fringes located around the object, with the hologram looking like a white
+dot, having no details like Figure~\ref{fig:139}. When reconstructed,
+Figure~\ref{fig:140} more closely matches the in-focus image of
+Figure~\ref{fig:136focus} than Figure~\ref{fig:139}.
 
 
 \begin{figure}[ht!]
@@ -280,40 +314,84 @@ resolution inside the object.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:147focus}
             \includegraphics[width=\textwidth]{pictures/147focus.png}
-            \caption{In-focus image}
+            \caption{The in-focus image that had little contrast.}
         \end{subfigure}
+        \hspace*{\fill}
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:148holo}
             \includegraphics[width=\textwidth]{pictures/148holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:148rec}
             \includegraphics[width=\textwidth]{pictures/148rec.png}
-            \caption{Reconstruction}
+            \caption{A reconstruction at a $z$ value of
+                \SI{44.898}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        The reconstruction shows more detail than the in-focus image.
+        The reconstruction of the hologram showed more details in the object
+        than the in-focus image did. The higher contrast of the reconstruction
+        allowed for these details to be seen.
     }%
     \label{fig:148}
 \end{figure}
+\clearpage
 
-In Figures~\ref{fig:148}, there is more detail in the reconstruction than there
-is in the in-focus image. This is because of the high contrast that is obtained
-when doing a reconstruction, allowing the details to be more easily seen.
+In Figure~\ref{fig:148}, the reconstruction revealed more detail in the object
+than the in-focus image did. This was because of the high contrast that was
+obtained in the reconstruction, using the hologram subtracted from the
+background. This contrast allowed for the small details to be seen, which were
+approximately one to two microns wide.
 
-All of the reconstructions have some fine details shown. For all of the
+\begin{figure}[ht!]
+    \begin{center}
+
+        \begin{subfigure}[t]{0.4\textwidth}
+            \label{fig:3Dx}
+            \includegraphics[width=\textwidth]{x}
+            \caption{Movement along the $x$-axis over time.}
+        \end{subfigure}
+        \hspace*{\fill}
+        \begin{subfigure}[t]{0.4\textwidth}
+            \label{fig:3Dy}
+            \includegraphics[width=\textwidth]{y}
+            \caption{Movement along the $y$-axis over time.}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[t]{0.6\textwidth}
+            \label{fig:3Dyx}
+            \includegraphics[width=\textwidth]{yx}
+            \caption{Movement along the $xy$-plane.}
+        \end{subfigure}
+
+
+    \end{center}
+    \caption{%
+        A 3 dimensional image of a particle that had little movement in the
+        $z$-axis, so the $z$-axis was replaced with time to show movement over
+        time.
+    }%
+    \label{fig:3D}
+\end{figure}
+
+In Figure~\ref{fig:3D}, one hundred reconstructions were done, and then they
+were composed into a three dimensional image by stacking all 100 images on top
+of one another. In this case, there was approximately a 1 micron movement in
+the $z$-axis, so instead time was used so that it could be seen how far the
+particle moved in the $x$-axis  or $y$-axis over time. This allows for the
+particle to be tracked in all three dimensions and in time. This is a
+convenience which optical bright field microscopy does not have.
+
+
+All of the reconstructions have some fine details shown, which shows the
+resolution of the Manoharan Lab setup. For all of the
 reconstructions done from the Harvard University images, the spacing in-between
-the pixels was 0.17 microns, and the image size was 1024 by 1024 pixels.
-
-
-
-
-
+the pixels was 0.17 microns, and the image size was 1024 by 1024 pixels,
+therefore each image is \SI{174.08}{\micro\meter} by \SI{174.08}{\micro\meter}.
 
 
 

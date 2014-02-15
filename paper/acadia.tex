@@ -4,17 +4,31 @@
 
 \section{Acadia University}
 
-Once the microscope was constructed, images could be taken in the lab. Many
-biological objects were tried, but due to the amount of objects in the
-three-dimensional space, there became too many fridges to resolve into a
-reconstruction. The reconstructions could be done, but no details could be
-seen.
+%Once the microscope was constructed, images could be taken in the lab. Many
+%biological objects were tried, but due to the amount of objects in the
+%three-dimensional space, there became too many fridges to resolve into a
+%reconstruction. The reconstructions could be done, but no details could be
+%seen.
 
 Like the images obtained from Harvard University, some of the objects shown are
 objects that appeared in the slide without intention, but made for interesting
 holograms and reconstructions. With the CCD that was used in the microscope,
 the spacing per pixel was about twice that of the Harvard images at around 0.34
-microns. The image size was 4000 by 3000 pixels.
+microns. The image size was 4000 by 3000 pixels, therefore the images were
+\SI{1360}{\micro\meter} by \SI{1020}{\micro\meter}. The values of $z$ used for
+reconstructions in the Acadia images are larger, since the objects were farther
+away from the CCD than in the Harvard images.
+
+In Figure~\ref{fig:68_74}, the object was a fibre from the lens tissue used to
+clean the slide. This fibre was found in the hologram, and then after the
+hologram was captured, the slide was repositioned to take the in-focus image.
+This demonstrates an advantage of holography over optical bright field
+microscopy, because in the bright field microscope this object might have been
+overlooked since the fibre was not at the focal length. Holography allowed for
+this object to be found and reconstructed without the need to find the focal
+plane of the object.
+
+
 
 \begin{figure}[ht!]
     \begin{center}
@@ -22,65 +36,67 @@ microns. The image size was 4000 by 3000 pixels.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:69_focus}
             \includegraphics[width=\textwidth]{pictures/69_focus.png}
-            \caption{In-focus image}
+            \caption{The in-focus image of a wood fibre.}
         \end{subfigure}
             %
-                %\hspace*{\fill}
+                \hspace*{\fill}
     %
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:68_74holo}
             \includegraphics[width=\textwidth]{pictures/68_74holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus image.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:68_74rec}
             \includegraphics[width=\textwidth]{pictures/68_74rec.png}
-            \caption{Reconstruction}
+            \caption{A reconstruction at a $z$ value of \SI{12580}{\micro\meter}}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        The reconstruction, which was obtained from a low detail hologram,
-        matches the in-focus image.
+        The reconstruction of a wood fibre, which was likely from a lens tissue
+        during cleaning of the slide, obtained from a hologram that had
+        approximately six fringes next to the object. The object was far away from
+        the CCD.
     }%
     \label{fig:68_74}
 \end{figure}
 
 
 
-\begin{figure}[ht!]
-    \begin{center}
-
-        \begin{subfigure}[t]{0.4\textwidth}
-            \label{fig:86_focus}
-            \includegraphics[width=\textwidth]{pictures/86_focus.png}
-            \caption{In-focus image}
-        \end{subfigure}
-            %
-                %\hspace*{\fill}
-    %
-        \begin{subfigure}[t]{0.4\textwidth}
-            \label{fig:85_88holo}
-            \includegraphics[width=\textwidth]{pictures/85_88holo.png}
-            \caption{Hologram}
-        \end{subfigure}
-        \\
-        \begin{subfigure}[t]{\textwidth}
-            \label{fig:85_88rec}
-            \includegraphics[width=\textwidth]{pictures/85_88rec.png}
-            \caption{Reconstruction}
-        \end{subfigure}
-
-
-    \end{center}
-    \caption{%
-        An image that shows the kind of resolution that can be achieved with
-        holography and our microscope.
-    }%
-    \label{fig:85_88}
-\end{figure}
+%\begin{figure}[ht!]
+%    \begin{center}
+%
+%        \begin{subfigure}[t]{0.4\textwidth}
+%            \label{fig:86_focus}
+%            \includegraphics[width=\textwidth]{pictures/86_focus.png}
+%            \caption{In-focus image}
+%        \end{subfigure}
+%            %
+%                %\hspace*{\fill}
+%    %
+%        \begin{subfigure}[t]{0.4\textwidth}
+%            \label{fig:85_88holo}
+%            \includegraphics[width=\textwidth]{pictures/85_88holo.png}
+%            \caption{Hologram}
+%        \end{subfigure}
+%        \\
+%        \begin{subfigure}[t]{\textwidth}
+%            \label{fig:85_88rec}
+%            \includegraphics[width=\textwidth]{pictures/85_88rec.png}
+%            \caption{Reconstruction}
+%        \end{subfigure}
+%
+%
+%    \end{center}
+%    \caption{%
+%        An image that shows the kind of resolution that can be achieved with
+%        holography and our microscope.
+%    }%
+%    \label{fig:85_88}
+%\end{figure}
 
 
 \begin{figure}[ht!]
@@ -92,19 +108,22 @@ microns. The image size was 4000 by 3000 pixels.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:72_74holo}
             \includegraphics[width=\textwidth]{pictures/72_74holo.png}
-            \caption{Hologram}
+            \caption{A hologram of a piece of dust that got in the solution.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:72_74rec}
             \includegraphics[width=\textwidth]{pictures/72_74rec.png}
-            \caption{Reconstruction}
+            \caption{A reconstruction at a $z$ value of
+                \SI{1706}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        Another object that has a high resolution for it's small size.
+        A piece of dust that in some places was \SI{5}{\micro\meter} in
+        thickness. Even with the interference of the fringes, the loop in the
+        dust was still resolved.
     }%
     \label{fig:72_74}
 \end{figure}
@@ -122,20 +141,21 @@ microns. The image size was 4000 by 3000 pixels.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:187_200holo}
             \includegraphics[width=\textwidth]{pictures/187_200holo.png}
-            \caption{Hologram}
+            \caption{A hologram of colloidal diamond.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:187_200rec}
             \includegraphics[width=\textwidth]{pictures/187_200rec.png}
-            \caption{Reconstruction}
+            \caption{A reconstruction at a $z$ value of \SI{675}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        This hologram was highly populated, and a good reconstruction was still
-        obtained, even with the high amount of fridges from separate objects.
+        This was an example of a highly populated hologram. While this is not
+        an idea situation, the colloidal diamond particles could still be
+        resolved.
     }%
     \label{fig:187_200}
 \end{figure}
@@ -149,51 +169,55 @@ microns. The image size was 4000 by 3000 pixels.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:196_focus}
             \includegraphics[width=\textwidth]{pictures/196_focus.png}
-            \caption{In-focus image}
+            \caption{An in-focus image of colloidal diamond.}
         \end{subfigure}
             %
-                %\hspace*{\fill}
+                \hspace*{\fill}
     %
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:198_200holo}
             \includegraphics[width=\textwidth]{pictures/198_200holo.png}
-            \caption{Hologram}
+            \caption{A hologram of the in-focus colloidal diamond.}
         \end{subfigure}
         \\
         \begin{subfigure}[t]{\textwidth}
             \label{fig:198_200rec}
             \includegraphics[width=\textwidth]{pictures/198_200rec.png}
-            \caption{Reconstruction}
+            \caption{A reconstruction at a $z$ value of \SI{500}{\micro\meter}.}
         \end{subfigure}
 
 
     \end{center}
     \caption{%
-        This hologram was a less densely populated version of
-        Figure~\ref{fig:187_200}.
+        This hologram was a more diluted version of
+        Figure~\ref{fig:187_200}. This is typically the amount of objects that
+        was looked for in a hologram. The \SI{5}{\micro\meter} size of the
+        particles was resolved in this reconstruction, even when the particles
+        were close together.
     }%
     \label{fig:198_200}
 \end{figure}
 
-\clearpage
+%\clearpage
 
-All of the images taken in the lab at Acadia University have a high resolution.
-This resolution was obtained with a minimum setup, and saving resources when
-they could be spared.
-Figures~\ref{fig:85_88},~\ref{fig:187_200},~\ref{fig:198_200} display how small
-the pixel resolution gets. In these images, the object is colloidal silica
-which has a diameter of around 5 microns.
 
-In Figure~\ref{fig:72_74}, the object is very small, and the level of detail is
-still high. This image is interesting because of the way it overlaps on itself,
-and the fridges overlap, and yet the reconstruction has a high resolution.
-In Figures~\ref{fig:187_200} and~\ref{fig:198_200}, the difference between two
-different dilutions of the same solution are shown. In this instance, it didn't
-matter, but one could see that if the densely populated hologram got too much
-more populated, the fridges could case a lose of resolution, and when the
-objects are 5 microns, this could result in objects missing, or a
-reconstruction so overcrowded that objects could not be distinguished from one
-another.
+Figure~\ref{fig:72_74} was captured while trying to view a solution of
+colloidal diamond, but the object, which is probably dust, was found. This made
+for an interesting reconstruction, since the object has a loop in it. Even
+though there are interfering fringes at the loop, which was thought might cause
+a loss of resolution at the loop, making the space between the object
+unrecognizable, the loop was still able to be resolved.
+
+Figures~\ref{fig:187_200} and~\ref{fig:198_200} were of colloidal diamond,
+which had a diameter of around five microns. In Figure~\ref{fig:187_200}, the
+solution used was highly populated, with fringes overlapping with one another.
+This was not ideal, as interference can cause resolution to be lost, but the
+reconstruction was done and the 5 micron particles were still resolved.
+Figure~\ref{fig:198_200} was a more diluted solution of colloidal diamond, and
+had a population that was typically looked for in the holograms. Some of the
+particles here are very close to one another, and yet they were still resolved
+into two distinct 5 micron particles, which is shown at spot $i$.
+
 
 
 

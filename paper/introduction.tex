@@ -9,11 +9,38 @@ are the two broad categories in which holography can be situated into.
 Holography was invented by Dennis Gabor in 1948, and he developed the technique
 of the in-line holography. Later, in 1960, Emmett N. Leith and Juris Upatnieks developed
 off-axis holography.
-A hologram is a coherent addition of two light fields, which produces an
-interference pattern. This interference pattern contains all of the information
-of the object that is being recorded, and can be reconstructed with this
-information.
-PAGE 469 of GUENTHERE
+
+\begin{quote}
+``A hologram is the photographically or otherwise recorded
+interference pattern between a wavefield scattered from the
+object and a coherent background, called the reference wave.
+A hologram is usually recorded on a flat surface, but contains
+information about the entire three-dimensional wavefield.
+This information is coded in the form of bright and dark
+microinterferences, usually not visible for the human eye due
+to the high spatial frequencies. The object wave can be
+reconstructed by illuminating the hologram with the reference
+wave again. This reconstructed wave is indistinguishable from
+the original object wave. An observer sees a three-dimensional
+image which exhibits all the effects of perspective and depth
+of focus.``\cite{schnars_digital_2002}
+\end{quote}
+Numerical reconstruction of holograms was started in 1972 by Yaroslavskii
+\emph{et al.} This was done by sampling optically enlarged parts of an in-line
+holograms that were recorded on a photographic plate. These digitalized
+holograms were then reconstructed numerically. A large development in
+holography was made when Schnars and J\"{u}ptner directly recorded holograms
+onto a charged coupled device, or a CCD \cite{schnars_digital_2002}.
+This enabled for holograms to not only
+be numerically reconstructed, but also digitally sampled directly, getting rid
+of the photographic plates that were needed, and the conversion of those
+photographic plates into digitalized holograms.
+
+In this work, the objective was to create a digital in-line holographic
+microscope that would allow for holograms to be created and then numerically
+reconstructed.
+
+%PAGE 469 of GUENTHERE
 
 
 %
@@ -43,7 +70,7 @@ PAGE 469 of GUENTHERE
 %
 %\begin{itemize} \item thin  and thick holograms come about when looking at the
 %            thickness of the recording medium.  If the thickness of the
-%            recording medium is larger than the average spacing of the fridges,
+%            recording medium is larger than the average spacing of the fringes,
 %            then volume effects cannot be neglected. For our purposes, the CCD
 %            camera is a thin recording medium I believe.  If $Q<1$ then it's a
 %            thin grating, else its a thick grating, where Q is \begin{equation}
@@ -54,10 +81,15 @@ PAGE 469 of GUENTHERE
 %
 %\end{itemize}
 
+\chapter{Mathematical Background} \label{chap:Math}
+
 \section{Fresnel-Kirchoff Integral}
 
+The Fresnel-Kirchoff integral was the key equation that allowed for holograms
+to be reconstructed numerically.
 The diffraction of a light wave at an aperature which is fastened perpendicular
-to the incoming beam is described by the Fresnel-Kirchoff integral:
+to the incoming beam is described by the Fresnel-Kirchoff integral
+\cite{schnars_digital_2002}:
 
 \begin{equation}
     \Gamma(\xi,\eta) =
@@ -97,22 +129,27 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
     Using this, along with a small angle approximation, the Fresnel-Kirchoff
     integral can be simplified to
 
-    \begin{multline}
-        \Gamma(\xi,\eta) = \frac{i}{\lambda d} \exp\left( -i\frac{2\pi}{\lambda}d \right)
+    \begin{equation}
+        \begin{aligned}
+        \Gamma(\xi,\eta) &= \frac{i}{\lambda d} \exp\left( -i\frac{2\pi}{\lambda}d \right)
         \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y) \\
-        \times \exp\left[ -i\frac{\pi}{\lambda d}\left(
+        & \times \exp\left[ -i\frac{\pi}{\lambda d}\left(
         (\xi-x)^{2}+(\eta-y)^{2} \right) \right]~dx~dy
-    \end{multline}
+        \end{aligned}
+    \end{equation}
+Pulling out the constants and simplifying gives
 
-    \begin{multline}
-        \Gamma(\xi,\eta) = \frac{i}{\lambda d} \exp\left( -i\frac{2\pi}{\lambda}d \right)
+    \begin{equation}
+        \begin{aligned}
+        \Gamma(\xi,\eta) &= \frac{i}{\lambda d} \exp\left( -i\frac{2\pi}{\lambda}d \right)
         \exp\left[ -i\frac{\pi}{\lambda d}(\xi^2+\eta^2) \right] \\
-        \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y)
+        &\times \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y)
         \exp\left[ -i\frac{\pi}{\lambda d}\left(
-        x^{2}+y^{2} \right) \right]
-        \exp\left[ i\frac{2\pi}{\lambda d}\left(
+        x^{2}+y^{2} \right) \right] \\
+        & \times \exp\left[ i\frac{2\pi}{\lambda d}\left(
         x\xi+y\eta \right) \right]~dx~dy
-    \end{multline}
+        \end{aligned}
+    \end{equation}
 
     The intensity is simply the magnitude of the reconstruction squared.
 
@@ -131,36 +168,42 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
 
     \begin{equation}
         \nu = \frac{\xi}{\lambda d} \qquad \mu = \frac{\eta}{\lambda d}
+        \label{eq:original}
     \end{equation}
 
-    \begin{multline}
-        \Gamma(\nu,\mu) = \frac{i}{\lambda d} 
-        \exp\left[ -i\pi\lambda d(\nu^2+\mu^2) \right] \\
-        \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y)
-        \exp\left[ -i\frac{\pi}{\lambda d}\left(
+    \begin{equation}
+        \begin{aligned}
+        \Gamma(\nu,\mu) &= \frac{i}{\lambda d}
+        \exp\left[ -i\pi\lambda d(\nu^2+\mu^2) \right] 
+        \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y) \\
+        &\times \exp\left[ -i\frac{\pi}{\lambda d}\left(
         x^{2}+y^{2} \right) \right]
         \exp\left[ i2\pi\left(
         x\nu+y\mu \right) \right]~dx~dy
-    \end{multline}
+        \end{aligned}
+    \end{equation}
 
     It can be seen from this equation, that the Fresnel approximation is the
     inverse Fourier transformation.
 
-    \begin{align}
+    \begin{equation}
+    \begin{aligned}
         \Gamma(\nu,\mu)&=\frac{i}{\lambda d}\exp\left[ -i\pi\lambda d\left(
             \nu^2+\mu^2
         \right) \right] \\
         & \mathfrak{F}^{-1}\left\{R(x,y)h(x,y)\exp\left[
             -i\frac{\pi}{\lambda d}(x^{2}+y^2)
         \right] \right\}
-    \end{align}
+    \end{aligned}
+    \end{equation}
 
-    If the hologram function is sampled on a rectangular raster of $N\times $
+    If the hologram function is sampled on a rectangular raster of $N\times N $
     points, with steps between neighbouring pixels on the CCD being $\Delta x$ and $\Delta
-    y$ in the horizontal and vertical directions respectivel, then the
+    y$ in the horizontal and vertical directions respectively, then the
     integrals can be converted into finite sums using these discrete values:
 
-    \begin{align}
+    \begin{equation}
+    \begin{aligned}
         \Gamma(m,n) &= \frac{i}{\lambda d}\exp\left[ -i\pi \lambda d\left(
             m^2\Delta \nu^2 + n^2\Delta \mu^2
         \right)\right]\\
@@ -170,22 +213,27 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
     \right] \\
     & \times \exp\left[ i2\pi\left( k\Delta x m \Delta\nu+l\Delta y n
     \Delta\mu \right) \right]
-    \end{align}
+    \end{aligned}
+    \label{eq:discrete}
+    \end{equation}
     According to the theory of Fourier transform among $\Delta x$, $\Delta y$
     and $\Delta\nu$, and $\Delta\mu$ the following relation exist:
 
     \begin{equation}
         \Delta\nu=\frac{1}{N\Delta x}; \qquad \Delta\mu=\frac{1}{N\Delta y}
+        \label{eq:transform}
     \end{equation}
-    Now substituting our original variables back in:
+    Now substituting our original variables used in Equation~\ref{eq:original} back into
+    Equation~\ref{eq:transform},
 
     \begin{equation}
         \Delta\xi=\frac{\lambda d}{N\Delta x}; \qquad \Delta\eta=\frac{\lambda
         \lambda d}{N\Delta y}
     \end{equation}
-    Plugging this back in,
+    Plugging this back into Equation~\ref{eq:discrete},
 
-    \begin{align}
+    \begin{equation}
+    \begin{aligned}
         \Gamma(m,n) & = \frac{i}{\lambda d}\exp\left[ -i\pi \lambda d\left(
             \frac{m^2}{N^2\Delta x^2}+\frac{n^2}{N^2\Delta y^2}
         \right)\right]\\
@@ -194,7 +242,8 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
         \frac{\pi}{\lambda d}\left( k^2\Delta x^2+l^2\Delta y^2 \right)
     \right] \\
     &\times \exp\left[ i2\pi\left( \frac{km}{N}+\frac{ln}{N} \right) \right]
-    \end{align}
+    \end{aligned}
+    \end{equation}
     This is a discrete Fresnel transform, and it is calculated by multiplying
     $R(k,l)$ with $h(k,l)$ and $\exp\left[ -i
         \frac{\pi}{\lambda d}\left( k^2\Delta x^2+l^2\Delta y^2 \right)
@@ -227,7 +276,7 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
         \begin{equation}
             f(t)=f(t+T)
         \end{equation}
-        for all values of $t$. We can represent this as
+        for all values of $t$ \cite{DanielSteck}. We can represent this as
 
         \begin{equation}
             f(t) = a_0 + b_0 + 2\sum_{n=1}^{\infty} a_n \cos(n\omega
@@ -254,7 +303,7 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
         \end{equation}
 
         Now, using the complex Fourier coefficient defined earlier, we can get the
-        complex Fourier series:
+        complex Fourier series
 
         \begin{equation}
             f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t}
@@ -291,6 +340,9 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
 
         \section{Fast Fourier Transform (FFT)}
 
+        The fast Fourier transform is one of the most prized algorithms in the
+        world, since it is such a commonly used algorithm, and provides
+        incredible speedups when compared to the discrete Fourier transform.
         The most commonly used FFT algorithm is known as the Cooley-Tukey algorithm.
         This is a recursive algorithm, and the basic idea is to take a DFT and split it
         into smaller DFTs. For example, taking a $n$ size DFT and transforming it into
@@ -303,7 +355,8 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
             Y[k] = \sum_{j=0}^{n-1}X[j]\omega_n^{jk}
             \label{eq:dft}
         \end{equation}
-        where $0\le k < n$ and $\omega_n=\exp\left( -2\pi\sqrt{-1}/n \right)$.
+        where $0\le k < n$ and $\omega_n=\exp\left( -2\pi\sqrt{-1}/n \right)$
+        \cite{frigo2005design}.
         $\omega_n$ is known as the twiddle factor. The problem
         with the DFT is that it requires \BigO{n^{2}} operations.
 
@@ -333,6 +386,7 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
                 \label{fig:dftVSfft}
             \end{figure}
 
+
             The Cooley-Tukey algorithm computes $n_2$ DFTs of size $n_1$, multiples the
             result by the twiddle factors, and finally computes $n_1$ DFTs of size
             $n_2$. This decomposition is then continued recursively. A term that comes up a
@@ -342,72 +396,78 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
             and odd indices.
             For example, if $n=8$, and a radix-2 algorithm was used, then it would split it
             into $n_1=4$ and $n_2=4$. The algorithm would then split the data into many
-            size-2 DFTs called butterfly operations. Figure~\ref{fig:radix-2} shows this
-            process.
-
-%        \begin{figure}[htbp!]
-%            \begin{center}
-%                \includegraphics[scale=0.5]{radix-2}
-%            \end{center}
-%            \caption{An example of $n=8$, radix-2 FFT.}
-%            \label{fig:radix-2}
-%        \end{figure}
-
-            \begin{figure}[htbp!]
-                \begin{center}
-                    \includegraphics[scale=0.75]{radix-2.pdf}
-                \end{center}
-                \caption{An example of $n=8$, radix-2 FFT.}
-                \label{fig:radix-2}
-            \end{figure}
-
-            The Cooley-Tukey algorithm isn't without it's own problems. The main problem is
-            that the $n_1$ dimension corresponds to discontiguous inputs $j_1$ in
-            $X$, but contiguous outputs in $k_1$ in $Y$, and vice versa for $n_2$.
-            This is a matrix transpose for a single decomposition stage, and the
-            composition of all such transpositions is a digit-reversal permutation
-            (or, bit reversal for radix-2). The contiguous and discontiguous
-            operations are better shown in Figure~\ref{fig:DFT2D}. The result of the discontiguous memory
-            access and data reordering  hinders the efficient use of hierarchical memory
-            architectures efficiencies (cache). The bit reversal technique is shown
-            in Table~\ref{tab:bitreversal}.
-
-            \begin{figure}[htbp!]
-                \begin{center}
-                    \includegraphics[scale=0.5]{DFT2D}
-                \end{center}
-                \caption{Another diagram of how a DFT works, showing contiguous and
-                non-contiguous operations.}
-                \label{fig:DFT2D}
-            \end{figure}
-
-            \begin{table}[htbp!]
-                \begin{center}
-                    \caption{Bit reversal done on the indices of an array.}
-                    \label{tab:bitreversal}
-                    \begin{tabular}{|c|c|c|c|}
-                        \hline
-                        index & binary & bit reversal & bit rev.\ index \\
-                        \hline
-                        0 & 000 & 000 & 0 \\
-                        1 & 001 & 100 & 4 \\
-                        2 & 010 & 010 & 2 \\
-                        3 & 011 & 110 & 6 \\
-                        4 & 100 & 001 & 1 \\
-                        5 & 101 & 101 & 5 \\
-                        6 & 110 & 011 & 3 \\
-                        7 & 111 & 111 & 7 \\
-                        \hline
-                    \end{tabular}
-                \end{center}
-            \end{table}
-
+            size-2 DFTs called butterfly operations \cite{frigo2005design}.
+            %Figure~\ref{fig:radix-2} shows this process.
+%
+%%        \begin{figure}[htbp!]
+%%            \begin{center}
+%%                \includegraphics[scale=0.5]{radix-2}
+%%            \end{center}
+%%            \caption{An example of $n=8$, radix-2 FFT.}
+%%            \label{fig:radix-2}
+%%        \end{figure}
+%
+%            \begin{figure}[htbp!]
+%                \begin{center}
+%                    \includegraphics[scale=0.75]{radix-2.pdf}
+%                \end{center}
+%                \caption{An example of $n=8$, radix-2 FFT.}
+%                \label{fig:radix-2}
+%            \end{figure}
+%
+%            The Cooley-Tukey algorithm isn't without it's own problems. The main problem is
+%            that the $n_1$ dimension corresponds to discontiguous inputs $j_1$ in
+%            $X$, but contiguous outputs in $k_1$ in $Y$, and vice versa for $n_2$.
+%            This is a matrix transpose for a single decomposition stage, and the
+%            composition of all such transpositions is a digit-reversal permutation
+%            (or, bit reversal for radix-2). The contiguous and discontiguous
+%            operations are better shown in Figure~\ref{fig:DFT2D}. The result of the discontiguous memory
+%            access and data reordering  hinders the efficient use of hierarchical memory
+%            architectures efficiencies (cache). The bit reversal technique is shown
+%            in Table~\ref{tab:bitreversal}.
+%
+%            \begin{figure}[htbp!]
+%                \begin{center}
+%                    \includegraphics[scale=0.5]{DFT2D}
+%                \end{center}
+%                \caption{Another diagram of how a DFT works, showing contiguous and
+%                non-contiguous operations.}
+%                \label{fig:DFT2D}
+%            \end{figure}
+%
+%            \begin{table}[htbp!]
+%                \begin{center}
+%                    \caption{Bit reversal done on the indices of an array.}
+%                    \label{tab:bitreversal}
+%                    \begin{tabular}{|c|c|c|c|}
+%                        \hline
+%                        index & binary & bit reversal & bit rev.\ index \\
+%                        \hline
+%                        0 & 000 & 000 & 0 \\
+%                        1 & 001 & 100 & 4 \\
+%                        2 & 010 & 010 & 2 \\
+%                        3 & 011 & 110 & 6 \\
+%                        4 & 100 & 001 & 1 \\
+%                        5 & 101 & 101 & 5 \\
+%                        6 & 110 & 011 & 3 \\
+%                        7 & 111 & 111 & 7 \\
+%                        \hline
+%                    \end{tabular}
+%                \end{center}
+%            \end{table}
+%
 
 
             \section{Convolution and the Convolution Theorem}
 
+            The convolution theorem allows for an integral to be written into
+            the product of two fast Fourier transforms and an inverse Fourier
+            transform. This is useful for numerical analysis since integration
+            is difficult to do numerically, while the FFT is fast and
+            efficient.
+
             The convolution is a mathematical operation that maps a pair of
-            functions to a function. This can be defined as
+            functions to a function. This can be defined as \cite{DanielSteck},
             \begin{equation}
                 (f*g)(x) \equiv \int_{-\infty}^{\infty} f(x')g(x-x')dx'
                 \label{eq:convolution}
@@ -434,7 +494,7 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
             is an image. The convolution theorem gives us a way to easy evaluate
             Equation~\ref{eq:convolution}. The convolution theorem states that the
             Fourier transform of the convolution is the product of the Fourier
-            transforms of the individual functions:
+            transforms of the individual functions \cite{DanielSteck}:
             \begin{equation}
                 \mathfrak{F}\left[ f*g
                 \right]=\mathfrak{F}[f]\mathfrak{F}[g]
@@ -446,16 +506,21 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
             Using this formulation of the convolution, we can use the FFT which is
             fast and efficient computationally, and allows us to easily process the
             convolution. The convolution theorem is of great use in numerically
-            reconstructing holograms.
+            reconstructing holograms, since it allows for the Fresnel-Kirchoff
+            integral to be rewritten in terms of fast Fourier transforms.
 
-            DANIEL STECK PAGE 187-189
+            %DANIEL STECK PAGE 187-189
 
 
     \section{Reconstruction}
 
-%    \emph{Skipping a bit here}
-    Might want to move this to a reconstruction section, after all of the FFT
-    stuff so it will make more sense.
+    The Fresnel-Kirchoff integral is not very computationally efficient, and
+    leads to large computation times for a small hologram. This process can be
+    sped up by transforming the Fresnel-Kirchoff integral into fast Fourier
+    transforms.
+    Using the convolution approach to the Fresnel-Kirchoff integral,
+    Equation~\ref{fresnel-kirchoff} can be transformed into
+    \cite{schnars_digital_2002},
 
     \begin{equation}
         \Gamma(\xi,\eta) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}
@@ -469,7 +534,22 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
         -i\frac{2\pi}{\lambda}\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}} \right]}{\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}}}
         \label{impulse}
     \end{equation}
-    Once again, the small angle approximation was used. Equation~\ref{impulse}
+    Once again, the small angle approximation was used. The small angle
+    approximation is justified since the distance between the object and the
+    charged coupled device was never large enough to cause the angle,
+    $\theta$, to become larger than 30 degrees. Figure~\ref{fig:smallangle}
+    shows what angle is being referenced here.
+    \begin{figure}
+    \begin{center}
+        \includegraphics[scale=0.5]{smallangle}
+    \end{center}
+    \caption{The angle, $\theta$, between $\rho$, the distance between a point
+    in the hologram plane and a point in the reconstruction plane, and the
+$z$-axis}
+    \label{fig:smallangle}
+    \end{figure}
+
+    Equation~\ref{impulse}
     shows that the impulse response function is space-invariant, which allows the
     use of the convolution theorem. This means that we can rewrite
     Equation~\ref{eq:superpositionIntegral} with the Fourier transforms
@@ -484,29 +564,47 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
     and in optics it is known as the point spread function. The impulse response is
     a way of remembering past events. It is used as a weighting function in the
     convolution integral. The weighting function serves as a window through which a
-    time average is performed. The window determines how much of the past history
-    of the function can be seen when the time average is performed.
-    GUENTHER 240-241
+    time average is performed and the window determines how much of the past history
+    of the function can be seen when the time average is performed
+    \cite{guenther_modern_1990}.
+    %GUENTHER 240-241
 
-    The impulse response in 2D and in 3D are shown in Figure~\ref{fig:psf} and
-    Figure~\ref{fig:psf3D} respectively.
+    The impulse response function in 2D and in 3D are shown in
+    Figure~\ref{fig:pointSpreadFunction} (a) and (b) respectively.
+    %and Figure~\ref{fig:psf3D} respectively.
 
     \begin{figure}[htbp!]
+        \ContinuedFloat
         \begin{center}
-            \includegraphics[scale=0.5]{psf}
+        \begin{subfigure}[t]{\textwidth}
+            \includegraphics[width=\textwidth]{psf}
+            \caption{A 2D representation of the impulse response function.}
+            \label{fig:psf}
+        \end{subfigure}
         \end{center}
-        \caption{A 2D impulse response function.}
-        \label{fig:psf}
+        %\label{fig:pointSpreadFunction}
     \end{figure}
 
     \begin{figure}[htbp!]
+        \ContinuedFloat
         \begin{center}
-            \includegraphics[scale=0.25]{psf3D}
-        \end{center}
-        \caption{A 3D impulse response function generated from the 2D plot in
-            Figure~\ref{fig:psf}.}
+        \begin{subfigure}[t]{0.5\textwidth}
+            \includegraphics[width=\textwidth]{psf3D}
+            \caption{A 3D representation of the impulse response function generated from the 2D plot in
+                Figure~\ref{fig:psf}.}
             \label{fig:psf3D}
-        \end{figure}
+        \end{subfigure}
+        \end{center}
+        \caption{The impulse response function in 2D and 3D.}
+        \label{fig:pointSpreadFunction}
+    \end{figure}
+
+%    \begin{figure}[htbp!]
+%        \begin{center}
+%            \includegraphics[scale=0.25]{psf3D}
+%        \end{center}
+%            \label{fig:psf3D}
+%        \end{figure}
 
     The numerical realization of the impulse response function is
 
@@ -536,7 +634,14 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
         \label{eq:finalEquation}
     \end{equation}
 
-    Equation~\ref{eq:finalEquation} is how HoloPy does reconstructions.
+    Equation~\ref{eq:finalEquation} is how HoloPy, the open-source library that
+    was used to do the numerical reconstructions of the holograms, does
+    reconstructions. For the holograms used, a background image was always
+    taken so that it could be subtracted from the hologram. This background
+    subtracted hologram was then used as the hologram $h$ for reconstructions.
+    This background subtracted image allowed for less noise in the image, and
+    for a higher contrast and quality image, since only the object being viewed
+    would be included in the reconstruction.
 
 
 
@@ -544,8 +649,13 @@ to the incoming beam is described by the Fresnel-Kirchoff integral:
 
 
 
+    %\cite{guenther_modern_1990}
+    %$\cite{moon_automated_2009}
+    %\cite{frigo2005design}
+    %\cite{DanielSteck}
 
 
-
+%\bibliographystyle{plain}
+%\bibliography{HonoursBiblio/HonoursBiblio.bib}
 
 %\end{document} 
