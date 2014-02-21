@@ -1,19 +1,31 @@
 %\include{header}
 %\begin{document}
 
-\chapter{Results} \label{chap:Results}
+\chapter{Results and Discussion} \label{chap:Results}
+
+Two sets of experimental holograms were obtained at Harvard and Acadia
+Universities and are reported in this chapter. The main goal was to achieve
+high resolution holograms that correctly reconstructed the objects in the
+holographic images. The holographic images taken at Harvard University were
+used as a reference to make sure that the images obtained from Acadia
+University and that the reconstruction procedure were correct.
+
 \section{Harvard University}
 
-HoloPy was the open-source Python module used for all of the reconstructions
-done, and was developed by the Manoharan Lab, who is a world leader in optical
-holography \cite{Manoharan}. When this module was found, the opportunity was presented to travel to
+As mentioned previously, HoloPy was the open-source Python module used for all
+of the image reconstructions
+done, and was developed by the Manoharan Lab, a world leader in optical
+holography research \cite{Manoharan}. 
+Through discussions arising from the use of HoloPy, an invitation to travel to
 Harvard University and meet with the developer to get some incite on how to
-build an efficient microscope as well as to learn how to properly use HoloPy. While at
-Harvard University, the Manoharan Lab graciously allowed for holograms to be
-taken using their setup so that there could be a comparison to the microscope
-that was to be built. The Manoharan Lab optical holography setup is shown in
-Figure~\ref{fig:harvardSetup}. This was a highly advanced setup, allowing for
-fine adjustments to be made easily to the any part of the setup.
+build an efficient holographic microscope as well as to learn how to properly
+use HoloPy was offered.
+%
+%When this module was found, the opportunity was presented to travel to
+%Harvard University and meet with the developer to get some incite on how to
+%build an efficient microscope as well as to learn how to properly use HoloPy. 
+%
+
 
 \begin{figure}[ht!]
     \begin{center}
@@ -54,18 +66,30 @@ fine adjustments to be made easily to the any part of the setup.
     \label{fig:harvardSetup}
 \end{figure}
 
-A lot of the images taken at Harvard University have objects in them which were
-unknown, since the sample was used was water from the Charles River in Boston,
+While at
+Harvard University, the Manoharan Lab graciously allowed for holograms to be
+recorded using their setup so that there would be a reference set of images to
+compare to the microscope
+that was to be built at Acadia. The Manoharan Lab optical holography setup is shown in
+Figure~\ref{fig:harvardSetup}. This was a highly advanced setup allowing for
+fine adjustments to be made easily to the any part of the setup. In this setup,
+the samples were mounted vertically to minimize the settling of the specimens
+due to gravitational effects.
+
+A lot of the images taken at Harvard University had objects in them which were
+unknown since the sample used was water from the Charles River in Boston,
 Massachusetts. Not
-having known what the objects were did not cause an issue though, since
+having known what the objects were did not cause an issue since
 a demonstration of holographic principles was the only purpose of looking at the objects.
 
 
 \begin{figure}
     \begin{center}
         \includegraphics[width=\textwidth]{pictures/128focus.png}
-        \caption{The in-focus image for Figures~\ref{fig:129}-\ref{fig:131}.
-    Objects $i.$\ - $iii.$\ are the objects being reconstructed. }
+        \caption{The in-focus holographic image for objects $i.$\ and  $ii.$\
+            for the reconstructions
+            displayed in Figures~\ref{fig:129}-\ref{fig:131}.
+    Objects $i.$\ - $iii.$\ are the features being reconstructed. }
         \label{fig:128focus}
     \end{center}
 \end{figure}
@@ -103,7 +127,9 @@ a demonstration of holographic principles was the only purpose of looking at the
     \caption{%
         This hologram has the least amount of fringes in these series of
         holograms at approximately 3 fringes located around object $i.$ tightly
-        bound to the object.
+        bound to the object. 
+        Objects $i.$ and $ii.$ were reconstructed in (b),
+        while object $iii.$ was reconstructed in (c).
     }%
     \label{fig:129}
 \end{figure}
@@ -139,6 +165,8 @@ a demonstration of holographic principles was the only purpose of looking at the
         This hologram is an in-between hologram in terms of the amount of
         fringes with there being approximately 7 tightly bound fringes around
         object $i.$
+        Objects $i.$ and $ii.$ were reconstructed in (b),
+        while object $iii.$ was reconstructed in (c).
     }%
     \label{fig:130}
 \end{figure}
@@ -161,19 +189,20 @@ a demonstration of holographic principles was the only purpose of looking at the
 
     \end{center}
     \caption{%
-        This hologram has the most fringes with approximately 7 fringes not
-        tightly grouped around object $i.$, and seemed to contain the least
-        amount of detail, but when reconstructed, it was seen that more detail
+        This hologram has the most fringes with approximately 7 fringes
+        grouped around object $i.$, and seemed to contain the least
+        amount of detail when reconstructed, it was seen that more detail
         is shown in object $i.$ and $ii.$, while the details of the objects at $iii.$
         were lost.
     }%
     \label{fig:131}
 \end{figure}
 
-The images shown below show a few different
-techniques of holography that is advantageous compared to bright field optics.
-For Figures~\ref{fig:128focus}-\ref{fig:131}, the difference between the number of fringes in the hologram
-are shown, along with reconstructions at different $z$ values. In these images,
+The images shown in Figures~\ref{fig:128focus}-\ref{fig:3D} are meant to highlight a few different
+examples where holographic imaging is superior to standard bright-field optics.
+For Figures~\ref{fig:128focus}-\ref{fig:131}, the effect of the number of fringes in the hologram
+on image reconstruction quality are presented at different $z$ values. 
+In these images,
 objects $i.$ and $ii.$ were in the same focal plane, while objects at $iii.$
 were in
 a different focal plane. This is why multiple values of $z$ were used in
@@ -182,10 +211,46 @@ located closely around object $i.$, which were tightly grouped. In
 Figure~\ref{fig:130} (a), there were approximately 7 fringes
 located closely around object $i.$, which were also tightly grouped. In
 Figure~\ref{fig:131} (a), there were approximately 7 fringes around object
-$i.$, but the fringes were not closely bound to object $i.$ like in
+$i.$, but the fringes were not as closely bound to object $i.$ as in
 Figures~\ref{fig:129} and \ref{fig:130}. This led to there being only one
-reconstruction that needed to be done, since the objects at position $iii.$
-could no longer be resolved.
+reconstruction that needed to be done since the objects at position $iii.$
+could no longer be resolved. Fringe spacing affects the resolution of the
+hologram, and can be shown by Bragg's Law,
+\begin{equation}
+    \Lambda = \frac{\lambda}{2\sin{\frac{\theta}{2}}} .
+\end{equation}
+Matt Lehmann explains the importance of interference fringes,
+\begin{quote}
+Every point on the recording film and on the object will provide a
+slight variation to the angular relationship and consequently a variation
+in fringe spacing. Since it is the fringe spacing that delineates
+the object
+during reconstruction, all of the optical information about the object is
+recoverable and the parallax and three-dimensionality of the
+reconstruction is assured.
+
+Since the spacing of the fringes is inversely proportional to
+$\sin{\frac{\theta}{2}}$, the larger the angle $\theta$ the finer the fringes.
+Conversely, when the angle is small, the fringes are far apart\ldots When the
+fringes are comparatively course, the hologram acts as a diffraction grating
+and can be viewed by a point source of partially filtered white light\ldots As
+the fringes become finer, the Bragg effect becomes apparent. This requires
+fairly precise alignment of the hologram with the illuminating beam to effect
+constructive refraction by the fringe pattern. The angle corresponds to the
+conjugate of the reference angle during recording (i.e the angle the reference
+beam makes with the surface of the hologram) \cite{Lehmann}.
+\end{quote}
+In the case that the recording medium is a CCD, the pixel size of the CCD must
+be smaller than the smallest fringe spacing that needs to be recorded. Either
+too few fringes, or fringes that are too close together will lead to a
+reduction is resolution \cite{Jericho}. Therefore, as the fringes number gets
+too large, the average number of pixels per fringes decreases which can cause
+an unexpected loss of resolution. In Figures~\ref{fig:128focus}-\ref{fig:131},
+this is apparent since for objects $i.$ and $ii.$, the details of the objects
+seem to be more resolved as more fringes are added subsequently from
+Figure~\ref{fig:129} to Figure~\ref{fig:131}. However, object $iii.$ was
+completely lost because their were too many fringes which resulted in a loss of
+resolution.
 
 
 %The advantages
@@ -199,8 +264,9 @@ could no longer be resolved.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:132focus}
             \includegraphics[width=\textwidth]{pictures/132focus.png}
-            \caption{The in-focus image, where the objects are hard to
-            identify.}
+            \caption{The in-focus holographic image.}
+%                where the objects are hard to
+%            identify.}
             %because of the low contrast to the background.}
         \end{subfigure}
             %
@@ -223,23 +289,33 @@ could no longer be resolved.
     \end{center}
     \caption{%
        The reconstruction allowed for the objects $i.$ and $ii.$ to be easily
-       identified because of the higher contrast. The edges of the objects now
+       identified since the edges of the objects now
        stand out, even with the interference from the small particles around
        the objects.
+%       The reconstruction allowed for the objects $i.$ and $ii.$ to be easily
+%       identified because of the higher contrast. The edges of the objects now
+%       stand out, even with the interference from the small particles around
+%       the objects.
     }%
     \label{fig:133}
 \end{figure}
 
 A typical reconstruction is shown in Figure~\ref{fig:133}. Even with some
-interference from objects, object $i.$ was still resolved into a clear
-rectangular object whose borders are clearly visable, along with object
-$ii.$, both of which were hard to distinguish in the in-focus image.
+interference from the small objects surrounding objects $i.$ and $ii.$, the
+objects were still resolved. Object $i.$ is shown to be a rectangular object,
+beneath the focal plane of the small objects surrounding it. Both objects were
+hard to distinguish in the in-focus holographic image, but by reconstructing
+the objects, the reconstruction plane is known, and so they can be
+distinguished from the particles surrounding them.
+%into a clear
+%rectangular object whose borders are clearly visible, along with object
+%$ii.$, both of which were hard to distinguish in the in-focus image.
 
 
 \begin{figure}
 \begin{center}
     \includegraphics[width=\textwidth]{pictures/136focus.png}
-    \caption{The in-focus image for Figures~\ref{fig:139} and~\ref{fig:140}. }
+    \caption{The in-focus holographic image for Figures~\ref{fig:139} and~\ref{fig:140}. }
     \label{fig:136focus}
 \end{center}
 \end{figure}
@@ -264,8 +340,8 @@ $ii.$, both of which were hard to distinguish in the in-focus image.
 
     \end{center}
     \caption{%
-        The hologram has some of the details seen in the object in the in-focus
-        image, and has approximately 8 fringes around the object.
+        The hologram had approximately 8 fringes around the object and
+        some of the details seen in the object in the in-focus can be observed.
     }%
     \label{fig:139}
 \end{figure}
@@ -290,23 +366,41 @@ $ii.$, both of which were hard to distinguish in the in-focus image.
 
     \end{center}
     \caption{%
-        This hologram had no details seen in the in-focus image, and had
+        This hologram had no details seen in the in-focus image and had
         approximately 12 fringes in a wide radius around the object. The
         reconstruction showed details from the in-focus image.
     }%
     \label{fig:140}
 \end{figure}
 
-Once again, in Figures~\ref{fig:136focus}-\ref{fig:140}, the difference in the
-amount of fringes is shown. In this case, the more fringes led to a higher
-resolution inside the object. In Figure~\ref{fig:139}, there were approximately
-8 fringes around the object, and in the hologram, the object still has some
-details about the object in it. In Figure~\ref{fig:140}, there is approximately
+Once again, in Figures~\ref{fig:136focus}-\ref{fig:140}, the difference in
+reconstruction quality with the number of fringes is shown. In this case, 
+more fringes led to a higher
+resolution inside the object. This was because the fringe spacing was still
+large enough that more fringes did indeed translate into a higher resolution.
+In Figure~\ref{fig:139}, there were approximately
+8 fringes around the object, and in the hologram, the object has some
+artifacts about the object in it. In Figure~\ref{fig:140}, there is approximately
 12-14 fringes located around the object, with the hologram looking like a white
 dot, having no details like Figure~\ref{fig:139}. When reconstructed,
 Figure~\ref{fig:140} more closely matches the in-focus image of
-Figure~\ref{fig:136focus} than Figure~\ref{fig:139}.
+Figure~\ref{fig:136focus} than Figure~\ref{fig:139} because of this higher
+fringe resolution.
 
+In Figure~\ref{fig:148}, the fringes in the reconstruction seem to be
+interfering with one another, and this reconstruction was done to see what kind
+of image resolution could be achieved with these types of overlapping fringes.
+With the use of the background-subtracted hologram, a highly detailed
+reconstruction was obtained, and the high contrast allowed for the small
+details to be seen, which were
+approximately one to two microns wide.
+
+%the reconstruction revealed more detail in the object
+%than the in-focus holographic image did. This was because of the high contrast that was
+%obtained in the reconstruction, using the hologram subtracted from the
+%background. 
+%The high contrast allowed for the small details to be seen, which were
+%approximately one to two microns wide.
 
 \begin{figure}[ht!]
     \begin{center}
@@ -314,7 +408,7 @@ Figure~\ref{fig:136focus} than Figure~\ref{fig:139}.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:147focus}
             \includegraphics[width=\textwidth]{pictures/147focus.png}
-            \caption{The in-focus image that had little contrast.}
+            \caption{The in-focus holographic image that had little contrast.}
         \end{subfigure}
         \hspace*{\fill}
         \begin{subfigure}[t]{0.4\textwidth}
@@ -334,18 +428,45 @@ Figure~\ref{fig:136focus} than Figure~\ref{fig:139}.
     \end{center}
     \caption{%
         The reconstruction of the hologram showed more details in the object
-        than the in-focus image did. The higher contrast of the reconstruction
-        allowed for these details to be seen.
+        than the in-focus image did. The fringes seemed to be interfering with
+        one another, but the resolution was still high allowing for the one to
+        two micron details to be seen.
+%        The higher contrast of the reconstruction
+%        allowed for these details to be seen.
     }%
     \label{fig:148}
 \end{figure}
 \clearpage
 
-In Figure~\ref{fig:148}, the reconstruction revealed more detail in the object
-than the in-focus image did. This was because of the high contrast that was
-obtained in the reconstruction, using the hologram subtracted from the
-background. This contrast allowed for the small details to be seen, which were
-approximately one to two microns wide.
+\begin{figure}[ht!]
+    \begin{center}
+
+        \begin{subfigure}[t]{0.4\textwidth}
+            \label{fig:particlexz}
+            \includegraphics[width=\textwidth]{particlexz}
+            \caption{A paricle shown in the x vs z direction}
+        \end{subfigure}
+        \hspace*{\fill}
+        \begin{subfigure}[t]{0.4\textwidth}
+            \label{fig:particleyz}
+            \includegraphics[width=\textwidth]{particleyz}
+            \caption{A paricle shown in the z vs y direction}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[t]{0.6\textwidth}
+            \label{fig:particlexy}
+            \includegraphics[width=\textwidth]{particlexy}
+            \caption{A paricle shown in the xy-plane.}
+        \end{subfigure}
+
+
+    \end{center}
+    \caption{%
+        A 3-dimensional image of a particle of a particle, with the axis in
+        pixels.
+    }%
+    \label{fig:3Dparticle}
+\end{figure}
 
 \begin{figure}[ht!]
     \begin{center}
@@ -371,29 +492,48 @@ approximately one to two microns wide.
 
     \end{center}
     \caption{%
-        A 3 dimensional image of a particle that had little movement in the
-        $z$-axis, so the $z$-axis was replaced with time to show movement over
-        time.
+        A 3-dimensional image of a particle that had moved by about 1 micron
+        along the $z$-axis over 100 time slices at \SI{100}{\micro\second} for
+        each time slice.
+%        A 3-dimensional image of a particle that had little movement in the
+%        $z$-axis, so the $z$-axis was replaced with time to show movement over
+%        time.
     }%
     \label{fig:3D}
 \end{figure}
 
+Since holograms contain information of the 3-D structure of the sample, a 3-D
+plot of particles movement or depth profiling within the specimen can be
+performed. In Figure~\ref{fig:3Dparticle}, a particle was reconstructed over
+twenty different $z$ values for a range of 30 microns. The particle was then ploted in 3-D
+space. This particle was moving when it came into view, so multiple pictures
+were taken over time of the same particle. This allowed for another 3-D plot to
+be made that showed the movement of the particle over time.
 In Figure~\ref{fig:3D}, one hundred reconstructions were done, and then they
-were composed into a three dimensional image by stacking all 100 images on top
-of one another. In this case, there was approximately a 1 micron movement in
-the $z$-axis, so instead time was used so that it could be seen how far the
-particle moved in the $x$-axis  or $y$-axis over time. This allows for the
+were composed into a three-dimensional image by stacking all 100 images on top
+of one another. The images were taken \SI{100}{\micro\second} apart. 
+In this case, there was approximately a 1 micron movement 
+of the particle along the $z$-axis, so instead of plotting this small movement,
+the $z$-axis was set to be time instead, so that it could be seen how far the
+particle moved in the $x$ or $y$-axis over time.
+%in the $z$-axis, so instead time was used so that it could be seen how far the
+%particle moved in the $x$-axis  or $y$-axis over time. 
+This allowed for the
 particle to be tracked in all three dimensions and in time. This is a
-convenience which optical bright field microscopy does not have.
+capability not possible with optical bright-field microscopy.
+
+All of the reconstructions have some fine details shown which can be used to
+estimate the resolution of the Manoharan Lab setup, which Figure~\ref{fig:148} gave at
+least a 2 micron resolution since two micron objects can be seen in the
+numerical reconstruction of the hologram.
+All of the
+reconstructions calculated from the Harvard University images had a pixel
+spacing of 0.17 microns and the image size was 1024 by 1024 pixels.
+Therefore each image is \SI{174.08}{\micro\meter} by \SI{174.08}{\micro\meter}.
 
 
-All of the reconstructions have some fine details shown, which shows the
-resolution of the Manoharan Lab setup. For all of the
-reconstructions done from the Harvard University images, the spacing in-between
-the pixels was 0.17 microns, and the image size was 1024 by 1024 pixels,
-therefore each image is \SI{174.08}{\micro\meter} by \SI{174.08}{\micro\meter}.
-
-
-
-
+%\bibliographystyle{plain}
+%\bibliography{HonoursBiblio/HonoursBiblio.bib}
+%
+%
 %\end{document}

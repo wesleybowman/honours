@@ -1,35 +1,45 @@
 %\include{header}
-
+%
 %\begin{document}
 
 \chapter{Experimental Procedure} \label{chap:Experimental}
 
+In this chapter, all of the steps of obtaining a holographic image, and obtaining
+a reconstruction image are explained. This includes sample and slide
+preparation, which is how all of the samples used were prepared, and
+an in-depth look at the program used to numerically reconstruct the holographic
+images.
+
 \section{Samples and Slide Preparation}
 
-Most of the objects that was observed were placed on slides. These objects
-needed to be between one and 100 microns in size, so that the holograms could
-be captured on the CCD\@. The objects were placed on slides
+Most of the objects that were observed in the holography setup were placed on slides. 
+%
+%These objects
+%needed to be between one and 100 microns in size, so that the holograms could
+%be captured on the CCD\@. 
+%
+The objects were placed on slides
 since most of the samples were of biological origin or in a suspension. Glass slides and
-cover slips were used. These had to be properly cleaned before any object could
+cover slips were used. These had to be properly cleaned before the object could
 be placed on them for viewing, since dirt and other materials would degrade the
 resolution of the hologram by adding in unwanted fringes that could interfere
-with the fringes of the objects of interest. This was done with either lens tissue or Kimwipes.
-This was the only cleaning that needed to be done since the slides and cover
-slips were kept covered and in isolation as to not collect dust and dirt.
-Once the slide and cover slip were cleaned, they
-were placed on lens paper, which was done to keep them clean, and not pick up
-any dirt off of the table.
+with the fringes of the objects of interest. This was done with either lens tissue or KimWipes.
+%This was the only cleaning that needed to be done since the slides and cover
+%slips were kept covered and in isolation as to not collect dust and dirt.
+Once the slide and cover slip were cleaned they
+were placed on lens paper to keep them clean.
 
 The rest of the slide preparation was done depending on the object that was to be
 viewed. If the sample did not need to be put in a suspension or solution, then
 the object could be placed directly on the slide, with the cover slip on top to
 secure it.
-If the object needed a suspension, then a well had to be made on the slide. The
-well was made out of vacuum grease. This was done to make a seal between the
+If the object needed a suspension, then a well had to be made on the slide
+using vacuum grease.
+This was done to make a seal between the
 slide and the cover slip, while also allowing liquid to stay in-between the two
-surfaces. Vacuum grease was used since it wa very stable and provided enough
-adhesion to hold on the cover slip.
-The well is shown in Figure~\ref{fig:well}.
+surfaces. Vacuum grease was used since it was very stable and provided enough
+adhesion to hold the cover slip in place.
+A sample well is shown in Figure~\ref{fig:well}.
 This was a delicate procedure, since any part of the slide touched by the
 vacuum grease was rendered useless for reconstruction. The vacuum
 grease was usually applied with a toothpick.
@@ -38,21 +48,30 @@ grease was usually applied with a toothpick.
 \begin{center}
     \includegraphics[scale=0.05]{pictures/well.jpg}
 \end{center}
-\caption{A slide with a well made out of vacuum grease.}
+\caption{A microscope slide with a well made out of vacuum grease.}
 \label{fig:well}
 \end{figure}
 
 The suspension had to be created by diluting the material that was to be
-observed. This was done by taking the sample, and placing a small amount in a
-large amount of water. This new solution could be further diluted by taking
-some of the solution and placing it in more water. This could be done as many
-times as needed to obtain a usable solution. Until the reconstructions were
-made, whether or not the solution was usable was not easily known.  The final solution needs to be
+observed.
+The final solution needs to be
 sparsely populated with the original sample, that way there is enough material
 so that a reconstruction can be done, but not too much material so that there
-are too many fringes and nothing can be resolved. This was done for most of the
+are too many fringes and nothing can be resolved.
+%
+%This was done by taking the sample, and placing a small amount in a
+%large amount of water. This new solution could be further diluted by taking
+%some of the solution and placing it in more water.
+%
+The sample could be diluted as many
+times as needed to obtain a usable solution since until the reconstructions were
+calculated, it was not known whether or not the solution was usable.
+This procedure was required for most of the
 samples used%(picture)
 , and a sample slide is shown in Figure~\ref{fig:solutionSlide}.
+The slide could then be
+placed on the slide holder%(picture)
+, shown in Figure~\ref{fig:slideHolder}
 
 %PICTURE OF SOLUTION SLIDE HERE
 \begin{figure}[htbp!]
@@ -63,20 +82,31 @@ samples used%(picture)
 top to seal the solution in.}
 \label{fig:solutionSlide}
 \end{figure}
+%
+%Typically, to get the right solution, many dilutions need to be made. For most
+%of the samples, four or five dilutions were made before any imaging was done,
+%that way it was easy to image, since usually one of the dilutions made would be
+%sparse enough for imaging. The dilution ratio was not important, since the only
+%objective was to get a sparsely populated hologram. One pipette of solution was
+%used for every 10 pipettes of distilled water used for a typical dilution.
+%After the solution was made, it was pipetted into the well taking care to
+%avoid air bubbles. Bubbles can appear in holograms and take away from your
+%resolution, sometimes covering up the material you want to image. After the
+%solution was in the well, the cover slip was place on until it was nicely
+%sealed so that none of the solution would leak out. 
+%
+%The slide could then be
+%placed on the slide holder%(picture)
+%, shown in Figure~\ref{fig:slideHolder}
 
-Typically, to get the right solution, many dilutions need to be made. For most
-of the samples, four or five dilutions were made before any imaging was done,
-that way it was easy to image, since usually one of the dilutions made would be
-sparse enough for imaging. The dilution ratio was not important, since the only
-objective was to get a sparsely populated hologram. One pipette of solution was
-used for every 10 pipettes of distilled water used for a typical dilution.
-After the solution was made, it was pipetted into the well taking care to
-avoid air bubbles. Bubbles can appear in holograms and take away from your
-resolution, sometimes covering up the material you want to image. After the
-solution was in the well, the cover slip was place on until it was nicely
-sealed so that none of the solution would leak out. The slide could then be
-placed on the slide holder%(picture)
-, shown in Figure~\ref{fig:slideHolder}
+These objects
+needed to be between one and 100 microns in size, so that the holograms could
+be captured on the CCD\@. This ranged from objects found in water obtained from the
+Charles River in Boston, Massachusetts to five micron colloidal diamond
+particles. The identity of the objects were not always known, but this was not
+a requirement since a valid hologram was the only objective. This allowed for
+interesting specimens to be examined.
+
 
 %PICTURE OF SLIDE HOLDER
 \begin{figure}[htbp!]
@@ -91,45 +121,70 @@ after preparation. The slide is held on with double-sided tape.}
 
 \section{Recording the Holograms}
 
-After the slides have been prepared, a hologram could be taken of the object. The
-laser must first be turned on. Once the beam is on, all of the components need
-to be lined up so that the laser goes through the first objective, the object,
-and through the second objective, and is fully captured by the CCD\@. Fine
-adjustments had to be made with the three-axis mounts to get all of the optical
+After the slides were prepared, a hologram could be recorded of the object. The
+laser must first be turned on. Once the beam is on, all of the components were
+aligned so that the laser passed through the first objective lens, the object,
+through the second objective lens, and captured by the CCD\@. Fine
+adjustments of components using the three-axis mounts were required to get all of the optical
 components lined up properly.
 Once all of the
-components are lined up, the object could be moved about to find an area of
-interest within the solution or sample. This was done so that the resolution can
-be maximized, and to make sure that the object that was intended for viewing
-was
-in frame. At times, the object needed to be moved because in the currently
-viewed portion of the solution, there were too many objects, and the
-overcrowding would result in no possible reconstruction, since there were too
-many fringes.
+components are lined up, the object could be moved to an area of
+interest within the solution or sample. 
+%
+%This was done so that the resolution can
+%be maximized, and to make sure that the object that was intended for viewing
+%was
+%in frame. At times, the object needed to be moved because in the currently
+%viewed portion of the solution, there were too many objects, and the
+%overcrowding would result in no possible reconstruction, since there were too
+%many fringes.
 
-Once a good object
-was in place, the second objective and the CCD could be moved. This was done to
-find the focal point of the second objective lens. Once the focal point was found,
+Once an appropriate object
+was in place the CCD could be moved to the focal point of the second objective
+lens.
+%
+%the second objective and the CCD could be moved. This was done to
+%find the focal point of the second objective lens. 
+Once the focal point was found,
 the object could be adjusted toward or away from the objective lens to create fringes,
-which lead to the reconstructions. The camera was moved to get the most of the
-hologram onto the CCD\@. The fringes were important, and had to be paid
-attention to. Too many,
-and there would be a loss in resolution, sometimes so much so no
-reconstruction was possible. Not enough, and again, there could be a loss of
-resolution or a loss of the reconstruction itself. Once the setup was properly
-aligned, a hologram could be taken. After the hologram was recorded, a
-background image was needed so that the background could be subtracted later on
-from the hologram. Once all the images had been recorded on the
-CCD, the memory card could be taken from the camera and the data could be analyzed.
+required for the formation of a hologram.
+%which lead to the reconstructions. 
+The camera was aligned to get as much of the
+hologram as possible projected onto the CCD\@. The fringe density was an
+important consideration to obtaining a high quality hologram.
+%, and had to be paid
+%attention to. 
+If there were too many fringes,
+there would be a loss in resolution even to the point
+%, sometimes so much so no
+where reconstruction was not possible. 
+If there were not enough fringes, again there could be a loss of
+resolution or a meaningful reconstruction became impossible. 
+%Once the setup was properly
+%aligned, a hologram could be taken. 
+After the hologram was recorded, a
+background image was also recorded with the sample removed from the beam path
+in order to remove artifacts associated with the background.
+%needed so that the background could be subtracted later on
+%from the hologram.
+Once all the images had been recorded on the
+CCD, the memory was removed from the camera and data was analyzed numerically.
 
 \section{Analyzing the Holograms}
 
-Once the digital images have been recorded, they were put onto a computer for
-analysis. The digital images were taken in a RW2 format, which is the raw
-format that the camera outputted. This was done to ensure that
-no information was lost to the compression of the photos in the camera.
-Therefore, the images had to be converted to a workable, yet still lossless
-format. A lossless format was used so that none of the fringes in the image
+Once the digital images have been recorded, they were transfered into a computer for
+analysis. The digital images were recorded in a RW2 format, which is the raw,
+lossless format that the camera uses. 
+%This was done to ensure that
+%no information was lost to the compression of the photos in the camera.
+%Therefore, the images had to be converted to a workable, yet still lossless
+%format.
+Since the RW2 format is difficult to work with in a programming language,
+the images had to be converted to a different format to overcome the
+limitations of the RW2 format.
+%Since these image files were large (approximately 70 megabytes each), the images had to be reduced in size to
+%overcome the limitations in memory and computation time.
+A lossless format was used so that none of the fringe information in the image
 would be lost in the compression process. 
 The raw images were converted into TIFF images using DCRaw~\cite{DCRaw},
 which is an
@@ -141,9 +196,12 @@ one used to convert all the RW2 files into a 16-bit TIFF file.
 dcraw -6 -T *.RW2
 \end{lstlisting}
 \end{center}
-The -6 is what makes the program write 16 bits per sample instead of eight, and
-the -T is how we get the output to be TIFF files. 16-bit TIFF files were used
-since that reduced the amount of information lost in the images.
+The -6 sets the program to write 16 bits per sample, and
+-T sets the output to be TIFF format.
+16-bit TIFF files were used
+since this format was lossless and easily usable in Python.
+%since this format minimized the amount of information when reducing from MB to
+%70 megabytes.
 %TIFF images
 %are preferable over most other formats, but PNG could also be used. 16-bit TIFF
 %files cannot be viewed by most programs, so a more typical approach is to go
@@ -151,13 +209,13 @@ since that reduced the amount of information lost in the images.
 %file, but DCRaw covers most raw formats that will be produced.
 
 Now that the images had been converted to a workable format, the
-reconstruction could be done. The reconstruction process was done with HoloPy,
-which is an open-source module in Python developed by Tom Dimiduk et al.\ at Manoharan Group at
-Harvard University. A sample of the general code run is shown in
-Listing~\ref{listing:code}. For every reconstruction done, there is a separate
-piece of code for that specific hologram, so that the conditions used to create
-that reconstruction are kept, and so that the hologram can easily be
-reconstructed at any time.
+reconstruction calculation could be performed. The reconstruction calculation was done with HoloPy,
+an open-source module in Python developed by Tom Dimiduk et al.\ of the Manoharan Group at
+Harvard University \cite{Manoharan}. A sample of the general code run is shown in
+Listing~\ref{listing:code}. For every image reconstruction, there was a separate
+piece of code for that specific hologram so that the conditions used to create
+that reconstruction were kept, and so that the hologram could easily be
+reconstructed at any later time.
 
 
 \lstset{frame=tb,
@@ -222,18 +280,87 @@ plt.show()
 \end{lstlisting}
 \end{Code}
 
-The beauty of using HoloPy was the simplicity of use. The first 3
-lines of Listing~\ref{listing:code} are import statements, which loads in the
-modules that we will need. NumPy is a scientific library, and MatPlotLib is a
+The beauty of using HoloPy was simplicity of use. The first 3
+lines of Listing~\ref{listing:code} are import statements required for loading
+the necessary computational modules.
+%which loads in the
+%modules that we will need.
+NumPy is a scientific library and MatPlotLib is a
 library that allows for the visualization of the data. Next, the magnification
-of the second objective is set. This was so that the spacing between the
-pixels can be set.
-The spacing was set so that when the reconstructions were done, measurements
-could
-be accurately taken of the reconstructed objects. The optics of the system were
-set next, which allows for information such as the wavelength and the index of
-refraction to be set. Since glass was used in the slides, the refractive index
-for glass was used, which was set to be 1.33 for all of the holograms.
+of the second objective lens was set, which was needed to set the pixel spacing
+calibration for quantitative work.
+%is set. This was so that the spacing between the
+%pixels can be set.
+%The spacing was set so that when the reconstructions were done, measurements
+%could
+%be accurately taken of the reconstructed objects. 
+The optics of the system were set next providing
+%, which allows for 
+information such as the wavelength and the index of
+refraction. Since the slides were composed of standard glass, the refractive
+index was 1.33 for all hologram reconstructions.
+
+%Since glass was used in the slides, the refractive index
+%for glass was used, which was set to be 1.33 for all of the holograms.
+
+%\begin{Code}[scale=0.75,htbp!]
+%    \centering
+%\begin{lstlisting}[caption=Timing of a typical run of the code,
+%label=listing:time]
+%IPython CPU timings (estimated):
+%Total runs performed: 2
+%  Times  :      Total      Per run
+%  User   :      59.33 s,      29.66 s.
+%  System :       2.03 s,       1.02 s.
+%Wall time:      61.84 s.
+%\end{lstlisting}
+%\end{Code}
+
+Next, the background and object hologram images were
+loaded into memory along with the spacing and optics parameters. 
+%passed so that all the
+%information was with the loaded images. The next thing was to get the distances
+%at which the reconstruction was to be done at. This was done with 
+Subsequently, the NumPy
+function \emph{linspace}, which took the parameters of a start point, a stop
+point, and how many points in between are needed, was loaded to set the
+location of the reconstruction plane.
+%All of these parameters vary
+%depending on the images. 
+One limiting factor of the complexity of calculation that could be performed
+was the amount of random access
+memory, or RAM, that the computer had. The number of slices in the
+reconstruction and the resolution of the images are the dominant factors
+determining how much RAM was needed.
+%, which was why the parameters must be
+%manipulated to achieve optimum results in runtime. 
+Next, the background image was
+subtracted from the object hologram image.
+%
+%This allowed for a higher contrast image,
+%as it got rid of the fringes from the material that was in the image that was not
+%desired. This included things such as dust or dirt that may have been on the
+%CCD or the other optical parts in the system, or on the slides themselves.
+%
+The background subtracted hologram image was then shown to the user. 
+%This was to make
+%sure that all of the right information has been given to the program. 
+This was
+just a reality check and was not needed after the first run.
+
+
+Finally, the hologram image was
+reconstructed. This was done by passing the background subtracted hologram and
+the distances at which the hologram was to be reconstructed at to the function
+propagate. This was where the program took the most amount of time and the timing
+of a typical run of the whole program is shown in Listing~\ref{listing:time}. After this,
+the reconstruction was plotted and all the slices could be viewed by pressing the
+arrow keys. A useful functionality of HoloPy was that when the user left or right
+clicked on the image the coordinates were printed. These coordinates were both
+the pixel and spacing coordinates, which allowed for measurements to be quickly
+obtained.
+
+
 
 \begin{Code}[scale=0.75,htbp!]
     \centering
@@ -247,39 +374,6 @@ Total runs performed: 2
 Wall time:      61.84 s.
 \end{lstlisting}
 \end{Code}
-
-The background image and the object hologram image was
-loaded, with the spacing and optics parameters passed so that all the
-information was with the loaded images. The next thing was to get the distances
-at which the reconstruction was to be done at. This was done with the NumPy
-function \emph{linspace}, which took the parameters of a start point, a stop
-point, and how many points in between are needed. All of these parameters vary
-depending on the images. A limiting factor was the amount of random access
-memory, or RAM, that the computer had. The more slices you make of the
-reconstruction, the more memory needed. The resolution of the images will
-determine how much memory was needed, which was why the parameters must be
-manipulated to achieve optimum results in runtime. Next, the background was
-subtracted from the object hologram. This allowed for a higher contrast image,
-as it got rid of the fringes from the material that was in the image that was not
-desired. This included things such as dust or dirt that may have been on the
-CCD or the other optical parts in the system, or on the slides themselves.
-The background subtracted hologram was then shown to the user. This was to make
-sure that all of the right information has been given to the program. This was
-just a check, and was not needed after the first run.
-
-
-Finally, the hologram was
-reconstructed. This was done by passing the background subtracted hologram and
-the distances at which the hologram was to be reconstructed at to the function
-propagate. This was where the program took the most amount of time. The timing
-of a typical run of the whole program is shown in Listing~\ref{listing:time}. After this,
-the reconstruction was plotted, and all the slices could be viewed by pressing the
-arrow keys. A nice functionality of HoloPy was that when the user left or right
-clicked on the image, the coordinates were printed. These coordinates were both
-the pixel and spacing coordinates, which allowed for measurements to be quickly taken.
-
-
-
 
 
 
@@ -296,6 +390,6 @@ the pixel and spacing coordinates, which allowed for measurements to be quickly 
 
 %\bibliographystyle{plain}
 %\bibliography{HonoursBiblio/HonoursBiblio.bib}
-
-
+%
+%
 %\end{document}

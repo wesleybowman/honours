@@ -10,23 +10,33 @@
 %reconstruction. The reconstructions could be done, but no details could be
 %seen.
 
-Like the images obtained from Harvard University, some of the objects shown are
+Holograms were recorded using the apparatus displayed in
+%Figure~\ref{fig:OurMicroscope}.
+
+As in the images obtained from Harvard University, some of the objects shown are
 objects that appeared in the slide without intention, but made for interesting
 holograms and reconstructions. With the CCD that was used in the microscope,
-the spacing per pixel was about twice that of the Harvard images at around 0.34
+the spacing per pixel was about twice that of the Harvard images at
+approximately 0.34
 microns. The image size was 4000 by 3000 pixels, therefore the images were
-\SI{1360}{\micro\meter} by \SI{1020}{\micro\meter}. The values of $z$ used for
+\SI{1360}{\micro\meter} by \SI{1020}{\micro\meter}, in the $x$ and $y$
+dimensions respectively. The values of $z$ used for
 reconstructions in the Acadia images are larger, since the objects were farther
 away from the CCD than in the Harvard images.
 
 In Figure~\ref{fig:68_74}, the object was a fibre from the lens tissue used to
-clean the slide. This fibre was found in the hologram, and then after the
-hologram was captured, the slide was repositioned to take the in-focus image.
-This demonstrates an advantage of holography over optical bright field
-microscopy, because in the bright field microscope this object might have been
-overlooked since the fibre was not at the focal length. Holography allowed for
+clean the slide. This fibre was found in the hologram and then after the
+hologram was captured the slide was repositioned to take the in-focus
+holographic image.
+This demonstrates an advantage of holography over optical bright-field
+microscopy. In a bright-field microscope this object might have been
+overlooked since the fibre was not at the focal length of the objective lens. Holography allowed for
 this object to be found and reconstructed without the need to find the focal
-plane of the object.
+plane of the object. This fibre also had a lot of fringes that were spaced
+appropriately so that a detailed reconstruction could still be achieved. The
+fringe spacing is high because the object was so far away from the CCD, which
+is why the reconstruction could still be done with the object being 1.26 cm
+away from the CCD.
 
 
 
@@ -36,7 +46,7 @@ plane of the object.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:69_focus}
             \includegraphics[width=\textwidth]{pictures/69_focus.png}
-            \caption{The in-focus image of a wood fibre.}
+            \caption{The in-focus holographic image of a wood fibre.}
         \end{subfigure}
             %
                 \hspace*{\fill}
@@ -50,7 +60,8 @@ plane of the object.
         \begin{subfigure}[t]{\textwidth}
             \label{fig:68_74rec}
             \includegraphics[width=\textwidth]{pictures/68_74rec.png}
-            \caption{A reconstruction at a $z$ value of \SI{12580}{\micro\meter}}
+            \caption{A reconstruction at a $z$ value of
+                \SI{12580}{\micro\meter}.}
         \end{subfigure}
 
 
@@ -122,7 +133,7 @@ plane of the object.
     \end{center}
     \caption{%
         A piece of dust that in some places was \SI{5}{\micro\meter} in
-        thickness. Even with the interference of the fringes, the loop in the
+        thickness. Even with overlapping of the interference fringes, the loop in the
         dust was still resolved.
     }%
     \label{fig:72_74}
@@ -154,7 +165,8 @@ plane of the object.
     \end{center}
     \caption{%
         This was an example of a highly populated hologram. While this is not
-        an idea situation, the colloidal diamond particles could still be
+        an ideal situation, since too many fringes can result in a loss of
+        resolution, the colloidal diamond particles could still be
         resolved.
     }%
     \label{fig:187_200}
@@ -169,7 +181,7 @@ plane of the object.
         \begin{subfigure}[t]{0.4\textwidth}
             \label{fig:196_focus}
             \includegraphics[width=\textwidth]{pictures/196_focus.png}
-            \caption{An in-focus image of colloidal diamond.}
+            \caption{An in-focus holographic image of colloidal diamond.}
         \end{subfigure}
             %
                 \hspace*{\fill}
@@ -189,9 +201,10 @@ plane of the object.
 
     \end{center}
     \caption{%
-        This hologram was a more diluted version of
-        Figure~\ref{fig:187_200}. This is typically the amount of objects that
-        was looked for in a hologram. The \SI{5}{\micro\meter} size of the
+        This hologram was recorded from a more diluted solution that was used
+        in
+        Figure~\ref{fig:187_200}.
+        The \SI{5}{\micro\meter} size of the
         particles was resolved in this reconstruction, even when the particles
         were close together.
     }%
@@ -205,25 +218,123 @@ Figure~\ref{fig:72_74} was captured while trying to view a solution of
 colloidal diamond, but the object, which is probably dust, was found. This made
 for an interesting reconstruction, since the object has a loop in it. Even
 though there are interfering fringes at the loop, which was thought might cause
-a loss of resolution at the loop, making the space between the object
-unrecognizable, the loop was still able to be resolved.
+a loss of resolution at the loop, and making the space between the object
+unrecognizable, the loop was still able to be resolved. The largest spacing
+between two sides of the loop was approximately \SI{23}{\micro\meter}, which
+gave confidence that the resolution of the microscope was at least
+\SI{23}{\micro\meter}.
 
 Figures~\ref{fig:187_200} and~\ref{fig:198_200} were of colloidal diamond,
 which had a diameter of around five microns. In Figure~\ref{fig:187_200}, the
 solution used was highly populated, with fringes overlapping with one another.
-This was not ideal, as interference can cause resolution to be lost, but the
-reconstruction was done and the 5 micron particles were still resolved.
-Figure~\ref{fig:198_200} was a more diluted solution of colloidal diamond, and
-had a population that was typically looked for in the holograms. Some of the
+This was not ideal, as overlapping fringes can cause a reduction in
+resolution, however, the 5 micron particles were still clearly resolved.
+Figure~\ref{fig:198_200} was a more diluted solution of colloidal diamond and
+had a population more ideally suited for recording holograms. Some of the
 particles here are very close to one another, and yet they were still resolved
-into two distinct 5 micron particles, which is shown at spot $i$.
+into two distinct 5 micron particles, which is shown at spot $i$. Taking a line
+scan of the two particles shown at spot $i.$, a fit can be made with two
+Gaussian distributions. In Figure~\ref{fig:linescan}, (a) shows how the two
+Gaussians and their sum fit with the original data gathered from Figure~\ref{fig:198_200}
+(c). Using the individual fits of the Gaussians, along with their sum, the resolution could be
+determined by moving one Gaussian toward the other until two distinct Gaussians
+could no longer be recognized. This is also known as the Rayleigh
+criterion, which states that when the full-width half-maximum (FWHM) of two Gaussians
+are directly overlapping, then that is the minimum resolvable separation
+between the two Gaussians. Equation \ref{eq:Rayleigh} is the mathematical
+formulation of the Rayleigh criterion,
+
+\begin{equation}
+    \delta_{Rayleigh} \propto \frac{\lambda}{NA}
+    \label{eq:Rayleigh}
+\end{equation}
+%
+where $\delta$ is the minimum resolvable separation, $\lambda$ is the
+wavelength of the laser, and $NA$ is the numerical aperture \cite{Goodman}.
+The separation of the FWHM on each of the individual Gaussians was
+approximately 5 microns, which corresponded to the known particle size and
+showed that the individual fits were able to model the particles in this
+scenario.
+
+
+\begin{figure}[ht!]
+    \begin{center}
+
+        \begin{subfigure}[t]{\textwidth}
+            \label{fig:linescan_original}
+            \includegraphics[width=\textwidth]{pictures/resolutionOriginal.png}
+            \caption{A Gaussian was fit to each peak in the original linescan.
+                The fit was used as an approximation to the two particles shown
+            at spot $i$ in Figure~\ref{fig:198_200}.}
+        \end{subfigure}
+            %
+        \\
+                %\hspace*{\fill}
+    %
+        \begin{subfigure}[t]{\textwidth}
+            \label{fig:linescan_new1}
+            \includegraphics[width=\textwidth]{pictures/resolutionNew1.png}
+            \caption{The red Gaussian was moved closer toward the blue
+            Gaussian. The distinctness of the peaks gets weaker as the
+        ``particles'' are moved closer to one another.}
+        \end{subfigure}
+
+    \end{center}
+\end{figure}
+
+\begin{figure}[ht!]
+    \ContinuedFloat
+    \begin{center}
+        \begin{subfigure}[t]{\textwidth}
+            \label{fig:linescan_rayleigh}
+            \includegraphics[width=\textwidth]{pictures/resolutionRayleigh.png}
+            \caption{When the full-width half-maximum (FWHM) of the fits are
+            overlayed, this is Rayleigh criterion, where two point-sources are
+            ``barely resolved.'' \cite{Goodman}}
+        \end{subfigure}
+        \\
+        \begin{subfigure}[t]{\textwidth}
+            \label{fig:linescan_new2}
+            \includegraphics[width=\textwidth]{pictures/resolutionNew2.png}
+            \caption{Once the FWHM values have completely overlapped, the two
+            particles are no longer distinguishable.}
+        \end{subfigure}
+
+    \end{center}
+    \caption{%
+        It is displayed in (c) that we can still resolve both of the
+        \SI{5}{\micro\meter} particles when $\delta$, the distance between the
+        peaks, is
+        \SI{2.72}{\micro\meter}.
+    }%
+    \label{fig:linescan}
+
+\end{figure}
+
+In Figure~\ref{fig:linescan} (c), the Rayleigh criterion is shown, with
+$\delta=$\SI{2.72}{\micro\meter}. Once the FWHM of each of the Gaussians move past one
+another, as displayed in Figure~\ref{fig:linescan} (d), the sum of the
+Gaussians can no longer be displayed as two distinct particles. The NA of the
+objective lens used in Figure~\ref{fig:OurMicroscope} was 0.25, which allowed
+us to use Equation~\ref{eq:Rayleigh} to determine the theoretical minimum
+separation of the two particles.
+\begin{equation}
+    \delta_{Rayleigh} \propto \frac{635~\mathrm{nm}}{0.25} = 2540~\mathrm{nm} =
+    2.54~\mathrm{\SI{}{\micro\meter}}
+\end{equation}
+which is close to the value obtained in Figure~\ref{fig:linescan} (c).
+This gives confidence in the results obtained, and displays that the particles
+can be resolved up to a lateral
+geometrical distance apart of approximately
+\SI{2.5}{\micro\meter}.
 
 
 
 
 
 
-
-
-
+%\bibliographystyle{plain}
+%\bibliography{HonoursBiblio/HonoursBiblio.bib}
+%
+%
 %\end{document}

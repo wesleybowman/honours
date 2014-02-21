@@ -4,10 +4,11 @@
 \chapter{Holographic Microscopy} \label{chap:Micro}
 
 One of the main goals of this research was to construct a microscope that was
-able to create holograms that could be reconstructed numerically. To achieve
-this, two different techniques were tried, pinhole holography and plane-wave
-holography. All parts used where placed on a
-optical rail that was horizontal.
+able to create holograms that could be reconstructed numerically and the 
+technique implemented was in-line, plane-wave
+holography.
+%All parts used where placed on a
+%optical rail that was horizontal.
 
 %\section{Pinhole Holograms}
 %This was the first microscope that was tried in the lab. This microscope
@@ -38,22 +39,25 @@ optical rail that was horizontal.
 \section{Plane-Wave Holography}
 
 A simple form of holography, and one that was tolerant to imperfections in the
-experimental setup, plane-wave holography was attempted. This
-setup entailed of a laser, two objectives, the sample, and a CCD\@. There was
-also the optional part of a neutral density filter (ND filter), which allowed for the
-intensity of light to be adjusted so as not to saturate the CCD\@.
-The optical power of a ND filter could be found using
-Equation~\ref{eq:ND},
+experimental setup, plane-wave holography, was used in this work. This
+setup consisted of a laser, two objective lenses, the sample, and a CCD\@. There was
+also a neutral density filter (ND filter) that could be inserted after the
+laser, to lower
+%which allowed for the
+intensity of light 
+%to be adjusted so as not to 
+preventing saturation of the CCD\@.
+The optical density, or absorbance, of a ND filter is
 
 \begin{equation}
-    d = -\log_{10}\frac{I}{I_0}
+    d = -\log_{10}\frac{I}{I_0},
     \label{eq:ND}
 \end{equation}
 where $d$ is the optical density, $I_0$ is the initial intensity, and $I$ is
 the measurable intensity after the ND filter.
-A diagram of
-the setup and the actual setup used are shown in Figure~\ref{fig:inlineSetup}
-and in Figure~\ref{fig:OurMicroscope} respectively.
+A schematic diagram of
+the experimental setup and the actual setup used are shown in Figures~\ref{fig:inlineSetup}
+and~\ref{fig:OurMicroscope} respectively.
 
 
 
@@ -61,7 +65,7 @@ and in Figure~\ref{fig:OurMicroscope} respectively.
     \begin{center}
         \includegraphics[scale=0.5]{inlineSetup}
     \end{center}
-    \caption{A diagram of the Plane-Wave Holography Microscope.}
+    \caption{A diagram of the in-line, plane-wave holography microscope.}
     \label{fig:inlineSetup}
 \end{figure}
 
@@ -72,9 +76,10 @@ and in Figure~\ref{fig:OurMicroscope} respectively.
         \begin{subfigure}[t]{\textwidth}
             \label{fig:OurMicroscopeSide}
             \includegraphics[width=\textwidth]{pictures/microscopesideFIXED.png}
-            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
-                slide holder (v.) 20x objective (vi.) CCD
-            }
+            \caption{}
+%            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
+%                slide holder (v.) 20x objective (vi.) CCD
+%            }
         \end{subfigure}
             %
 %        \\
@@ -107,9 +112,10 @@ and in Figure~\ref{fig:OurMicroscope} respectively.
         \begin{subfigure}[t]{\textwidth}
             \label{fig:OurMicroscopeSideUp}
             \includegraphics[width=\textwidth]{pictures/microscopesideupFIXED.png}
-            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
-                slide holder (v.) 20x objective (vi.) CCD
-            }
+            \caption{}
+%            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
+%                slide holder (v.) 20x objective (vi.) CCD
+%            }
         \end{subfigure}
 
     \end{center}
@@ -135,16 +141,19 @@ and in Figure~\ref{fig:OurMicroscope} respectively.
 %                    \item CCD
 %                \end{enumerate}
 %            }
-            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
-                slide holder (v.) 20x objective (vi.) CCD
-            }
+            \caption{}
+%            \caption{(i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
+%                slide holder (v.) 20x objective (vi.) CCD
+%            }
         \end{subfigure}
 
     \end{center}
     \caption{%
-        The actual setup used as seen from (a) side view, (b) a different angle
-        that allows for a better view of the CCD, the ND filter, and the
-        objectives, and (c) a top-down view that shows both optical rails.
+        The actual experimental setup used as viewed from (a) side view, (b)
+        angled
+        view, and (c) a top view that shows both optical rails. The parts are
+            (i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
+                slide holder (v.) 20x objective (vi.) CCD
     }%
     \label{fig:OurMicroscope}
 \end{figure}
@@ -186,39 +195,47 @@ and in Figure~\ref{fig:OurMicroscope} respectively.
 \clearpage
 
 
-A 632 nm, 0.5 mW helium-neon, or HeNe, laser was mostly used, but a 450 nm, 1 W laser was tested at one point as
-well to see if it helped the resolution and intensity.
+A 632 nm, 0.5 mW helium-neon, or HeNe, laser was used,as the coherent light
+source.
 %The same
 %lasers used in the pinhole setup were used here. 
-The CCD used was from an interchangeable lens camera.
-Interchangeable lens cameras have no mirrors or prisms in front of
-their CCD\@, which allowed for the Panasonic Lumix DMC-GF3 camera body only to
-be bought, since there was no need for a lens. The CCD was directly
-exposed to the incoming light, which allowed for minimal aberrations.
+The CCD used was from a Panasonic Lumix DMC-GF3 interchangeable lens camera.
+Interchangeable lens cameras have an important advantage pver a normal digital
+camera in that they have no mirrors or prisms in front of
+the CCD\@, which allowed for direct exposure of the incoming light with minimal
+aberrations.
+%the Panasonic Lumix DMC-GF3 camera body only to
+%be bought, since there was no need for a lens. The CCD was directly
+%exposed to the incoming light, which allowed for minimal aberrations.
 
 The Panasonic Lumix DMC-GF3 camera allowed for high shutter speeds, low ISO
-(which means low noise), and approximately 12 millions pixels.
-The two objectives were used
+%(which means low noise),
+and approximately 12 million pixels.
+The two objective lenses were used
 before and after the sample in the setup. The first objective, which was a 10x
-objective lens, was there for
-the culmination of the light from the laser. This was not needed if the laser
-has a culminated beam on its own. The second objective, which was a 20x
+objective lens, was to %there for
+culminate the light from the laser and would not be needed if the laser
+had a culminated beam of appropriate diameter. The purpose of the second
+objective lens, which was a 20x
 objective lens, was there to
 magnify the resulting diffraction or interference patterns that were created
-when the light passes through the sample. This allowed for the holograms to be
-better recorded on the CCD, as it allowed the CCD to be fully used.
-Both of the objectives and the object were placed on
-three-axis mounts so that they could be adjusted and lined up properly.
-The Edmund optics neutral density filters were used depending on the sample
-that was being viewed, and if the CCD was being saturated. Saturating the CCD does not allow for a good hologram reconstruction
-since some of the information is missing.
-There were three different ND filters with
-different optical density values used: 1.0, 0.6,
-and a 0.3. This allowed for the intensity of the light from the laser to be
-adjusted.
-The ND filter went after the laser
-and before the first objective. It was placed here for ease of use and access,
-but could be moved to anywhere in the setup.
+when the light passed through the sample. This allowed for the holograms to be
+recorded onto the CCD using the full area of the CCD.
+%, as it allowed the CCD to be fully used.
+Both of the objective lenses and the object were placed on
+three-axis mounts so that they could be adjusted and aligned accurately.
+%The Edmund optics 
+The neutral density filters were used depending on the sample opacity to avoid
+saturation of the CCD.
+%that was being viewed, and if the CCD was being saturated. Saturating the CCD does not allow for a good hologram reconstruction
+%since some of the information is missing.
+%There were three different ND filters with
+The three different optical density values used were 1.0, 0.6,
+and a 0.3, allowing for the intensity of the light from the laser to be
+adjusted over a wide range.
+%The ND filter went after the laser
+%and before the first objective. It was placed here for ease of use and access,
+%but could be moved to anywhere in the setup.
 
 
-%\end{document} 
+%\end{document}

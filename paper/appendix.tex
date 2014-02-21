@@ -1,0 +1,89 @@
+%\include{header}
+%\begin{document}
+
+\chapter{Appendix} \label{chap:Appendix}
+
+\section{Fourier Transform}
+
+In science, one of the most fundamental principles is the superposition
+principle. The superposition principle tells us that for a linear system
+composed of different functions is the sum of the responses that would have
+been caused by the different functions individually. Green's function is
+written as the
+superposition of infinitely many impulse response functions, which then makes
+the response a superposition of impulse responses. Fourier transforms are like
+Green's function, but instead of using impulse response functions, it uses
+sinusoids instead.
+
+Think of sinusoids (sines and cosines) as being the fundamental building blocks
+for functions. From these functions, we can write any other function as a
+superposition of those two functions, whether they be periodic or not. This can
+be represented with an infinite series, known as the Fourier series.
+
+First, let's suppose that $f(t)$ is a periodic function with a period
+$T$, so that
+\begin{equation}
+    f(t)=f(t+T)
+\end{equation}
+for all values of $t$ \cite{DanielSteck}. We can represent this as
+
+\begin{equation}
+    f(t) = a_0 + b_0 + 2\sum_{n=1}^{\infty} a_n \cos(n\omega
+    t)+2\sum_{n=1}^{\infty}b_n\sin(n\omega t)
+    \label{eq:fourierseries}
+\end{equation}
+where $\omega=2\pi\nu=\frac{2\pi}{T}$ is the angular frequency, and $\nu$ is the frequency.
+We can define the complex Fourier coefficient as
+
+\begin{equation}
+    c_n \equiv a_n+ib_n
+\end{equation}
+which allows for Equation~\ref{eq:fourierseries} to be rewritten as
+
+\begin{equation}
+    f(t) = a_0 + b_0 +\sum_{n=1}^{\infty} a_n \left( e^{in\omega t} +
+    e^{-in\omega t} \right) - i\sum_{n=1}^{\infty} b_n \left( e^{in\omega t} -
+    e^{-in\omega t} \right)
+\end{equation}
+This can be simplified farther
+
+\begin{equation}
+    f(t) = \sum_{n=-\infty}^{\infty}a_ne^{-in\omega t} + i\sum_{n=-\infty}^{\infty}b_ne^{-in\omega t}
+\end{equation}
+
+Now, using the complex Fourier coefficient defined earlier, we can get the
+complex Fourier series
+
+\begin{equation}
+    f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t}
+\end{equation}
+
+Now, these same harmonic functions can be used to build aperiodic functions. An
+aperiodic function corresponds to $T\rightarrow \infty$, so we need a
+continuous spectrum to represent an aperiodic function, since there is more
+information in the function than the aperiodic case.
+
+\begin{equation}
+    f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t} \rightarrow
+    f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty} \tilde{f}(\omega) e^{-i\omega t}~d\omega
+\end{equation}
+This is the inverse Fourier transform. To find the amplitudes, $c_n$, which are
+also called the Fourier transform,
+
+\begin{equation}
+    c_n = \frac{1}{T}\int_0^Te^{in\omega t} f(t) dt \rightarrow
+    \tilde{f}(\omega) =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
+\end{equation}
+In a more common notation,
+
+\begin{equation}
+    \mathfrak{F} =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
+    \qquad
+    \mathfrak{F}^{-1} =\int_{-\infty}^{\infty}f(\omega)e^{-i\omega t}~d\omega
+\end{equation}
+where $\mathfrak{F}$ is the Fourier transform of  $f(t)$ and
+$\mathfrak{F}^{-1}$ is the inverse Fourier transform of $f(t)$.
+
+
+%*=============================================================================================*
+

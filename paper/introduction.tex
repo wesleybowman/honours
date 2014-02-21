@@ -3,12 +3,16 @@
 
 \chapter{Introduction} \label{chap:Intro}
 
-Holography has two basic methods of obtaining holograms, in-line holography and
-off-axis holography. There are different types of those techniques, but those
-are the two broad categories in which holography can be situated into.
 Holography was invented by Dennis Gabor in 1948, and he developed the technique
-of the in-line holography. Later, in 1960, Emmett N. Leith and Juris Upatnieks developed
-off-axis holography.
+of the in-line holography, while he was trying to improve the resolution of
+electron microscopes. He proposed a lensless, two-step process which he called
+wavefront reconstruction and is now known as holography .
+Gabor realized that when a reference wave and a scattered wave from an object
+interfer, then information about both the amplitude and the phase of the
+scattered waves can be recorded, despite the fact that the recording medium
+only captures the intensity of the light from the waves \cite{Goodman}.
+Later, in 1960, Emmett N. Leith and Juris Upatnieks developed
+off-axis holography. Schnars et. al said that,
 
 \begin{quote}
 ``A hologram is the photographically or otherwise recorded
@@ -25,6 +29,37 @@ the original object wave. An observer sees a three-dimensional
 image which exhibits all the effects of perspective and depth
 of focus.``\cite{schnars_digital_2002}
 \end{quote}
+Contrary to popular belief, many of the most interesting and useful properties
+of holography are different and independent of this ability to view a
+three-dimensional object, a lot of which are discussed in later chapters of
+this thesis. Some applications of holography include microscopy, which
+motivated much of the early work in holography, and volume reconstructions.
+Holography is advantageous in this area since in conventional microscopy, high
+lateral resolution is achieved at the price of a limited depth of focus. This
+can be fixed by continuously refocusing, but this approach is unsatisfactory.
+With a hologram, the object can be recorded and all the information is retained
+to do a full volume exploration from one image.
+Another interesting application of holography is the ability to take
+multiple-exposures of holograms, which allows the hologram to store two or more
+separate complex wave fields on the same recording medium, and subsequent
+interference of those fields when reconstructed together. This allows for
+changes in local refractive-index perturbations of air to be seen, so that
+things like shock waves from a bullet, or being able to image the gas expansion
+of an incandescent bulb, can be seen. This interferometry also allows for
+contour generation, which lets the object easily be seen as having contours in
+a two dimensional image, and vibrational analysis of objects, which allows for
+the vibration of a diaphragm, as shown in Figure~\ref{fig:vibrationAnalysis}, to be seen.
+
+\begin{figure}[htbp!]
+\begin{center}
+    \includegraphics[width=0.6\textwidth]{pictures/vibrationAnalysis.jpg}
+\end{center}
+\caption{The difference between two different frequencies on a diaphragm, shown
+    using holography interferometry \cite{vibration}.}
+\label{fig:vibrationAnalysis}
+\end{figure}
+
+
 Numerical reconstruction of holograms was started in 1972 by Yaroslavskii
 \emph{et al.} This was done by sampling optically enlarged parts of an in-line
 holograms that were recorded on a photographic plate. These digitalized
@@ -36,9 +71,57 @@ be numerically reconstructed, but also digitally sampled directly, getting rid
 of the photographic plates that were needed, and the conversion of those
 photographic plates into digitalized holograms.
 
+A fundamental problem of holography is that a hologram must be recorded, and
+later reconstructed, getting both the amplitude and the phase information out
+of the hologram, however, the recording medium only responds to the light
+intensity. The way this is solved, is by using a reference wave with the object
+wave, both of which are mutually coherent, and then the intensity of the sum of
+the two complex fields then depends on both the amplitude and phase of the
+object wave. Therefore, if
+\begin{equation}
+    S(x,y) = \left| S(x,y) \right | \exp{[i\phi(x,y)]}
+\end{equation}
+represents the object wavefront to be reconstructed, and
+\begin{equation}
+    A(x,y) = \left| A(x,y) \right | \exp{[i\psi(x,y)]}
+\end{equation}
+represents the reference wavefront with which $S(x,y)$ interfers, the intensity
+of the sum is given by
+\begin{equation}
+    I(x,y) = \left| A(x,y) \right |^2 + \left| S(x,y) \right |^2 + 2\left|
+    A(x,y) \right |\left| S(x,y) \right |\cos{\left[ \psi(x,y)-\phi(x,y) \right]}
+    \label{eq:intensity}
+\end{equation}
+The first two terms of Equation~\ref{eq:intensity} depend only on the
+intensities of the individual incoming wavefronts, while the third depends on
+their relative phases. Thus, information about both the amplitude and the phase
+of $S(x,y)$ have been recorded in the hologram \cite{Goodman}.
+
+Holography has two basic methods of obtaining holograms, in-line holography and
+off-axis holography. There are different types of those techniques, but those
+are the two broad categories in which holography can be situated into. For
+in-line holography, which is the technique used through this thesis, the
+reference wave is scattered off the object, creating the object wavefront, but
+the object is aligned in such a way that the reference wave is till recorded on
+the recording medium. This allows for all of the components of the holographic
+microscope to be placed in a linear setup. Off-axis holography splits the
+incoming reference wavefront using a beam splitter, and using one of the split
+beams to scatter off of the object, and the other as the reference wavefront.
+This requires a more complicated setup than in-line holography, since it
+requires more components to make sure everything is aligned properly.
+
 In this work, the objective was to create a digital in-line holographic
 microscope that would allow for holograms to be created and then numerically
-reconstructed.
+reconstructed. In Chapter~\ref{chap:Math}, the mathematical background of
+holographic reconstruction is discussed in some detail, along with information
+needed to achieve efficient computation time for the reconstructions. In
+Chapter~\ref{chap:Micro}, the microscope setup along with the sample and slide
+setup are discussed. Chapter~\ref{chap:Experimental} discusses how the
+holograms were recorded, and once they were recorded how they were
+reconstructed numerically. Chapter~\ref{chap:Results} the reconstructions
+obtained from Harvard and Acadia Universities are shown and discussed. In
+Chapter~\ref{chap:Conclusion}, conclusions are drawn and where this work could
+go in the future are discussed.
 
 %PAGE 469 of GUENTHERE
 
@@ -82,14 +165,28 @@ reconstructed.
 %\end{itemize}
 
 \chapter{Mathematical Background} \label{chap:Math}
+In this chapter, the mathematical background needed to understand how a
+hologram is formed and how to reconstruct the holograms numerically are
+discussed, along with how to obtain efficient numerical reconstructions using
+the fast Fourier transform (FFT) algorithm instead of direct evaluation of the Fresnel integral.
 
 \section{Fresnel-Kirchoff Integral}
 
-The Fresnel-Kirchoff integral was the key equation that allowed for holograms
+The Fresnel-Kirchoff integral is the key equation required for holograms
 to be reconstructed numerically.
-The diffraction of a light wave at an aperature which is fastened perpendicular
-to the incoming beam is described by the Fresnel-Kirchoff integral
+The diffraction of a light wave through an aperture, which is fastened perpendicular
+to the incoming beam, is described by the Fresnel-Kirchoff integral
 \cite{schnars_digital_2002}:
+
+    \begin{figure}
+    \begin{center}
+        \includegraphics[scale=0.5]{smallangle}
+    \end{center}
+    \caption{The angle, $\theta$, between $\rho$, the distance between a point
+    in the hologram plane and a point in the reconstruction plane, as
+    referenced to the $z$-axis}
+    \label{fig:smallangle}
+    \end{figure}
 
 \begin{equation}
     \Gamma(\xi,\eta) =
@@ -105,9 +202,14 @@ to the incoming beam is described by the Fresnel-Kirchoff integral
     \end{equation}
     where $h(x,y)$ is the hologram function, $R(x,y)$ is the reference wave
     function, $\rho$ is the distance between a point in the hologram plane and
-    a point in the reconstruction plane, and $d$ is the distance from the hologram
-    to the image plane. If a plane wave reference wave is used,
-    then $R(x,y)$ is given by the real amplitude:
+    a point in the reconstruction plane, $d$ is the distance from the hologram
+    to the image plane, and $\lambda$ is the wavelength of the laser being used. 
+    In Figure~\ref{fig:smallangle}, it is shown that $\theta$ is the angle
+    between a point in the hologram plane, denoted with $x$ and $y$
+    coordinates, and a point in the reference plane, denoted with $\xi$ and
+    $\eta$.
+    If a plane wave reference wave is used,
+    then $R(x,y)$ is given by the real amplitude, $r$:
 
     \begin{equation}
         R = r+ i0 = r
@@ -115,7 +217,8 @@ to the incoming beam is described by the Fresnel-Kirchoff integral
 
     If the values of $x$ and $y$ along with the values of $\xi$ and $\eta$ are
     small compared the the distance between the planes, $d$, then $\rho$ can be
-    replaced with a Taylor series approximated to the first terms:
+    replaced with a Taylor series,
+    %approximated to the first terms:
 
     \begin{equation}
         \rho=d+\frac{(\xi-x)^{2}}{2d}+\frac{(\eta-y)^{2}}{2d}-\frac{1}{8}\frac{\left[
@@ -124,9 +227,12 @@ to the incoming beam is described by the Fresnel-Kirchoff integral
 
     \begin{equation}
         \rho\approx d+\frac{(\xi-x)^{2}}{2d}+\frac{(\eta-y)^{2}}{2d}
+        \label{eq:distance}
     \end{equation}
+    %
+    where only terms linear in $1/d$ are considered.
 
-    Using this, along with a small angle approximation, the Fresnel-Kirchoff
+    Using Equation~\ref{eq:distance}, along with a small angle approximation, the Fresnel-Kirchoff
     integral can be simplified to
 
     \begin{equation}
@@ -134,10 +240,10 @@ to the incoming beam is described by the Fresnel-Kirchoff integral
         \Gamma(\xi,\eta) &= \frac{i}{\lambda d} \exp\left( -i\frac{2\pi}{\lambda}d \right)
         \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}h(x,y)R(x,y) \\
         & \times \exp\left[ -i\frac{\pi}{\lambda d}\left(
-        (\xi-x)^{2}+(\eta-y)^{2} \right) \right]~dx~dy
+        (\xi-x)^{2}+(\eta-y)^{2} \right) \right]~dx~dy .
         \end{aligned}
     \end{equation}
-Pulling out the constants and simplifying gives
+Pulling the constants out of the integral and simplifying gives
 
     \begin{equation}
         \begin{aligned}
@@ -147,29 +253,35 @@ Pulling out the constants and simplifying gives
         \exp\left[ -i\frac{\pi}{\lambda d}\left(
         x^{2}+y^{2} \right) \right] \\
         & \times \exp\left[ i\frac{2\pi}{\lambda d}\left(
-        x\xi+y\eta \right) \right]~dx~dy
+        x\xi+y\eta \right) \right]~dx~dy .
         \end{aligned}
+        \label{eq:last}
     \end{equation}
 
-    The intensity is simply the magnitude of the reconstruction squared.
+    The intensity is simply the magnitude of the reconstruction squared,
 
     \begin{equation}
-        I(\xi,\eta) = |\Gamma(\xi,\eta)|^{2}
+        I(\xi,\eta) = |\Gamma(\xi,\eta)|^{2} ,
     \end{equation}
 
-    and the phase can be calculated by
+    and the phase can be calculated using
     \begin{equation}
-        \phi(\xi,\eta)=\arctan\left( \frac{\mathrm{Im}[\Gamma(\xi,\eta)]}{\mathrm{Re}[\Gamma(\xi,\eta)]} \right)
+        \phi(\xi,\eta)=\arctan\left(
+        \frac{\mathrm{Im}[\Gamma(\xi,\eta)]}{\mathrm{Re}[\Gamma(\xi,\eta)]}
+        \right).
     \end{equation}
-    where Re and Im correspond to the real and the imaginary parts of the
-    reconstruction respectively.
+%    where Re and Im correspond to the real and the imaginary parts of the
+%    reconstruction respectively.
 
-    To digitize these equations, we introduce a transformation of
+    In order to digitize Equation~\ref{eq:last} we introduce the variable
+    transformations of
 
     \begin{equation}
         \nu = \frac{\xi}{\lambda d} \qquad \mu = \frac{\eta}{\lambda d}
         \label{eq:original}
     \end{equation}
+    which are the spatial frequencies, so that the Fresnel integral can be
+    written as,
 
     \begin{equation}
         \begin{aligned}
@@ -179,12 +291,13 @@ Pulling out the constants and simplifying gives
         &\times \exp\left[ -i\frac{\pi}{\lambda d}\left(
         x^{2}+y^{2} \right) \right]
         \exp\left[ i2\pi\left(
-        x\nu+y\mu \right) \right]~dx~dy
+        x\nu+y\mu \right) \right]~dx~dy.
         \end{aligned}
+        \label{eq:variableFresnel}
     \end{equation}
 
-    It can be seen from this equation, that the Fresnel approximation is the
-    inverse Fourier transformation.
+    It can be seen from this Equation~\ref{eq:variableFresnel}, that the Fresnel approximation is the
+    inverse Fourier transformation,
 
     \begin{equation}
     \begin{aligned}
@@ -193,13 +306,14 @@ Pulling out the constants and simplifying gives
         \right) \right] \\
         & \mathfrak{F}^{-1}\left\{R(x,y)h(x,y)\exp\left[
             -i\frac{\pi}{\lambda d}(x^{2}+y^2)
-        \right] \right\}
+        \right] \right\} .
     \end{aligned}
+    \label{eq:FFTneeded}
     \end{equation}
 
-    If the hologram function is sampled on a rectangular raster of $N\times N $
+    Now if the hologram function is sampled on a rectangular raster of $N\times M $
     points, with steps between neighbouring pixels on the CCD being $\Delta x$ and $\Delta
-    y$ in the horizontal and vertical directions respectively, then the
+    y$ in the horizontal and vertical directions, respectively, then the
     integrals can be converted into finite sums using these discrete values:
 
     \begin{equation}
@@ -208,143 +322,151 @@ Pulling out the constants and simplifying gives
             m^2\Delta \nu^2 + n^2\Delta \mu^2
         \right)\right]\\
         & \times
-        \sum_{k=0}^{N-1}\sum_{k=0}^{N-1}R(k,l)h(k,l)\exp\left[ -i
+        \sum_{k=0}^{N-1}\sum_{k=0}^{M-1}R(k,l)h(k,l)\exp\left[ -i
         \frac{\pi}{\lambda d}\left( k^2\Delta x^2+l^2\Delta y^2 \right)
     \right] \\
     & \times \exp\left[ i2\pi\left( k\Delta x m \Delta\nu+l\Delta y n
-    \Delta\mu \right) \right]
+    \Delta\mu \right) \right] .
     \end{aligned}
     \label{eq:discrete}
     \end{equation}
     According to the theory of Fourier transform among $\Delta x$, $\Delta y$
-    and $\Delta\nu$, and $\Delta\mu$ the following relation exist:
+    and $\Delta\nu$, and $\Delta\mu$ the following relation can be defined:
 
     \begin{equation}
-        \Delta\nu=\frac{1}{N\Delta x}; \qquad \Delta\mu=\frac{1}{N\Delta y}
+        \Delta\nu=\frac{1}{N\Delta x}; \qquad \Delta\mu=\frac{1}{M\Delta y}.
         \label{eq:transform}
     \end{equation}
-    Now substituting our original variables used in Equation~\ref{eq:original} back into
-    Equation~\ref{eq:transform},
+    Now substituting the original variables used in Equation~\ref{eq:original} into
+    Equation~\ref{eq:transform} we have
 
     \begin{equation}
-        \Delta\xi=\frac{\lambda d}{N\Delta x}; \qquad \Delta\eta=\frac{\lambda
-        \lambda d}{N\Delta y}
+        \Delta\xi=\frac{\lambda d}{N\Delta x}; \qquad \Delta\eta=\frac{
+        \lambda d}{M\Delta y},
     \end{equation}
-    Plugging this back into Equation~\ref{eq:discrete},
+    and plugging these expressions back into Equation~\ref{eq:discrete} results
+    in
 
     \begin{equation}
     \begin{aligned}
         \Gamma(m,n) & = \frac{i}{\lambda d}\exp\left[ -i\pi \lambda d\left(
-            \frac{m^2}{N^2\Delta x^2}+\frac{n^2}{N^2\Delta y^2}
+            \frac{m^2}{N^2\Delta x^2}+\frac{n^2}{M^2\Delta y^2}
         \right)\right]\\
         &\times
-        \sum_{k=0}^{N-1}\sum_{k=0}^{N-1}R(k,l)h(k,l)\exp\left[ -i
+        \sum_{k=0}^{N-1}\sum_{k=0}^{M-1}R(k,l)h(k,l)\exp\left[ -i
         \frac{\pi}{\lambda d}\left( k^2\Delta x^2+l^2\Delta y^2 \right)
     \right] \\
-    &\times \exp\left[ i2\pi\left( \frac{km}{N}+\frac{ln}{N} \right) \right]
+    &\times \exp\left[ i2\pi\left( \frac{km}{N}+\frac{ln}{M} \right) \right].
     \end{aligned}
     \end{equation}
     This is a discrete Fresnel transform, and it is calculated by multiplying
-    $R(k,l)$ with $h(k,l)$ and $\exp\left[ -i
+    $R(k,l)$ by $h(k,l)$ and $\exp\left[ -i
         \frac{\pi}{\lambda d}\left( k^2\Delta x^2+l^2\Delta y^2 \right)
     \right]$
     and then applying an inverse Fourier transform to the product. This is done
-    the most effectively using the fast Fourier transform, or FFT\@. The factor
-    in front of the sum is only affecting the phase and can be neglected for
+    the most effectively using the fast Fourier transform, or FFT\@, as
+    discussed in Section~\ref{sect:FFT}. The factor
+    in front of the sum only affects the phase and can be neglected for
     most applications.
 
 
-        \section{Fourier Transform}
-
-        In science, one of the most fundamental principles is the superposition
-        principle. The superposition principle tells us that for a linear system
-        composed of different functions is the sum of the responses that would have
-        been caused by the different functions individually. Green's function is
-        written as the
-        superposition of infinitely many impulse response functions, which then makes
-        the response a superposition of impulse responses. Fourier transforms are like
-        Green's function, but instead of using impulse response functions, it uses
-        sinusoids instead.
-
-        Think of sinusoids (sines and cosines) as being the fundamental building blocks
-        for functions. From these functions, we can write any other function as a
-        superposition of those two functions, whether they be periodic or not. This can
-        be represented with an infinite series, known as the Fourier series.
-
-        First, let's suppose that $f(t)$ is a periodic function with a period
-        $T$, so that
-        \begin{equation}
-            f(t)=f(t+T)
-        \end{equation}
-        for all values of $t$ \cite{DanielSteck}. We can represent this as
-
-        \begin{equation}
-            f(t) = a_0 + b_0 + 2\sum_{n=1}^{\infty} a_n \cos(n\omega
-            t)+2\sum_{n=1}^{\infty}b_n\sin(n\omega t)
-            \label{eq:fourierseries}
-        \end{equation}
-        where $\omega=2\pi\nu=\frac{2\pi}{T}$ is the angular frequency, and $\nu$ is the frequency.
-        We can define the complex Fourier coefficient as
-
-        \begin{equation}
-            c_n \equiv a_n+ib_n
-        \end{equation}
-        which allows for Equation~\ref{eq:fourierseries} to be rewritten as
-
-        \begin{equation}
-            f(t) = a_0 + b_0 +\sum_{n=1}^{\infty} a_n \left( e^{in\omega t} +
-            e^{-in\omega t} \right) - i\sum_{n=1}^{\infty} b_n \left( e^{in\omega t} -
-            e^{-in\omega t} \right)
-        \end{equation}
-        This can be simplified farther
-
-        \begin{equation}
-            f(t) = \sum_{n=-\infty}^{\infty}a_ne^{-in\omega t} + i\sum_{n=-\infty}^{\infty}b_ne^{-in\omega t}
-        \end{equation}
-
-        Now, using the complex Fourier coefficient defined earlier, we can get the
-        complex Fourier series
-
-        \begin{equation}
-            f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t}
-        \end{equation}
-
-        Now, these same harmonic functions can be used to build aperiodic functions. An
-        aperiodic function corresponds to $T\rightarrow \infty$, so we need a
-        continuous spectrum to represent an aperiodic function, since there is more
-        information in the function than the aperiodic case.
-
-        \begin{equation}
-            f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t} \rightarrow
-            f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty} \tilde{f}(\omega) e^{-i\omega t}~d\omega
-        \end{equation}
-        This is the inverse Fourier transform. To find the amplitudes, $c_n$, which are
-        also called the Fourier transform,
-
-        \begin{equation}
-            c_n = \frac{1}{T}\int_0^Te^{in\omega t} f(t) dt \rightarrow
-            \tilde{f}(\omega) =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
-        \end{equation}
-        In a more common notation,
-
-        \begin{equation}
-            \mathfrak{F} =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
-            \qquad
-            \mathfrak{F}^{-1} =\int_{-\infty}^{\infty}f(\omega)e^{-i\omega t}~d\omega
-        \end{equation}
-        where $\mathfrak{F}$ is the Fourier transform of  $f(t)$ and
-        $\mathfrak{F}^{-1}$ is the inverse Fourier transform of $f(t)$.
-
-
+%        \section{Fourier Transform}
+%
+%        In science, one of the most fundamental principles is the superposition
+%        principle. The superposition principle tells us that for a linear system
+%        composed of different functions is the sum of the responses that would have
+%        been caused by the different functions individually. Green's function is
+%        written as the
+%        superposition of infinitely many impulse response functions, which then makes
+%        the response a superposition of impulse responses. Fourier transforms are like
+%        Green's function, but instead of using impulse response functions, it uses
+%        sinusoids instead.
+%
+%        Think of sinusoids (sines and cosines) as being the fundamental building blocks
+%        for functions. From these functions, we can write any other function as a
+%        superposition of those two functions, whether they be periodic or not. This can
+%        be represented with an infinite series, known as the Fourier series.
+%
+%        First, let's suppose that $f(t)$ is a periodic function with a period
+%        $T$, so that
+%        \begin{equation}
+%            f(t)=f(t+T)
+%        \end{equation}
+%        for all values of $t$ \cite{DanielSteck}. We can represent this as
+%
+%        \begin{equation}
+%            f(t) = a_0 + b_0 + 2\sum_{n=1}^{\infty} a_n \cos(n\omega
+%            t)+2\sum_{n=1}^{\infty}b_n\sin(n\omega t)
+%            \label{eq:fourierseries}
+%        \end{equation}
+%        where $\omega=2\pi\nu=\frac{2\pi}{T}$ is the angular frequency, and $\nu$ is the frequency.
+%        We can define the complex Fourier coefficient as
+%
+%        \begin{equation}
+%            c_n \equiv a_n+ib_n
+%        \end{equation}
+%        which allows for Equation~\ref{eq:fourierseries} to be rewritten as
+%
+%        \begin{equation}
+%            f(t) = a_0 + b_0 +\sum_{n=1}^{\infty} a_n \left( e^{in\omega t} +
+%            e^{-in\omega t} \right) - i\sum_{n=1}^{\infty} b_n \left( e^{in\omega t} -
+%            e^{-in\omega t} \right)
+%        \end{equation}
+%        This can be simplified farther
+%
+%        \begin{equation}
+%            f(t) = \sum_{n=-\infty}^{\infty}a_ne^{-in\omega t} + i\sum_{n=-\infty}^{\infty}b_ne^{-in\omega t}
+%        \end{equation}
+%
+%        Now, using the complex Fourier coefficient defined earlier, we can get the
+%        complex Fourier series
+%
+%        \begin{equation}
+%            f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t}
+%        \end{equation}
+%
+%        Now, these same harmonic functions can be used to build aperiodic functions. An
+%        aperiodic function corresponds to $T\rightarrow \infty$, so we need a
+%        continuous spectrum to represent an aperiodic function, since there is more
+%        information in the function than the aperiodic case.
+%
+%        \begin{equation}
+%            f(t)=\sum_{n=-\infty}^{\infty}c_ne^{-in\omega t} \rightarrow
+%            f(t)=\frac{1}{2\pi}\int_{-\infty}^{\infty} \tilde{f}(\omega) e^{-i\omega t}~d\omega
+%        \end{equation}
+%        This is the inverse Fourier transform. To find the amplitudes, $c_n$, which are
+%        also called the Fourier transform,
+%
+%        \begin{equation}
+%            c_n = \frac{1}{T}\int_0^Te^{in\omega t} f(t) dt \rightarrow
+%            \tilde{f}(\omega) =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
+%        \end{equation}
+%        In a more common notation,
+%
+%        \begin{equation}
+%            \mathfrak{F} =\int_{-\infty}^{\infty}f(t)e^{i\omega t}~dt
+%            \qquad
+%            \mathfrak{F}^{-1} =\int_{-\infty}^{\infty}f(\omega)e^{-i\omega t}~d\omega
+%        \end{equation}
+%        where $\mathfrak{F}$ is the Fourier transform of  $f(t)$ and
+%        $\mathfrak{F}^{-1}$ is the inverse Fourier transform of $f(t)$.
+%
+%
 %*=============================================================================================*
 
-        \section{Fast Fourier Transform (FFT)}
+    \section{Fast Fourier Transform (FFT) \label{sect:FFT}}
 
-        The fast Fourier transform is one of the most prized algorithms in the
-        world, since it is such a commonly used algorithm, and provides
-        incredible speedups when compared to the discrete Fourier transform.
+    The image reconstruction of a hologram, Equation~\ref{eq:FFTneeded},
+    requires the calculation of Fourier transforms and the fast Fourier
+    transform provides incredible computational speedups when compared to the
+    calculations using the discrete Fourier transform (DFT).
+%
+%        The fast Fourier transform is one of the most prized algorithms in the
+%        world, since it is such a commonly used algorithm, and provides
+%        incredible speedups when compared to the discrete Fourier transform.
+%
         The most commonly used FFT algorithm is known as the Cooley-Tukey algorithm.
-        This is a recursive algorithm, and the basic idea is to take a DFT and split it
+        This is a recursive algorithm and the basic idea is to take a DFT and split it
         into smaller DFTs. For example, taking a $n$ size DFT and transforming it into
         two DFTs of size $n_1$ and $n_2$ respectively.
 
@@ -372,24 +494,33 @@ Pulling out the constants and simplifying gives
 
 
             Fast Fourier transforms,
-            have \BigO{n \log n} operations, which is much better
-            computationally than the DFT's \BigO{n^2} operations. This difference is more clearly shown in
-            Figure~\ref{fig:dftVSfft}, which only shows up to $n=20$, yet, the difference is
-            already about a factor of 8 operations.
+            have \BigO{n \log n} operations, which is more efficient
+            computationally than the DFT's \BigO{n^2} operations. This
+            difference in the number of operations required to compute a FFT is clearly shown in
+            Figure~\ref{fig:dftVSfft}, a plot of the operations required for
+            DFT and FFT methods up to $n=1\times 10^{12}$.
+            %which only shows up to $n=20$, yet, 
+            The difference for $n=1\times 10^{12}$ is about 10 orders of
+            magnitude. For the reconstructions involved in this thesis, $n$ was
+            $12\times 10^{6}$ resulting in a computational speed up of about 4
+            orders of magnitude.
+            %already about a factor of 8 operations.
 
             \begin{figure}[htbp!]
                 \begin{center}
-                    \includegraphics[scale=0.5]{dftVSfft}
+                    \includegraphics[scale=0.5]{dftVSfft2}
                 \end{center}
-                \caption{Shown here is the difference between \BigO{n^2} operations and
-                \BigO{n\log n} operations.}
+                \caption{A plot of the difference between \BigO{n^2} operations and
+                \BigO{n\log n} operations as used in DFT and FFT computations,
+            respectively.}
                 \label{fig:dftVSfft}
             \end{figure}
 
 
             The Cooley-Tukey algorithm computes $n_2$ DFTs of size $n_1$, multiples the
-            result by the twiddle factors, and finally computes $n_1$ DFTs of size
-            $n_2$. This decomposition is then continued recursively. A term that comes up a
+            result by the twiddle factors, and then computes $n_1$ DFTs of size
+            $n_2$. This decomposition is then implemented recursively until the
+            butterfly is reached. A term that comes up a
             lot in FFT is the radix, which is used to describe an $n_1$ or $n_2$ that is
             bounded. The small DFT of the radix is traditionally called a butterfly. The
             Cooley-Tukey algorithm also rearranges the DFT of $X$ into a sum over the even
@@ -460,62 +591,67 @@ Pulling out the constants and simplifying gives
 
             \section{Convolution and the Convolution Theorem}
 
-            The convolution theorem allows for an integral to be written into
+            The convolution theorem allows for an integral to be evaluated as
             the product of two fast Fourier transforms and an inverse Fourier
             transform. This is useful for numerical analysis since integration
-            is difficult to do numerically, while the FFT is fast and
-            efficient.
+            can be difficult and slow to do numerically, while the FFT is
+            simpler and more computationally efficient.
 
-            The convolution is a mathematical operation that maps a pair of
-            functions to a function. This can be defined as \cite{DanielSteck},
+            Convolution is a mathematical operation that maps a pair of
+            functions to a function and can be defined as \cite{DanielSteck},
             \begin{equation}
-                (f*g)(x) \equiv \int_{-\infty}^{\infty} f(x')g(x-x')dx'
+                (f*g)(x) \equiv \int_{-\infty}^{\infty} f(x')g(x-x')dx' .
                 \label{eq:convolution}
             \end{equation}
             If we allow $g(x')$ to be a localized function, then we call this a
-            convolution kernel.
-            This allows us to think of the convolution
-            as the value at location $x$ is the amount of $f(x')$ that passes
+            convolution kernel and
+            allows us to think of the convolution
+            as the value at location $x$ as the amount of $f(x')$ that passes
             through $g(x')$ when $g$ is displaced by an amount $x$. For example,
-            let $g(x) = \delta(x)$. The convolution with $f(x)$ is
+            let $g(x) = \delta(x)$ and the convolution with $f(x)$ is
             \begin{equation}
-                (f*\delta)(x)=\int_{-\infty}^{\infty}f(x')\delta(x-x')dx'=f(x)
+                (f*\delta)(x)=\int_{-\infty}^{\infty}f(x')\delta(x-x')dx'=f(x).
             \end{equation}
             The convolution gives us back the original function $f(x)$, and it
             does this because the $\delta$-function is a perfectly localized
             function. Now, if we displace the $\delta$-function by some amount, $g(x)=\delta(x-x_0)$,
             we get
             \begin{equation}
-                (f*\delta)(x)=\int_{-\infty}^{\infty}f(x')\delta(x-x')dx'=f(x-x_0)
+                (f*\delta)(x)=\int_{-\infty}^{\infty}f(x')\delta(x-x')dx'=f(x-x_0),
             \end{equation}
+            the original function shifted along $x$ by a distance $x_0$
 
-            Convolution can be very useful, but as has been discussed, doing an
-            integral numerically can be slow, especially when you function, $f(x)$,
-            is an image. The convolution theorem gives us a way to easy evaluate
+            Convolution integrals appear often in physics, but as has been discussed, doing an
+            integral numerically can be slow, especially when the function, $f(x)$,
+            is large and complex as encountered in an image. 
+            Fortunately, the convolution theorem provides a way to efficiently evaluate
             Equation~\ref{eq:convolution}. The convolution theorem states that the
             Fourier transform of the convolution is the product of the Fourier
             transforms of the individual functions \cite{DanielSteck}:
             \begin{equation}
                 \mathfrak{F}\left[ f*g
-                \right]=\mathfrak{F}[f]\mathfrak{F}[g]
+                \right]=\mathfrak{F}[f]\mathfrak{F}[g] ,
             \end{equation}
-            This allows us to write the convolution as
+            thereby allowing us to write the convolution operation as,
             \begin{equation}
-                f*g = \mathfrak{F}^{-1}\left\{\mathfrak{F}[f]\mathfrak{F}[g] \right\}
+                f*g = \mathfrak{F}^{-1}\left\{\mathfrak{F}[f]\mathfrak{F}[g]
+            \right\}.
             \end{equation}
-            Using this formulation of the convolution, we can use the FFT which is
-            fast and efficient computationally, and allows us to easily process the
-            convolution. The convolution theorem is of great use in numerically
-            reconstructing holograms, since it allows for the Fresnel-Kirchoff
-            integral to be rewritten in terms of fast Fourier transforms.
+%            Using this formulation of the convolution, we can use the FFT which is
+%            fast and efficient computationally, and allows us to easily process the
+%            convolution. 
+            The convolution theorem is of great use in numerically
+            reconstructing holograms, since it allows in this thesis for the Fresnel-Kirchoff
+            integral to be rewritten in terms of fast Fourier transforms as
+            discussed in the following section.
 
             %DANIEL STECK PAGE 187-189
 
 
-    \section{Reconstruction}
+    \section{Image Reconstruction}
 
-    The Fresnel-Kirchoff integral is not very computationally efficient, and
-    leads to large computation times for a small hologram. This process can be
+    The Fresnel-Kirchoff integral is not very computationally efficient
+    leading to long computation times even for a small hologram, and this process can be
     sped up by transforming the Fresnel-Kirchoff integral into fast Fourier
     transforms.
     Using the convolution approach to the Fresnel-Kirchoff integral,
@@ -524,30 +660,31 @@ Pulling out the constants and simplifying gives
 
     \begin{equation}
         \Gamma(\xi,\eta) = \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}
-        h(x,y)R(x,y) g(\xi,\eta,x,y)~dx~dy
+        h(x,y)R(x,y) g(\xi,\eta,x,y)~dx~dy,
         \label{eq:superpositionIntegral}
     \end{equation}
     where $g(\xi,\eta,x,y)$ is the impulse response function and is given by
 
     \begin{equation}
         g(\xi,\eta,x,y)=\frac{1}{\lambda}\frac{\exp\left[
-        -i\frac{2\pi}{\lambda}\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}} \right]}{\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}}}
+        -i\frac{2\pi}{\lambda}\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}}
+    \right]}{\sqrt{d^{2}+(x-\xi)^{2}+(y-\eta)^{2}}}.
         \label{impulse}
     \end{equation}
     Once again, the small angle approximation was used. The small angle
     approximation is justified since the distance between the object and the
-    charged coupled device was never large enough to cause the angle,
+    charged coupled device (CCD) was never large enough to cause the angle,
     $\theta$, to become larger than 30 degrees. Figure~\ref{fig:smallangle}
-    shows what angle is being referenced here.
-    \begin{figure}
-    \begin{center}
-        \includegraphics[scale=0.5]{smallangle}
-    \end{center}
-    \caption{The angle, $\theta$, between $\rho$, the distance between a point
-    in the hologram plane and a point in the reconstruction plane, and the
-$z$-axis}
-    \label{fig:smallangle}
-    \end{figure}
+    shows the geometry between the hologram and the imaging plane.
+%    \begin{figure}
+%    \begin{center}
+%        \includegraphics[scale=0.5]{smallangle}
+%    \end{center}
+%    \caption{The angle, $\theta$, between $\rho$, the distance between a point
+%    in the hologram plane and a point in the reconstruction plane, and the
+%$z$-axis}
+%    \label{fig:smallangle}
+%    \end{figure}
 
     Equation~\ref{impulse}
     shows that the impulse response function is space-invariant, which allows the
@@ -556,13 +693,14 @@ $z$-axis}
 
     \begin{equation}
         \Gamma(\xi,\eta) = \mathfrak{F}^{-1}\left\{ \mathfrak{F}(R\cdot h)
-        \cdot\mathfrak{F}(g) \right\}
+        \cdot\mathfrak{F}(g) \right\} .
         \label{eq:convReconstruction}
     \end{equation}
 
-    The impulse response function is a delta function that is known to mathematicians as Green's function,
-    and in optics it is known as the point spread function. The impulse response is
-    a way of remembering past events. It is used as a weighting function in the
+    The impulse response function is a delta function that is known to
+    mathematicians as a Green's function,
+    and in optics as the point spread function. The impulse response is
+    a way of remembering past events and is used as a weighting function in the
     convolution integral. The weighting function serves as a window through which a
     time average is performed and the window determines how much of the past history
     of the function can be seen when the time average is performed
@@ -570,7 +708,7 @@ $z$-axis}
     %GUENTHER 240-241
 
     The impulse response function in 2D and in 3D are shown in
-    Figure~\ref{fig:pointSpreadFunction} (a) and (b) respectively.
+    Figures~\ref{fig:pointSpreadFunction} (a) and (b), respectively.
     %and Figure~\ref{fig:psf3D} respectively.
 
     \begin{figure}[htbp!]
@@ -578,7 +716,8 @@ $z$-axis}
         \begin{center}
         \begin{subfigure}[t]{\textwidth}
             \includegraphics[width=\textwidth]{psf}
-            \caption{A 2D representation of the impulse response function.}
+%            \caption{A 2D representation of the impulse response function.}
+            \caption{}
             \label{fig:psf}
         \end{subfigure}
         \end{center}
@@ -590,12 +729,15 @@ $z$-axis}
         \begin{center}
         \begin{subfigure}[t]{0.5\textwidth}
             \includegraphics[width=\textwidth]{psf3D}
-            \caption{A 3D representation of the impulse response function generated from the 2D plot in
-                Figure~\ref{fig:psf}.}
+            \caption{}
+            %\caption{A 3D representation of the impulse response function generated from the 2D plot in
+            %    Figure~\ref{fig:psf}.}
             \label{fig:psf3D}
         \end{subfigure}
         \end{center}
-        \caption{The impulse response function in 2D and 3D.}
+        \caption{The impulse response function displayed in 2D (a) and 3D (b).
+        The axes are in pixels with the height of the impulse response function
+    being in arbitrary units.}
         \label{fig:pointSpreadFunction}
     \end{figure}
 
@@ -613,34 +755,34 @@ $z$-axis}
         -i\frac{2\pi}{\lambda}\sqrt{d^2+\left(k-\frac{N}{2}\right)^2\Delta x^2+\left(
         l-\frac{N}{2}
     \right)^{2}\Delta y^2} \right]}{\sqrt{d^2+\left(k-\frac{N}{2}\right)^2\Delta x^2+\left(
-        l-\frac{N}{2}
-    \right)^{2}\Delta y^2}}
+        l-\frac{M}{2}
+    \right)^{2}\Delta y^2}} .
     \end{equation}
     The Fourier transform of $g(k,l)$ can be calculated and expressed
-    analytically:
+    analytically
 
     \begin{equation}
         G(n,m) = \exp\left\{ -i\frac{2\pi
         d}{\lambda}\sqrt{1-\frac{\lambda^{2}\left( n+\frac{N^2\Delta
-        x^2}{2d\lambda} \right)^2}{N^2\Delta x^2}-\frac{\lambda^{2}\left( m+\frac{N^2\Delta
-        y^2}{2d\lambda} \right)^2}{N^2\Delta y^2}} \right\}
+        x^2}{2d\lambda} \right)^2}{N^2\Delta x^2}-\frac{\lambda^{2}\left( m+\frac{M^2\Delta
+        y^2}{2d\lambda} \right)^2}{M^2\Delta y^2}} \right\} ,
     \end{equation}
-    This saves one Fourier transformation for reconstruction, allowing for
+    thereby saving one Fourier transformation calculation allowing for
     Equation~\ref{eq:convReconstruction} to be rewritten as
 
     \begin{equation}
         \Gamma(\xi,\eta) = \mathfrak{F}^{-1}\left\{ \mathfrak{F}(R\cdot h)
-        \cdot G \right\}
+        \cdot G \right\} .
         \label{eq:finalEquation}
     \end{equation}
 
     Equation~\ref{eq:finalEquation} is how HoloPy, the open-source library that
-    was used to do the numerical reconstructions of the holograms, does
+    was used to do the numerical reconstructions of the holograms, performs
     reconstructions. For the holograms used, a background image was always
     taken so that it could be subtracted from the hologram. This background
-    subtracted hologram was then used as the hologram $h$ for reconstructions.
-    This background subtracted image allowed for less noise in the image, and
-    for a higher contrast and quality image, since only the object being viewed
+    subtracted image was then used as the hologram $h$ in the reconstructions.
+    A background subtracted image allowed for less noise in the image, as well
+    as higher contrast and image quality, since only the object being viewed
     would be included in the reconstruction.
 
 
@@ -657,5 +799,5 @@ $z$-axis}
 
 %\bibliographystyle{plain}
 %\bibliography{HonoursBiblio/HonoursBiblio.bib}
-
+%
 %\end{document} 
