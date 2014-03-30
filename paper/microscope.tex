@@ -1,12 +1,13 @@
 %\include{header}
 %\begin{document}
 
-\chapter{Holographic Microscopy} \label{chap:Micro}
+\chapter{Holographic Microscopy Apparatus} \label{chap:Micro}
 
-One of the main goals of this research was to construct a microscope that was
-able to create holograms that could be reconstructed numerically and the 
-technique implemented was in-line, plane-wave
-holography.
+%One of the main goals of this research was to construct a microscope that was
+%able to create holograms that could be reconstructed numerically and the 
+%technique implemented was in-line, plane-wave
+%holography.
+
 %All parts used where placed on a
 %optical rail that was horizontal.
 
@@ -36,28 +37,28 @@ holography.
 %just not possible with the equipment that we had available.
 %
 
-\section{Plane-Wave Holography}
+%\section{Plane-Wave Holography}
 
-A simple form of holography, and one that was tolerant to imperfections in the
-experimental setup, plane-wave holography, was used in this work. This
+A simple form of holography that was tolerant to imperfections in the
+experimental setup, plane-wave holography was used in this work. This
 setup consisted of a laser, two objective lenses, the sample, and a CCD\@. There was
 also a neutral density filter (ND filter) that could be inserted after the
-laser, to lower
+laser to lower the
 %which allowed for the
-intensity of light 
+intensity of light and
 %to be adjusted so as not to 
-preventing saturation of the CCD\@.
-The optical density, or absorbance, of a ND filter is
+prevent saturation of the CCD\@.
+The optical density, or absorbance, of a ND filter is defined as,
 
 \begin{equation}
     d = -\log_{10}\frac{I}{I_0},
     \label{eq:ND}
 \end{equation}
 where $d$ is the optical density, $I_0$ is the initial intensity, and $I$ is
-the measurable intensity after the ND filter.
+the intensity after the ND filter.
 A schematic diagram of
 the experimental setup and the actual setup used are shown in Figures~\ref{fig:inlineSetup}
-and~\ref{fig:OurMicroscope} respectively.
+and~\ref{fig:OurMicroscope}, respectively.
 
 
 
@@ -72,7 +73,6 @@ and~\ref{fig:OurMicroscope} respectively.
 
 \begin{figure}[ht!]
     \begin{center}
-
         \begin{subfigure}[t]{\textwidth}
             \label{fig:OurMicroscopeSide}
             \includegraphics[width=\textwidth]{pictures/microscopesideFIXED.png}
@@ -149,11 +149,10 @@ and~\ref{fig:OurMicroscope} respectively.
 
     \end{center}
     \caption{%
-        The actual experimental setup used as viewed from (a) side view, (b)
-        angled
-        view, and (c) a top view that shows both optical rails. The parts are
-            (i.) HeNe laser (ii.) ND filter (iii.) 10x objective (iv.)
-                slide holder (v.) 20x objective (vi.) CCD
+        The experimental setup as viewed from (a) the side, (b)
+        an angle, and (c) the top. The parts are
+            (i.) HeNe laser, (ii.) ND filter, (iii.) 10x objective, (iv.)
+                slide holder, (v.) 20x objective, and (vi.) CCD.
     }%
     \label{fig:OurMicroscope}
 \end{figure}
@@ -195,37 +194,37 @@ and~\ref{fig:OurMicroscope} respectively.
 \clearpage
 
 
-A 632 nm, 0.5 mW helium-neon, or HeNe, laser was used,as the coherent light
+A 632 nm, 0.5 mW helium-neon laser was used as the coherent light
 source.
 %The same
 %lasers used in the pinhole setup were used here. 
-The CCD used was from a Panasonic Lumix DMC-GF3 interchangeable lens camera.
-Interchangeable lens cameras have an important advantage pver a normal digital
-camera in that they have no mirrors or prisms in front of
+The CCD was a Panasonic Lumix DMC-GF3 interchangeable lens camera.
+Interchangeable lens cameras have an important advantage over normal digital
+cameras in that they have no mirrors or prisms in front of
 the CCD\@, which allowed for direct exposure of the incoming light with minimal
 aberrations.
 %the Panasonic Lumix DMC-GF3 camera body only to
 %be bought, since there was no need for a lens. The CCD was directly
 %exposed to the incoming light, which allowed for minimal aberrations.
 
-The Panasonic Lumix DMC-GF3 camera allowed for high shutter speeds, low ISO
+The Panasonic Lumix DMC-GF3 camera also allowed for high shutter speeds, low ISO
 %(which means low noise),
-and approximately 12 million pixels.
+and had approximately 12 million pixels.
 The two objective lenses were used
 before and after the sample in the setup. The first objective, which was a 10x
 objective lens, was to %there for
 culminate the light from the laser and would not be needed if the laser
-had a culminated beam of appropriate diameter. The purpose of the second
+had a collimated beam of appropriate diameter. The purpose of the second
 objective lens, which was a 20x
-objective lens, was there to
-magnify the resulting diffraction or interference patterns that were created
+objective lens, was to
+magnify the resulting interference patterns created
 when the light passed through the sample. This allowed for the holograms to be
 recorded onto the CCD using the full area of the CCD.
 %, as it allowed the CCD to be fully used.
 Both of the objective lenses and the object were placed on
 three-axis mounts so that they could be adjusted and aligned accurately.
 %The Edmund optics 
-The neutral density filters were used depending on the sample opacity to avoid
+The particular neutral density filter used depended on the sample opacity to avoid
 saturation of the CCD.
 %that was being viewed, and if the CCD was being saturated. Saturating the CCD does not allow for a good hologram reconstruction
 %since some of the information is missing.
