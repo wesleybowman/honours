@@ -6,7 +6,7 @@
 Holography was invented by Dennis Gabor in 1948, and he developed the technique
 of in-line holography while he was trying to improve the resolution of
 electron microscopes. He proposed a lensless, two-step process which he called
-wavefront reconstruction and is now known as holography .
+wavefront reconstruction and is now known as holography.
 Gabor realized that when a reference wave and a scattered wave from an object
 interfere, then information about both the amplitude and the phase of the
 scattered waves can be recorded, despite the fact that the recording medium
@@ -246,8 +246,8 @@ to the incoming beam is described by the Fresnel-Kirchoff integral
     a point in the reconstruction plane, $d$ is the distance from the hologram
     to the image plane, and $\lambda$ is the wavelength of the laser being used. 
     In Figure~\ref{fig:smallangle}, it is shown that $\theta$ is the angle
-    between a point in the hologram plane, denoted by $x$ and $y$
-    , and a point in the reference plane, denoted by $\xi$ and
+    between a point in the hologram plane, denoted by $x$ and $y$,
+    and a point in the reference plane, denoted by $\xi$ and
     $\eta$.
     If a plane reference wave is used,
     then $R(x,y)$ is given by the real amplitude, $r$,
@@ -389,7 +389,7 @@ Pulling the constants out of the integral and simplifying gives
         \Delta\xi=\frac{\lambda d}{N\Delta x}, \qquad \Delta\eta=\frac{
         \lambda d}{M\Delta y},
     \end{equation}
-    and plugging these expressions back into Equation~\ref{eq:discrete} results
+    and substituting these expressions into Equation~\ref{eq:discrete} results
     in
 
     \begin{equation}
@@ -504,7 +504,7 @@ Pulling the constants out of the integral and simplifying gives
 
     The numerical reconstruction of a hologram using Equation~\ref{eq:FFTneeded}
     requires the calculation of Fourier transforms and the fast Fourier
-    transform provides incredible computational speedups when compared to
+    transform provides incredible computational speed when compared to
     calculations using the discrete Fourier transform (DFT).
 %
 %        The fast Fourier transform is one of the most prized algorithms in the
@@ -512,8 +512,11 @@ Pulling the constants out of the integral and simplifying gives
 %        incredible speedups when compared to the discrete Fourier transform.
 %
         The most commonly used FFT algorithm is known as the Cooley-Tukey algorithm.
-        This is a recursive algorithm and the basic idea is to take a DFT and split it
-        into smaller DFTs. For example, taking a size $n$ DFT and transforming it into
+        This is a recursive algorithm, and 
+        the main principle is to split a DFT into smaller DFTs.
+        %the basic idea is to take a DFT and split it
+        %into smaller DFTs. 
+        For example, taking a size $n$ DFT and transforming it into
         two DFTs of sizes $n_1$ and $n_2$, respectively.
 
         The discrete Fourier transform of an array $X$ with $n$ complex numbers is the array
@@ -551,7 +554,7 @@ Pulling the constants out of the integral and simplifying gives
             %which only shows up to $n=20$, yet, 
             The difference for $n=1\times 10^{12}$ is about 10 orders of
             magnitude. For the reconstructions involved in this thesis, $n$ was
-            $12\times 10^{6}$ resulting in a computational speed up of about 4
+            $12\times 10^{6}$ resulting in a computational speed increase of about 4
             orders of magnitude.
             %already about a factor of 8 operations.
 
@@ -576,8 +579,9 @@ Pulling the constants out of the integral and simplifying gives
             The butterfly is the portion of the algorithm 
             that breaks larger DFTs up into smaller
             DFTs, or vise versa.
-            A term that comes up a
-            lot in FFT is the radix which is used to describe the size of the
+            A commonly used term
+            %term that comes up a lot
+            in FFT is the radix which is used to describe the size of the
             FFT decomposition.
 %            which is used to describe an $n_1$ or $n_2$ that is
 %            bounded. 
@@ -653,7 +657,7 @@ Pulling the constants out of the integral and simplifying gives
             The convolution theorem allows for an integral to be evaluated as
             the product of two fast Fourier transforms and an inverse Fourier
             transform. This is useful for numerical analysis since integration
-            can be difficult and slow to do numerically, while the FFT is
+            can be difficult and slow to calculate numerically, while the FFT is
             simpler and more computationally efficient.
 
             Convolution is a mathematical operation that maps a pair of
@@ -672,7 +676,7 @@ Pulling the constants out of the integral and simplifying gives
             \begin{equation}
                 (f*\delta)(x)=\int_{-\infty}^{\infty}f(x')\delta(x-x')dx'=f(x).
             \end{equation}
-            In this case, the convolution integral gives us back the original function $f(x)$
+            In this case, the convolution integral returns the original function $f(x)$
             since
 %            , and it
 %            does this because 
@@ -755,10 +759,12 @@ Pulling the constants out of the integral and simplifying gives
     when moved to a different point in space.
     %which allows the
     This allows for the
-    use of the convolution theorem which means that 
+    use of the convolution theorem which
+    allows
+    %means that 
     %we can rewrite
     Equation~\ref{eq:superpositionIntegral} 
-    can be rewritten with the Fourier transforms,
+    to be rewritten with the Fourier transforms,
 
     \begin{equation}
         \Gamma(\xi,\eta) = \mathfrak{F}^{-1}\left\{ \mathfrak{F}(R\cdot h)

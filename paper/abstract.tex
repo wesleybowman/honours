@@ -1,0 +1,80 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{epsfig}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{siunitx}
+%%\usepackage[margin=0.5in]{geometry}
+
+\usepackage{url}
+\urlstyle{same}
+
+%FlowChart Stuff
+\usetikzlibrary{shapes,arrows}
+\tikzstyle{decision} = [diamond, draw, text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, text width=5em, text centered, rounded corners, minimum height=4em]
+
+%%theorems and stuff
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{prop}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{result}[theorem]{Result}
+\newtheorem{definition}[theorem]{Definition}
+
+%%definitions
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+%tab command
+\newcommand{\tab}{\hspace*{2em}}
+
+%%degree command
+\newcommand{\degree}{\ensuremath{^\circ}}
+
+%%Begin%%
+
+\begin{document}
+
+\title{Digital In-Line Holography and the Numerical Reconstruction of Holograms}
+\author{Wesley Bowman}
+\date{\today}
+\maketitle
+
+\begin{abstract}
+
+    A hologram is the recorded interference pattern between a reference
+    wave and a scattered wave from an object. Although, the recording medium only
+    captures
+    the intensity of the light from these waves, the information about both
+    the amplitude and the phase is still present in this recording, due to the
+    interference fringes produced by the superposition of these two waves.
+    This information can be reconstructed numerically using the
+    Fresnel-Kirchoff integral, which can be transformed into a
+    numerically efficient calculation using the convolution theorem.
+
+    The setup used in this thesis was in-line holography.
+    In Digital In-line Holographic Microscopy (DIHM), all of the components 
+    are aligned in a linear setup, and 
+    both the reference and scattered waves are
+    recorded on the same detector. The setup used in this thesis contained a
+    laser, two objective lenses, the object holder, a neutral density (ND) filter, and
+    a charged coupled device (CCD). The CCD allowed for direct 
+    digital recording of the holograms.
+
+    Once the holograms were obtained from the DIHM, an open-source Python
+    library, HoloPy, was used to reconstruct the holographic images. Images
+    from both Harvard and Acadia Universities were recorded and reconstructed, which
+    demonstrated the successful
+    acquisition of holograms and the reconstruction method.
+    The DIHM that was constructed at Acadia achieved a resolution of approximately
+    \SI{2.7}{\micro\meter}.
+
+
+\end{abstract}
+
+\end{document}

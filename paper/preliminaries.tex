@@ -22,46 +22,32 @@
 \beforepreface
 \prefacesection{Abstract}
 
-This is a ``quick-start'' guide to help you use \LaTeX\ to produce
-your thesis.  It by no means covers all issues, but it should give you
-a solid start.
+    A hologram is the recorded interference pattern between a reference
+    wave and a scattered wave from an object. Although, the recording medium only
+    captures
+    the intensity of the light from these waves, the information about both
+    the amplitude and the phase is still present in this recording, due to the
+    interference fringes produced by the superposition of these two waves.
+    This information can be reconstructed numerically using the
+    Fresnel-Kirchoff integral, which can be transformed into a
+    numerically efficient calculation using the convolution theorem.
 
-\TeX\ is a system developed by Donald Knuth with the goal of doing
-beautiful typesetting, particularly for documents which use
-mathematics.  It is one of the first significant programs made
-available to the world at large (for free) by its author.  By design,
-Knuth has dictated that \TeX\ won't change any more, which means
-that \TeX\ documents won't become unusable because of incompatible
-updates.  (However, other people are extending \TeX, so it is not a
-``dead'' system.)
+    The setup used in this thesis was in-line holography.
+    In Digital In-line Holographic Microscopy (DIHM), all of the components 
+    are aligned in a linear setup, and 
+    both the reference and scattered waves are
+    recorded on the same detector. The setup used in this thesis contained a
+    laser, two objective lenses, the object holder, a neutral density (ND) filter, and
+    a charged coupled device (CCD). The CCD allowed for direct 
+    digital recording of the holograms.
 
-\LaTeX\ is a set of additions to \TeX\ which arguably make it easier
-to produce documents.  This sample thesis will assume you are going to
-use \LaTeX\, but if you later to decide to try Knuth's ``plain'' \TeX,
-you will find that the concepts are similar, but some details are
-different.
-
-This document was mostly written by Brian Demmings; any ``I'' found in
-this document refers to Brian.  Jim Diamond has updated it
-occasionally since Brian graduated, and hopes he has only improved
-things with his changes.  Kudos to Alex Sanford for modifying the
-master's thesis template to meet the honours thesis requirements.
-
-The ``source code'' of this document should be in the same directory
-as the nicely-formatted PDF file you are reading.  If you want to see
-exactly how anything here is produced, just look in the appropriate
-``source code'' file.  (For example\dots\ if you read the source code,
-you will see that we used ``\verb|\dots|'' rather than ``\verb|...|'',
-since the spacing of ``\dots'' is better than ``...''.)
-
-\medskip
-
-Write \emph{your} abstract here.
-		
-\textbf{BEWARE:} Some of the techniques (e.g., the ``Table of
-Algorithms/Listings'') may \emph{not} be permitted.
-When in doubt check with the registrar or your adviser.
-
+    Once the holograms were obtained from the DIHM, an open-source Python
+    library, HoloPy, was used to reconstruct the holographic images. Images
+    from both Harvard and Acadia Universities were recorded and reconstructed, which
+    demonstrated the successful
+    acquisition of holograms and the reconstruction method.
+    The DIHM that was constructed at Acadia achieved a resolution of approximately
+    \SI{2.7}{\micro\meter}.
 
 
 
@@ -71,6 +57,44 @@ When in doubt check with the registrar or your adviser.
 	
 \prefacesection{Acknowledgments}
 
-Place any acknowledgments you might want to make here.
+    First and foremost, I would like to think Dr.\ Michael Robertson. Without him, 
+    none of this would have been possible for numerious reasons. He gave me, not 
+    only the opportunity to work with him, but also the guidance I needed to make 
+    sure that this thesis could be completed. I could not have asked for a better
+    supervisor. He went above and beyond, which allowed me to experience the best parts
+    of the scientific community. Not only was he a mentor, he was also a great friend.
+    Thank you Dr.\ Robertson.
+
+    Next, I would like to acknowledge my family. Without them, I would never have come to
+    Acadia in the first place. They showed immense support with my decision, and offered
+    nothing but help with the transition. Specifically to Dad and Mom, thank you both for
+    dealing with my lack of communication. A honours undergraduate degree is more demanding
+    than I can ever explain, but that is no excuse. Thank you for being there when I needed
+    you to be. I love you both with all of my heart. Never forget that.
+
+    To my colleges and companions, thank you for making this a fun ride. Everyone that is
+    graduating with me, thank you, cause without you I wouldn't be here.
+    Robie Hennigar, thank you for the summer work we did together. You helped me troubleshoot
+    and learn new skills that I will take forward with me, and I hope we never lose contact.
+    Patrick Murray, thank you for being the friend I needed, when I needed him the most. You
+    will always be remembered, and always be my friend.
+    Aidan Bharath, I have spent way too much time with you, but you've made this last year
+    the best it could have been. We've shared line after line of code, and it was worth 
+    every second. You have taught me a ton of life skills, and shared more stories than
+    I could, or would, ever retell. Thank you friend, for being there.
+
+    Last, and surely not the least, Lydia van Vilsteren. I can honestly say that without
+    you, none of this would have been possible. You deal with me when I am at my most
+    unreasonable, you help take care of all the things that I just don't want to do,
+    you accept me for who I am,
+    and you remind me every day of what I am working to achieve. You have kept me on task,
+    you have kept me grounded,
+    you have been my stress relief, and you have just been there for me, which is more than
+    a man could ever ask for. It is hard to put down just how much you mean to me.
+    I am one lucky guy. Thank you for being you, and for being 
+    there for me. I love you.
+
+    And I love you all. Thank you, from my heart, as you will all have a place
+    in it.
 
 \afterpreface

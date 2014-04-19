@@ -1,5 +1,5 @@
 %\include{header}
-%begin{document}
+%\begin{document}
 
 \chapter{Experimental Procedure} \label{chap:Experimental}
 
@@ -77,6 +77,14 @@ The slide could then be
 placed on the slide holder %(picture)
 as shown in Figure~\ref{fig:slideHolder}.
 
+The sample objects
+needed to be between 1 and 100 microns in size so that the holograms could
+be captured on the CCD\@. The objects ranged from water obtained from the
+Charles River (Boston, Massachusetts) to five micron colloidal diamond
+particles. The identity of the objects was not always known, but this was not
+a requirement since the formation of a valid hologram was the primary objective
+of this work.
+
 %PICTURE OF SOLUTION SLIDE HERE
 \begin{figure}[htbp!]
 \begin{center}
@@ -103,16 +111,14 @@ top to seal the solution in.}
 %placed on the slide holder%(picture)
 %, shown in Figure~\ref{fig:slideHolder}
 
-The sample objects
-needed to be between 1 and 100 microns in size so that the holograms could
-be captured on the CCD\@. The objects ranged from water obtained from the
-Charles River (Boston, Massachusetts) to five micron colloidal diamond
-particles. The identity of the objects was not always known, but this was not
-a requirement since the formation of a valid hologram was the primary objective
-of this work.
-
-
-%PICTURE OF SLIDE HOLDER
+%The sample objects
+%needed to be between 1 and 100 microns in size so that the holograms could
+%be captured on the CCD\@. The objects ranged from water obtained from the
+%Charles River (Boston, Massachusetts) to five micron colloidal diamond
+%particles. The identity of the objects was not always known, but this was not
+%a requirement since the formation of a valid hologram was the primary objective
+%of this work.
+%
 \begin{figure}[htbp!]
 \begin{center}
     \includegraphics[scale=0.05]{pictures/slideHolder.jpg}
@@ -129,9 +135,10 @@ After the slides were prepared a hologram could be recorded of the object.
 %The laser must first be turned on. Once the beam is on, 
 All of the components were
 aligned so that the laser passed through the first objective lens, the object,
-through the second objective lens, and was captured by the CCD\@. Fine
-adjustments of the components using the three-axis mounts were required to get all of the optical
-components aligned properly.
+the second objective lens, and was captured by the CCD\@. Fine
+adjustments of the components using the three-axis mounts were required to
+align all of the optical
+components properly.
 %Once all of the components are lined up, 
 %The object was then moved to an area of
 %interest within the solution or sample.
@@ -222,8 +229,8 @@ format.
 %Now that the images had been converted to a workable format, the
 %reconstruction calculation could be performed. 
 The reconstruction calculation was done with HoloPy,
-an open-source module in Python developed by Tom Dimiduk et al.\ of the Manoharan Group at
-Harvard University \cite{Manoharan}. A sample of the code is shown in
+an open-source module in Python developed by Tom Dimiduk et al.\cite{Manoharan} of the Manoharan Group at
+Harvard University. A sample of the code is shown in
 Listing~\ref{listing:code}. For every image reconstruction, there was a separate
 piece of code for that specific hologram so that the conditions used to create
 that reconstruction were kept and so that the hologram could easily be
@@ -292,7 +299,7 @@ plt.show()
 \end{lstlisting}
 \end{Code}
 
-The beauty of using HoloPy was simplicity of use. The first 3
+The advantage of using HoloPy was simplicity of use. The first 3
 lines of Listing~\ref{listing:code} are import statements required for loading
 the necessary computational modules.
 %which loads in the
@@ -347,7 +354,8 @@ One limiting factor of the complexity of calculation that could be performed
 was the amount of random access
 memory, or RAM, that the computer had. The number of slices in the
 reconstruction and the resolution of the images were the dominant factors
-determining how much RAM was needed.
+determining how much RAM was needed. A typical run took required around 6
+gigabytes of RAM.
 %, which was why the parameters must be
 %manipulated to achieve optimum results in runtime. 
 Next, the background image was
